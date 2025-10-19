@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Hello World & Print Statements",
+    "topic": "Basics",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Learn your first Python program and how to output text to the console."
+  },
+  {
+    "id": 2,
+    "title": "Variables & Data Types",
+    "topic": "Basics",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Understanding variables, strings, integers, floats, and booleans."
+  }
+]
