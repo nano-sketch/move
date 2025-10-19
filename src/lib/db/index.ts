@@ -10,7 +10,15 @@ export interface User {
     createdAt?: Date;
 }
 
-const client = new MongoClient(MONGODB_URI);
+const client = new MongoClient(MONGODB_URI, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    },
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+});
 
 export let promise: Promise<MongoClient> = client.connect();
 
