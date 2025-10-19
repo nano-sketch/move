@@ -55,16 +55,8 @@
     >
         <span class="text-xl">getgodly</span>
 
-        <div class="flex items-center justify-center text-sm font-semibold">
-            <a
-                href="/help"
-                class="cursor-pointer hover:text-primary transition-colors"
-                >Help</a
-            >
-        </div>
-
         <div>
-            <Button variant="outline">Account</Button>
+            <Button variant="outline" href="/account">Account</Button>
         </div>
     </header>
 
@@ -91,9 +83,11 @@
                             <div
                                 class="mt-6 flex items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
                             >
-                                <Button onclick={() => goto("/start")}>
-                                    Start
-                                </Button>
+                                <Button href="/start">Start</Button>
+
+                                <Button variant="secondary" href="/login"
+                                    >Login</Button
+                                >
                             </div>
                         </div>
                     </div>

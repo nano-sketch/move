@@ -4,10 +4,26 @@
     import Button from "$lib/components/ui/button/button.svelte";
     import lessons from "$lib/lessons/lessons.json";
     import { goto } from "$app/navigation";
+    import { Check, CheckCheck, CheckCircle, CheckIcon } from "lucide-svelte";
 
     onMount(() => {
         document.documentElement.classList.add("dark");
+
+        if (!localStorage.getItem("username")) {
+            goto("/login");
+        }
     });
+
+    let {
+        data,
+    }: {
+        data: {
+            user: { username: string; progress: number; completed: number[] };
+        };
+    } = $props();
+
+    const progress = data.user.progress;
+    const completed = data.user.completed;
 
     let search_query = $state("");
     let selected_topic = $state("all");
@@ -92,24 +108,12 @@
     <Particles className="absolute inset-0" refresh={true} />
 
     <header
-        class="h-14 bg-card w-full flex items-center justify-between px-6 border-b border-border sticky top-0 z-50"
+        class="h-14 bg-card w-full flex items-center justify-between px-80 border-b border-border relative z-10"
     >
-        <button
-            onclick={() => goto("/")}
-            class="text-xl font-semibold hover:text-primary transition-colors"
-        >
-            getgodly
-        </button>
+        <span class="text-xl">getgodly</span>
 
-        <div class="flex items-center gap-4">
-            <a
-                href="/help"
-                class="text-sm font-semibold hover:text-primary transition-colors"
-                >Help</a
-            >
-            <Button variant="outline" size="sm" class="cursor-pointer"
-                >Account</Button
-            >
+        <div>
+            <Button variant="outline" href="/account">Account</Button>
         </div>
     </header>
 
@@ -235,7 +239,14 @@
                                             class="font-medium flex items-center gap-2"
                                         >
                                             {lesson.title}
+
+                                            {#if completed.includes(lesson.id)}
+                                                <CheckIcon
+                                                    class="text-green-500"
+                                                />
+                                            {/if}
                                         </div>
+
                                         <div
                                             class="text-sm text-muted-foreground mt-1"
                                         >
@@ -256,14 +267,20 @@
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-2">
                                     <div class="text-sm font-medium">
-                                        {lesson.success_rate}%
+                                        {completed.includes(lesson.id)
+                                            ? "100"
+                                            : "0"}%
                                     </div>
                                     <div
                                         class="w-16 h-1.5 bg-muted rounded-full overflow-hidden"
                                     >
                                         <div
                                             class="h-full bg-primary rounded-full"
-                                            style="width: {lesson.success_rate}%"
+                                            style="width: {completed.includes(
+                                                lesson.id,
+                                            )
+                                                ? '100'
+                                                : '0'}%"
                                         ></div>
                                     </div>
                                 </div>
@@ -308,7 +325,9 @@
             </div>
             <div class="bg-card border border-border rounded-lg p-6">
                 <div class="text-sm text-muted-foreground mb-1">Completed</div>
-                <div class="text-2xl font-bold">0 / {lessons.length}</div>
+                <div class="text-2xl font-bold">
+                    {progress} / {lessons.length}
+                </div>
             </div>
             <div class="bg-card border border-border rounded-lg p-6">
                 <div class="text-sm text-muted-foreground mb-1">
@@ -316,8 +335,11 @@
                 </div>
                 <div class="text-2xl font-bold">
                     {(
-                        lessons.reduce((acc, l) => acc + l.success_rate, 0) /
-                        lessons.length
+                        (lessons.filter((l) =>
+                            data.user.completed.includes(l.id),
+                        ).length /
+                            lessons.length) *
+                        100
                     ).toFixed(1)}%
                 </div>
             </div>

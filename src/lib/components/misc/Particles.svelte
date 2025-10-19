@@ -6,7 +6,7 @@
     export let staticity: number = 50;
     export let ease: number = 50;
     export let size: number = 0.4;
-    export let refresh: boolean = true;
+    export const refresh: boolean = true;
     export let color: string = "#ffffff";
     export let vx: number = 0;
     export let vy: number = 0;
