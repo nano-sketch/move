@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 import { MONGODB_URI } from "$env/static/private";
 
 if (!MONGODB_URI) throw new Error("MONGODB_URI is null");
