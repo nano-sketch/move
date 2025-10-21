@@ -4,7 +4,7 @@ import { error, fail, redirect } from "@sveltejs/kit";
 
 export const load = async ({ cookies }) => {
     const username = cookies.get("username");
-    if (username) throw redirect(303, "/start");
+    if (username) throw redirect(303, "/lessons");
     return {};
 };
 
@@ -42,6 +42,6 @@ export const actions = {
             maxAge: 60 * 60 * 24 * 30,
         });
 
-        throw redirect(303, "/start");
+        throw redirect(303, "/lessons");
     },
 };

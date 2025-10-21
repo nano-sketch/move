@@ -1,20 +1,17 @@
 <script lang="ts">
-import Particles from "$lib/components/misc/Particles.svelte";import Button from "$lib/components/ui/button/button.svelte";import Input from "$lib/components/ui/input/input.svelte";import Label from "$lib/components/ui/label/label.svelte";import {goto} from "$app/navigation";import {enhance} from "$app/forms";
-let {form}=$props();let username=$state("");let loading=$state(false);
+    import Particles from "$lib/components/misc/Particles.svelte";
+    import Button from "$lib/components/ui/button/button.svelte";
+    import Input from "$lib/components/ui/input/input.svelte";
+    import Label from "$lib/components/ui/label/label.svelte";
+    import { goto } from "$app/navigation";
+    import { enhance } from "$app/forms";
+    let { form } = $props();
+    let username = $state("");
+    let loading = $state(false);
 </script>
 
 <main class="min-h-screen bg-background relative">
     <Particles className="absolute inset-0" refresh={true} />
-    <header
-        class="h-14 bg-card w-full flex items-center justify-between px-6 border-b border-border sticky top-0 z-50"
-    >
-        <button
-            onclick={() => goto("/")}
-            class="text-xl font-semibold hover:text-primary transition-colors cursor-default"
-        >
-            getgodly
-        </button>
-    </header>
     <div
         class="max-w-3xl mx-auto px-6 py-8 relative z-10 flex items-center justify-center min-h-[calc(100vh-3.5rem)]"
     >

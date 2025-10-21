@@ -1,47 +1,49 @@
 <script lang="ts">
-import Particles from "$lib/components/misc/Particles.svelte";import Button from "$lib/components/ui/button/button.svelte";import {goto} from "$app/navigation";import {CheckCircle2,XCircle,ChevronRight} from "lucide-svelte";import {enhance} from "$app/forms";
-let {data,form}:{data:any,form:any}=$props();let Content=data.content;
-let quiz_answers=$state<(number|null)[]>(data.metadata?.quizzes?.map(()=>null)||[]);
-let show_results=$state<boolean[]>(data.metadata?.quizzes?.map(()=>false)||[]);
-let all_correct=$derived(data.metadata?.quizzes?.every((quiz:any,i:number)=>quiz_answers[i]===quiz.correct)||false);
-let submitting=$state(false);let completed=$state(false);
+    import Particles from "$lib/components/misc/Particles.svelte";
+    import Button from "$lib/components/ui/button/button.svelte";
+    import { goto } from "$app/navigation";
+    import { CheckCircle2, XCircle, ChevronRight } from "lucide-svelte";
+    import { enhance } from "$app/forms";
+    let { data, form }: { data: any; form: any } = $props();
+    let Content = data.content;
+    let quiz_answers = $state<(number | null)[]>(
+        data.metadata?.quizzes?.map(() => null) || [],
+    );
+    let show_results = $state<boolean[]>(
+        data.metadata?.quizzes?.map(() => false) || [],
+    );
+    let all_correct = $derived(
+        data.metadata?.quizzes?.every(
+            (quiz: any, i: number) => quiz_answers[i] === quiz.correct,
+        ) || false,
+    );
+    let submitting = $state(false);
+    let completed = $state(false);
 
-function check_answer(quizIndex:number){show_results[quizIndex]=true;}
-function select_option(quizIndex:number,optionIndex:number){quiz_answers[quizIndex]=optionIndex;show_results[quizIndex]=false;}
-function is_correct(quizIndex:number,optionIndex:number):boolean{return data.metadata?.quizzes?.[quizIndex]?.correct===optionIndex;}
-function is_selected(quizIndex:number,optionIndex:number):boolean{return quiz_answers[quizIndex]===optionIndex;}
-function next_lesson(){const cur_id=data.metadata?.lesson||1;goto(`/lesson/${cur_id+1}`);}
-$effect(()=>{if(form?.success&&!form?.already_completed)completed=true;});
+    function check_answer(quizIndex: number) {
+        show_results[quizIndex] = true;
+    }
+    function select_option(quizIndex: number, optionIndex: number) {
+        quiz_answers[quizIndex] = optionIndex;
+        show_results[quizIndex] = false;
+    }
+    function is_correct(quizIndex: number, optionIndex: number): boolean {
+        return data.metadata?.quizzes?.[quizIndex]?.correct === optionIndex;
+    }
+    function is_selected(quizIndex: number, optionIndex: number): boolean {
+        return quiz_answers[quizIndex] === optionIndex;
+    }
+    function next_lesson() {
+        const cur_id = data.metadata?.lesson || 1;
+        goto(`/lesson/${cur_id + 1}`);
+    }
+    $effect(() => {
+        if (form?.success && !form?.already_completed) completed = true;
+    });
 </script>
 
 <main class="min-h-screen bg-background relative overflow-hidden">
     <Particles className="absolute inset-0" refresh={true} />
-
-    <header
-        class="h-16 bg-card/80 backdrop-blur-xl w-full flex items-center justify-between px-6 border-b border-border/50 sticky top-0 z-50"
-    >
-        <button
-            onclick={() => goto("/")}
-            class="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent hover:from-primary/80 hover:to-primary/40 transition-all duration-300 cursor-default"
-        >
-            getgodly
-        </button>
-        <div class="flex items-center gap-6">
-            <a
-                href="/help"
-                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-            >
-                Help
-            </a>
-            <Button
-                variant="outline"
-                size="sm"
-                class="cursor-pointer hover:bg-primary/10 transition-all duration-200"
-            >
-                Account
-            </Button>
-        </div>
-    </header>
 
     <div class="max-w-4xl mx-auto px-6 py-12 relative z-10">
         <div class="prose prose-lg">
