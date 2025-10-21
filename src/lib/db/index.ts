@@ -12,15 +12,39 @@ export interface User {
     createdAt?: Date;
 }
 
-const client = new MongoClient(MONGODB_URI, {
-    tls: true,
-    tlsAllowInvalidCertificates: true,
-});
+/* SO the connection complies with vercel */
+let cached_client: MongoClient | null = null;
+let cached_promise: Promise<MongoClient> | null = null;
 
-export let promise: Promise<MongoClient> = client.connect();
+async function connect(): Promise<MongoClient> {
+    if (cached_client) return cached_client;
+    if (cached_promise) return cached_promise;
+
+    const client = new MongoClient(MONGODB_URI, {
+        tls: true,
+        tlsAllowInvalidCertificates: false,
+        serverSelectionTimeoutMS: 45000,
+        minPoolSize: 1,
+        maxPoolSize: 10,
+    });
+
+    cached_promise = client
+        .connect()
+        .then((cl) => {
+            cached_client = cl;
+            cached_promise = null;
+            return cached_client;
+        })
+        .catch((err) => {
+            cached_promise = null;
+            throw err;
+        });
+
+    return cached_promise;
+}
 
 export async function get_database(db: string = "data") {
-    const client = await promise;
+    const client = await connect();
     return client.db(db);
 }
 
