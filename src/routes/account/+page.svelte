@@ -50,7 +50,7 @@
                         >
                     </CardHeader>
                     <CardContent class="space-y-4">
-                        <div>
+                        <div class="flex flex-col pb-20">
                             <p
                                 class="text-sm font-medium text-muted-foreground"
                             >
@@ -60,6 +60,11 @@
                                 {username}
                             </p>
                         </div>
+                        <form method="POST" action="?/logout" use:enhance>
+                            <Button variant="destructive" class="w-full"
+                                >Logout</Button
+                            >
+                        </form>
                     </CardContent>
                 </Card>
 
