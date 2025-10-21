@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import type { Document } from "mongodb";
 import { MONGODB_URI } from "$env/static/private";
 
 if (!MONGODB_URI) throw new Error("MONGODB_URI is null");
@@ -7,6 +8,7 @@ export interface User {
     username: string;
     progress: number;
     completed: number[];
+    completedchallenges?: number[];
     createdAt?: Date;
 }
 

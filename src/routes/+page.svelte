@@ -16,6 +16,9 @@
     import Button from "$lib/components/ui/button/button.svelte";
     import { onMount } from "svelte";
 
+    let { data } = $props();
+    const isLoggedIn = data.isLoggedIn;
+
     onMount(() => {
         document.documentElement.classList.add("dark");
     });
@@ -48,15 +51,35 @@
     ];
 </script>
 
-<main>
-    <Particles className="absolute inset-0" refresh={true} />
-    <header
-        class="h-14 bg-card w-full flex items-center justify-between px-80 border-b border-border relative z-10"
-    >
-        <span class="text-xl">getgodly</span>
+<svelte:head>
+    <title>GetGodly - Learn Python Programming</title>
+    <meta name="description" content="Master Python programming with interactive lessons, challenges, and coding playground. Perfect for beginners and advanced learners." />
+</svelte:head>
 
-        <div>
-            <Button variant="outline" href="/account">Account</Button>
+<main class="select-none">
+    <Particles className="absolute inset-0" refresh={true} />
+    <header class="relative z-10 border-b border-border bg-card/80 backdrop-blur-sm">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <div class="flex items-center gap-6">
+                <a href="/" class="text-xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent hover:from-primary/80 hover:to-primary/40 transition-all duration-300 cursor-default">
+                    getgodly
+                </a>
+                <nav class="flex items-center gap-4">
+                    <a href="/start" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Lessons
+                    </a>
+                    <a href="/challenges" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Challenges
+                    </a>
+                    <a href="/resources" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Resources
+                    </a>
+                    <a href="/playground" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Playground
+                    </a>
+                </nav>
+            </div>
+            <Button variant="outline" size="sm" href="/account">Account</Button>
         </div>
     </header>
 
@@ -83,11 +106,17 @@
                             <div
                                 class="mt-6 flex items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
                             >
-                                <Button href="/start">Start</Button>
+                                <Button href="/start">Start Lessons</Button>
 
-                                <Button variant="secondary" href="/login"
-                                    >Login</Button
+                                <Button variant="outline" href="/challenges"
+                                    >Challenges</Button
                                 >
+
+                                {#if !isLoggedIn}
+                                    <Button variant="secondary" href="/login"
+                                        >Login</Button
+                                    >
+                                {/if}
                             </div>
                         </div>
                     </div>

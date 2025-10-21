@@ -1,14 +1,6 @@
 <script lang="ts">
-    import Particles from "$lib/components/misc/Particles.svelte";
-    import Button from "$lib/components/ui/button/button.svelte";
-    import Input from "$lib/components/ui/input/input.svelte";
-    import Label from "$lib/components/ui/label/label.svelte";
-    import { goto } from "$app/navigation";
-    import { enhance } from "$app/forms";
-
-    let { form } = $props();
-    let username = $state("");
-    let loading = $state(false);
+import Particles from "$lib/components/misc/Particles.svelte";import Button from "$lib/components/ui/button/button.svelte";import Input from "$lib/components/ui/input/input.svelte";import Label from "$lib/components/ui/label/label.svelte";import {goto} from "$app/navigation";import {enhance} from "$app/forms";
+let {form}=$props();let username=$state("");let loading=$state(false);
 </script>
 
 <main class="min-h-screen bg-background relative">
@@ -18,7 +10,7 @@
     >
         <button
             onclick={() => goto("/")}
-            class="text-xl font-semibold hover:text-primary transition-colors"
+            class="text-xl font-semibold hover:text-primary transition-colors cursor-default"
         >
             getgodly
         </button>
@@ -32,7 +24,7 @@
             <div class="space-y-2 text-center">
                 <h1 class="text-3xl font-bold tracking-tight">Welcome back</h1>
                 <p class="text-muted-foreground">
-                    Enter your username to continue or create a new account
+                    enter your new user to continue
                 </p>
             </div>
 
@@ -63,7 +55,7 @@
                 </Button>
             </form>
             <p class="text-xs text-center text-muted-foreground">
-                No password required. Your username is all we need.
+                no pass required, just your user.
             </p>
         </div>
     </div>

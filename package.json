@@ -32,7 +32,9 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
+		"@monaco-editor/loader": "^1.6.1",
 		"lucide-svelte": "^0.546.0",
+		"monaco-editor": "^0.52.2",
 		"mongodb": "^6.20.0"
 	}
 }

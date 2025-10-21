@@ -1,4 +1,5 @@
-import { get_collection, get_database, User } from "$lib/db/index.js";
+import { get_collection, get_database } from "$lib/db/index.js";
+import type { User } from "$lib/db/index.js";
 import { error, fail, redirect } from "@sveltejs/kit";
 
 export const load = async ({ cookies }) => {

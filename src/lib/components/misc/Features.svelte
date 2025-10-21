@@ -50,7 +50,7 @@
         handleScroll();
     });
     let handleScroll = () => {
-        let autoScrollTimer: Timer;
+        let autoScrollTimer: ReturnType<typeof setTimeout>;
         let handleAutoScroll = () => {
             currentIndex.update((prevIndex) =>
                 prevIndex !== undefined ? (prevIndex + 1) % data.length : 0,
@@ -160,7 +160,7 @@
                             autoplay
                             loop
                             muted
-                        />
+                        ></video>
                     {:else}
                         <div
                             class="aspect-auto size-full rounded-xl border border-neutral-300/50 bg-gray-200 p-1"

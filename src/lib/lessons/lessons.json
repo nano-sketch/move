@@ -16,5 +16,95 @@
     "difficulty": "Easy",
     "disabled": false,
     "description": "Understanding variables, strings, integers, floats, and booleans."
+  },
+  {
+    "id": 3,
+    "title": "While Loops",
+    "topic": "Control Flow",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Learn to repeat code with while loops and control loop execution."
+  },
+  {
+    "id": 4,
+    "title": "Dictionaries",
+    "topic": "Data Structures",
+    "success_rate": 0.0,
+    "difficulty": "Medium",
+    "disabled": false,
+    "description": "Master key-value pairs and dictionary operations in Python."
+  },
+  {
+    "id": 5,
+    "title": "File Handling",
+    "topic": "File Operations",
+    "success_rate": 0.0,
+    "difficulty": "Medium",
+    "disabled": false,
+    "description": "Read from and write to files, manage file operations safely."
+  },
+  {
+    "id": 6,
+    "title": "Lists",
+    "topic": "Data Structures",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Work with ordered collections and master list operations."
+  },
+  {
+    "id": 7,
+    "title": "Functions",
+    "topic": "Functions",
+    "success_rate": 0.0,
+    "difficulty": "Medium",
+    "disabled": false,
+    "description": "Create reusable code blocks with parameters and return values."
+  },
+  {
+    "id": 8,
+    "title": "Regular Expressions",
+    "topic": "Text Processing",
+    "success_rate": 0.0,
+    "difficulty": "Hard",
+    "disabled": false,
+    "description": "Master pattern matching and text manipulation with regex."
+  },
+  {
+    "id": 9,
+    "title": "Error Handling",
+    "topic": "Error Management",
+    "success_rate": 0.0,
+    "difficulty": "Medium",
+    "disabled": false,
+    "description": "Handle exceptions gracefully and build robust applications."
+  },
+  {
+    "id": 10,
+    "title": "Input Validation",
+    "topic": "Data Validation",
+    "success_rate": 0.0,
+    "difficulty": "Medium",
+    "disabled": false,
+    "description": "Validate and sanitize user input for secure applications."
+  },
+  {
+    "id": 11,
+    "title": "String Methods & Special Characters",
+    "topic": "Text Processing",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Master string manipulation methods and special character handling."
+  },
+  {
+    "id": 12,
+    "title": "Variable Types & Type Conversion",
+    "topic": "Basics",
+    "success_rate": 0.0,
+    "difficulty": "Easy",
+    "disabled": false,
+    "description": "Understand Python types and convert between different data types."
   }
 ]

@@ -4,10 +4,11 @@ import { mdsvex } from "mdsvex";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://svelte.dev/docs/kit/integrations
+  // consult https://svelte.dev/docs/kit/integrations
   // for more information about preprocessors
   extensions: [".svelte", ".md"],
   preprocess: [
+    vitePreprocess(),
     mdsvex({
       extensions: [".md"],
       highlight: { alias: { py: "python" } },
@@ -22,6 +23,15 @@ const config = {
     alias: {
       "@/*": "/src/lib",
     },
+    //nothing useful
+    prerender: {
+      //prerender static pages for better performance
+      handleMissingId: 'warn'
+    },
+    csp: {
+      //basic CSP for security
+      mode: 'auto'
+    }
   },
 };
 

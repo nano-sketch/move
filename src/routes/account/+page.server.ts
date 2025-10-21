@@ -19,6 +19,7 @@ export const load = async ({ cookies }) => {
             username: user.username,
             progress: user.progress,
             completed: user.completed,
+            completed_challenges: user.completedchallenges || [],
         },
     };
 };
