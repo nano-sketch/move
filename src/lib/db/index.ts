@@ -21,11 +21,9 @@ async function connect(): Promise<MongoClient> {
     if (cached_promise) return cached_promise;
 
     const client = new MongoClient(MONGODB_URI, {
-        tls: true,
-        tlsAllowInvalidCertificates: false,
-        serverSelectionTimeoutMS: 45000,
-        minPoolSize: 1,
-        maxPoolSize: 10,
+        serverSelectionTimeoutMS: 5000,
+        maxIdleTimeMS: 10000 /* Close idle sockets before freeze */,
+        maxPoolSize: 1,
     });
 
     cached_promise = client
