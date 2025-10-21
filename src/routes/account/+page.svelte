@@ -61,8 +61,10 @@
                             </p>
                         </div>
                         <form method="POST" action="?/logout" use:enhance>
-                            <Button variant="destructive" class="w-full"
-                                >Logout</Button
+                            <Button
+                                type="submit"
+                                variant="destructive"
+                                class="w-full">Logout</Button
                             >
                         </form>
                     </CardContent>
