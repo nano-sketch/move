@@ -3,6 +3,8 @@ import { get_user, get_collection } from "$lib/db";
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 
+export const prerender = false;
+
 export const load: PageServerLoad = async ({ cookies, params }) => {
     const username = cookies.get("username");
     if (!username) throw redirect(302, "/login");
@@ -11,7 +13,8 @@ export const load: PageServerLoad = async ({ cookies, params }) => {
     if (!user) throw redirect(302, "/login");
 
     const challenge_id = parseInt(params.id);
-    const is_completed = user.completedchallenges?.includes(challenge_id) || false;
+    const is_completed =
+        user.completedchallenges?.includes(challenge_id) || false;
 
     return {
         is_completed,
@@ -35,7 +38,7 @@ export const actions: Actions = {
         const users = await get_collection("users");
         await users.updateOne(
             { username },
-            { 
+            {
                 $addToSet: { completedchallenges: challenge_id },
             },
         );
