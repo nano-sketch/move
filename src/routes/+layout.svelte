@@ -47,6 +47,16 @@
                     class="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >Playground</a
                 >
+                <a
+                    href="/flowchart"
+                    class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >Flowchart</a
+                >
+                <a
+                    href="/pseudo"
+                    class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >Pseudo</a
+                >
             </nav>
         </div>
         <Button variant="outline" size="sm" href="/account">Account</Button>

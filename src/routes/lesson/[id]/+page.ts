@@ -1,14 +1,31 @@
-import { json } from "@sveltejs/kit";
+import { error } from "@sveltejs/kit";
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({ params }) => {
-  /* ensure we dont import a lesson which cant exist */
-  const max_lessons = (await import("$lib/lessons/lessons.json")).length;
-  if (parseInt(params.id) > max_lessons) return null;
+  const lessonId = parseInt(params.id);
+  
+  /* ensure we have a valid lesson id */
+  if (isNaN(lessonId) || lessonId < 1) {
+    throw error(404, "Lesson not found");
+  }
 
-  const l = await import(`$lib/lessons/${params.id}.md`);
-  return {
-    content: l.default,
-    metadata: l.metadata,
-  };
+  try {
+    /* check if lesson exists in lessons.json */
+    const lessons = (await import("$lib/lessons/lessons.json")).default;
+    const lessonExists = lessons.some((lesson: any) => lesson.id === lessonId);
+    
+    if (!lessonExists) {
+      throw error(404, "Lesson not found");
+    }
+
+    /* import the lesson markdown file */
+    const l = await import(`$lib/lessons/${params.id}.md`);
+    return {
+      content: l.default,
+      metadata: l.metadata,
+    };
+  } catch (err) {
+    console.error("Error loading lesson:", err);
+    throw error(404, "Lesson not found");
+  }
 };

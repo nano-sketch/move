@@ -150,7 +150,8 @@
                         <img
                             src={data[$currentIndex].image}
                             alt="feature"
-                            class="aspect-auto size-full rounded-xl border border-neutral-300/50 object-cover object-left-top p-1 shadow-lg"
+                            class="aspect-auto size-full rounded-xl border border-neutral-300/50 object-cover object-left-top p-1 shadow-lg select-none"
+                            draggable="false"
                         />
                     {:else if data[$currentIndex]?.video}
                         <video

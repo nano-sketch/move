@@ -1,110 +1,156 @@
 [
   {
     "id": 1,
-    "title": "Hello World & Print Statements",
-    "topic": "Basics",
+    "title": "hello world & print statements",
+    "topic": "basics",
+    "topic_color": "#3B82F6",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Learn your first Python program and how to output text to the console."
+    "description": "learn your first python program and display text."
   },
   {
     "id": 2,
-    "title": "Variables & Data Types",
-    "topic": "Basics",
+    "title": "variables & data types",
+    "topic": "basics",
+    "topic_color": "#3B82F6",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Understanding variables, strings, integers, floats, and booleans."
+    "description": "store data using variables and learn the main data types."
   },
   {
     "id": 3,
-    "title": "While Loops",
-    "topic": "Control Flow",
+    "title": "loops",
+    "topic": "control",
+    "topic_color": "#8B5CF6",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Learn to repeat code with while loops and control loop execution."
+    "description": "repeat code multiple times using loops."
   },
   {
     "id": 4,
-    "title": "Dictionaries",
-    "topic": "Data Structures",
+    "title": "lists",
+    "topic": "data",
+    "topic_color": "#F59E0B",
     "success_rate": 0.0,
-    "difficulty": "Medium",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Master key-value pairs and dictionary operations in Python."
+    "description": "store multiple items in lists and learn list operations."
   },
   {
     "id": 5,
-    "title": "File Handling",
-    "topic": "File Operations",
+    "title": "if statements",
+    "topic": "control",
+    "topic_color": "#8B5CF6",
     "success_rate": 0.0,
-    "difficulty": "Medium",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Read from and write to files, manage file operations safely."
+    "description": "make decisions using if, elif, and else statements."
   },
   {
     "id": 6,
-    "title": "Lists",
-    "topic": "Data Structures",
+    "title": "built-in functions",
+    "topic": "functions",
+    "topic_color": "#EF4444",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Work with ordered collections and master list operations."
+    "description": "use built in functions like input, len, sum, and max."
   },
   {
     "id": 7,
-    "title": "Functions",
-    "topic": "Functions",
+    "title": "error handling",
+    "topic": "errors",
+    "topic_color": "#DC2626",
     "success_rate": 0.0,
-    "difficulty": "Medium",
+    "difficulty": "medium",
+    "difficulty_color": "#F59E0B",
     "disabled": false,
-    "description": "Create reusable code blocks with parameters and return values."
+    "description": "handle errors gracefully with try except blocks."
   },
   {
     "id": 8,
-    "title": "Regular Expressions",
-    "topic": "Text Processing",
+    "title": "regex & validation",
+    "topic": "text",
+    "topic_color": "#06B6D4",
     "success_rate": 0.0,
-    "difficulty": "Hard",
+    "difficulty": "medium",
+    "difficulty_color": "#F59E0B",
     "disabled": false,
-    "description": "Master pattern matching and text manipulation with regex."
+    "description": "validate text patterns using regular expressions."
   },
   {
     "id": 9,
-    "title": "Error Handling",
-    "topic": "Error Management",
+    "title": "file handling",
+    "topic": "files",
+    "topic_color": "#84CC16",
     "success_rate": 0.0,
-    "difficulty": "Medium",
+    "difficulty": "medium",
+    "difficulty_color": "#F59E0B",
     "disabled": false,
-    "description": "Handle exceptions gracefully and build robust applications."
+    "description": "read and write files safely."
   },
   {
     "id": 10,
-    "title": "Input Validation",
-    "topic": "Data Validation",
+    "title": "python dictionaries",
+    "topic": "data",
+    "topic_color": "#F59E0B",
     "success_rate": 0.0,
-    "difficulty": "Medium",
+    "difficulty": "medium",
+    "difficulty_color": "#F59E0B",
     "disabled": false,
-    "description": "Validate and sanitize user input for secure applications."
+    "description": "store data using key value pairs in dictionaries."
   },
   {
     "id": 11,
-    "title": "String Methods & Special Characters",
-    "topic": "Text Processing",
+    "title": "operators & modulus",
+    "topic": "math",
+    "topic_color": "#EC4899",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
     "disabled": false,
-    "description": "Master string manipulation methods and special character handling."
+    "description": "master mathematical operators including modulus for calculations."
   },
   {
     "id": 12,
-    "title": "Variable Types & Type Conversion",
-    "topic": "Basics",
+    "title": "classes & objects",
+    "topic": "oop",
+    "topic_color": "#6366F1",
     "success_rate": 0.0,
-    "difficulty": "Easy",
+    "difficulty": "medium",
+    "difficulty_color": "#F59E0B",
     "disabled": false,
-    "description": "Understand Python types and convert between different data types."
+    "description": "create reusable code with classes and object oriented programming."
+  },
+  {
+    "id": 13,
+    "title": "flowcharts",
+    "topic": "design",
+    "topic_color": "#10B981",
+    "success_rate": 0.0,
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
+    "disabled": false,
+    "description": "learn to design flowcharts seamlessly."
+  },
+  {
+    "id": 14,
+    "title": "pseudocode",
+    "topic": "design",
+    "topic_color": "#10B981",
+    "success_rate": 0.0,
+    "difficulty": "easy",
+    "difficulty_color": "#10B981",
+    "disabled": false,
+    "description": "learn to write pseudocode for your programs"
   }
 ]

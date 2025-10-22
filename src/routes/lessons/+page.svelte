@@ -49,14 +49,14 @@
         } else if (sort_option === "success-low") {
             filtered.sort((a, b) => a.success_rate - b.success_rate);
         } else if (sort_option === "difficulty-easy") {
-            const diff_order = { Easy: 1, Medium: 2, Hard: 3 };
+            const diff_order = { easy: 1, medium: 2, hard: 3 };
             filtered.sort(
                 (a, b) =>
                     diff_order[a.difficulty as keyof typeof diff_order] -
                     diff_order[b.difficulty as keyof typeof diff_order],
             );
         } else if (sort_option === "difficulty-hard") {
-            const difficultyOrder = { Easy: 1, Medium: 2, Hard: 3 };
+            const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
             filtered.sort(
                 (a, b) =>
                     difficultyOrder[
@@ -76,24 +76,27 @@
 
     function get_diff_clr(difficulty: string) {
         switch (difficulty) {
-            case "Easy":
+            case "easy":
                 return "bg-green-500/10 text-green-500 border-green-500/20";
-            case "Medium":
-                return "bg-yellow-500/10 text-yellow-500 border-yellow-500/20";
-            case "Hard":
+            case "medium":
+                return "bg-orange-500/10 text-orange-500 border-orange-500/20";
+            case "hard":
             default:
-                return "bg-muted text-muted-foreground";
+                return "bg-red-500/10 text-red-500 border-red-500/20";
         }
     }
     function getTopicColor(topic: string): string {
         const colors = {
-            Basics: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-            "Data Structures":
-                "bg-purple-500/10 text-purple-400 border-purple-500/20",
-            "Control Flow": "bg-pink-500/10 text-pink-400 border-pink-500/20",
-            Functions: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-            Advanced: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-            OOP: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+            basics: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+            control: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+            data: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+            functions: "bg-red-500/10 text-red-400 border-red-500/20",
+            errors: "bg-red-600/10 text-red-600 border-red-600/20",
+            text: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+            files: "bg-green-500/10 text-green-400 border-green-500/20",
+            math: "bg-pink-500/10 text-pink-400 border-pink-500/20",
+            oop: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+            design: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
         };
         return (
             colors[topic as keyof typeof colors] ||
@@ -157,12 +160,16 @@
                         style="outline: none !important; box-shadow: none !important;"
                     >
                         <option value="all">All Topics</option>
-                        <option value="Basics">Basics</option>
-                        <option value="Data Structures">Data Structures</option>
-                        <option value="Control Flow">Control Flow</option>
-                        <option value="Functions">Functions</option>
-                        <option value="Advanced">Advanced</option>
-                        <option value="OOP">OOP</option>
+                        <option value="basics">Basics</option>
+                        <option value="control">Control</option>
+                        <option value="data">Data</option>
+                        <option value="functions">Functions</option>
+                        <option value="errors">Errors</option>
+                        <option value="text">Text</option>
+                        <option value="files">Files</option>
+                        <option value="math">Math</option>
+                        <option value="oop">OOP</option>
+                        <option value="design">Design</option>
                     </select>
                 </div>
 
@@ -178,9 +185,9 @@
                         style="outline: none !important; box-shadow: none !important;"
                     >
                         <option value="all">All Difficulties</option>
-                        <option value="Easy">Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
                     </select>
                 </div>
                 <div>
