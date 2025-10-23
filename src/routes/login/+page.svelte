@@ -5,7 +5,7 @@
     import Label from "$lib/components/ui/label/label.svelte";
     import { goto } from "$app/navigation";
     import { enhance } from "$app/forms";
-    let { form, data } = $props();
+    let { form } = $props();
     let username = $state("");
     let loading = $state(false);
 </script>
@@ -48,7 +48,7 @@
                     />
                 </div>
                 <Button type="submit" class="w-full" disabled={loading}>
-                    {loading ? "Loading..." : "Continue"}
+                    {loading ? "loading..." : "continue"}
                 </Button>
             </form>
             <p class="text-xs text-center text-muted-foreground">
