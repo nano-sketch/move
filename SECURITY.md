@@ -1,16 +1,7 @@
 # Security Policy
 ## will add later
 ## Supported Versions
-
-(will eheck soon, ignore this table)
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
-
+## might add cloudfare protection(if domain is bought, since vercel would not allow us to configure dns)
 ## reporting a vuln
 
 to report a vuln please contact us or make an issue explaining in detail the vulnerability

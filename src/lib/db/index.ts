@@ -9,10 +9,11 @@ export interface User {
     progress: number;
     completed: number[];
     completedchallenges?: number[];
+    solutionshallf?: number[];
     createdAt?: Date;
 }
 
-/* SO the connection complies with vercel */
+/* SO the connection complies with vercel..*/
 let cached_client: MongoClient | null = null;
 let cached_promise: Promise<MongoClient> | null = null;
 

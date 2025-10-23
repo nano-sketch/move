@@ -5,7 +5,7 @@
     import Label from "$lib/components/ui/label/label.svelte";
     import { goto } from "$app/navigation";
     import { enhance } from "$app/forms";
-    let { form } = $props();
+    let { form, data } = $props();
     let username = $state("");
     let loading = $state(false);
 </script>

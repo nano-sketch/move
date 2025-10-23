@@ -29,7 +29,7 @@
     onMount(() => document.documentElement.classList.add("dark"));
 </script>
 
-<main class="min-h-screen bg-background relative">
+<main class="min-h-screen bg-background relative select-none">
     <Particles className="absolute inset-0" refresh />
 
     <div class="max-w-4xl mx-auto px-6 py-12 relative z-10">

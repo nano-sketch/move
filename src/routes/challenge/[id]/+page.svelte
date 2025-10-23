@@ -13,13 +13,8 @@
         CheckCircle2,
     } from "lucide-svelte";
     import { enhance } from "$app/forms";
-
     const challenge_id = parseInt($page.params.id || "0");
     const challenge = challenges.find((c) => c.id === challenge_id);
-    if (!challenge) {
-        goto("/challenges");
-    }
-
     let code = $state(challenge?.starter_code || "");
     let output = $state("");
     let test_results = $state<any[]>([]);
@@ -35,7 +30,6 @@
     let highlightCache = new Map<string, string>();
     let tooltipTimeout: ReturnType<typeof setTimeout>;
     let { form, data } = $props();
-
     $effect(() => {
         if (data?.is_completed) completed = true;
         if (form?.success && !form?.already_completed) completed = true;
@@ -45,7 +39,6 @@
         document.documentElement.classList.add("dark");
         await loadMonaco();
     });
-
     async function loadMonaco() {
         try {
             if ((window as any).monaco) {
@@ -70,7 +63,7 @@
                 script.onload = resolve;
                 script.onerror = reject;
                 setTimeout(
-                    () => reject(new Error("Monaco loading timeout")),
+                    () => reject(new Error("monaco loading timeout")),
                     10000,
                 );
             });
@@ -82,13 +75,12 @@
             });
             (window as any).require(["vs/editor/editor.main"], createEditor);
         } catch (error) {
-            console.error("Monaco loading failed:", error);
+            console.error("monaco loading failed:", error);
         }
     }
 
     function createEditor() {
         if (!editorContainer) return;
-
         editor = (window as any).monaco.editor.create(editorContainer, {
             value: code,
             language: "python",
@@ -132,16 +124,14 @@
             }, 150);
         });
     }
-
     let pyodideLoading = false;
     async function loadPyodide() {
         if (pyodideLoading) return;
         pyodideLoading = true;
-
         try {
             if ((window as any).pyodideInstance) {
                 pyodide = (window as any).pyodideInstance;
-                output = "✓ Python environment ready!";
+                output = "✓ python environment ready!";
                 return;
             }
 
