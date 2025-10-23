@@ -3,105 +3,80 @@
     import { onMount } from "svelte";
     import Button from "$lib/components/ui/button/button.svelte";
     import lessons from "$lib/lessons/lessons.json";
-    import { goto } from "$app/navigation";
-    import { Check, CheckCheck, CheckCircle, CheckIcon } from "lucide-svelte";
+    import { CheckIcon } from "lucide-svelte";
 
     onMount(() => {
         document.documentElement.classList.add("dark");
-        if (!localStorage.getItem("username")) {
-            goto("/login");
-        }
     });
 
-    let {
-        data,
-    }: {
-        data: {
-            user: { username: string; progress: number; completed: number[] };
-        };
-    } = $props();
+    let { data } = $props();
 
-    const progress = data.user.progress;
-    const completed = data.user.completed;
+    const user_progress = data?.user?.progress ?? 0;
+    const user_completed = data?.user?.completed ?? [];
 
     let search_query = $state("");
     let selected_topic = $state("all");
-    let selected_diff = $state("all");
-    let sort_option = $state("difficulty-easy");
+    let selected_difficulty = $state("all");
+    let sort_by = $state("newest");
 
-    let filtered_lessons = $derived.by(() => {
+    const filtered_lessons = $derived.by(() => {
         let filtered = lessons.filter((lesson) => {
-            const matches_srch =
+            const matches_search =
                 lesson.title
                     .toLowerCase()
                     .includes(search_query.toLowerCase()) ||
                 lesson.description
                     .toLowerCase()
                     .includes(search_query.toLowerCase());
+
             const matches_topic =
                 selected_topic === "all" || lesson.topic === selected_topic;
-            const matches_diff =
-                selected_diff === "all" || lesson.difficulty === selected_diff;
-            return matches_srch && matches_topic && matches_diff;
+
+            const matches_difficulty =
+                selected_difficulty === "all" ||
+                lesson.difficulty === selected_difficulty;
+
+            return matches_search && matches_topic && matches_difficulty;
         });
-        if (sort_option === "success-high") {
-            filtered.sort((a, b) => b.success_rate - a.success_rate);
-        } else if (sort_option === "success-low") {
-            filtered.sort((a, b) => a.success_rate - b.success_rate);
-        } else if (sort_option === "difficulty-easy") {
-            const diff_order = { easy: 1, medium: 2, hard: 3 };
-            filtered.sort(
-                (a, b) =>
-                    diff_order[a.difficulty as keyof typeof diff_order] -
-                    diff_order[b.difficulty as keyof typeof diff_order],
-            );
-        } else if (sort_option === "difficulty-hard") {
-            const difficultyOrder = { easy: 1, medium: 2, hard: 3 };
-            filtered.sort(
-                (a, b) =>
-                    difficultyOrder[
-                        b.difficulty as keyof typeof difficultyOrder
-                    ] -
-                    difficultyOrder[
-                        a.difficulty as keyof typeof difficultyOrder
-                    ],
-            );
-        } else if (sort_option === "newest") {
-            filtered.sort((a, b) => b.id - a.id);
-        } else if (sort_option === "oldest") {
+
+        if (sort_by === "difficultyEasy") {
+            const order = { Easy: 1, Medium: 2, Hard: 3 };
+            filtered.sort((a, b) => order[a.difficulty] - order[b.difficulty]);
+        } else if (sort_by === "difficultyHard") {
+            const order = { Easy: 1, Medium: 2, Hard: 3 };
+            filtered.sort((a, b) => order[b.difficulty] - order[a.difficulty]);
+        } else if (sort_by === "newest") {
             filtered.sort((a, b) => a.id - b.id);
+        } else if (sort_by === "oldest") {
+            filtered.sort((a, b) => b.id - a.id);
         }
+
         return filtered;
     });
 
-    function get_diff_clr(difficulty: string) {
-        switch (difficulty) {
-            case "easy":
-                return "bg-green-500/10 text-green-500 border-green-500/20";
-            case "medium":
-                return "bg-orange-500/10 text-orange-500 border-orange-500/20";
-            case "hard":
-            default:
-                return "bg-red-500/10 text-red-500 border-red-500/20";
-        }
+    function get_difficulty_color(difficulty: string): string {
+        if (difficulty === "Easy")
+            return "bg-green-500/10 text-green-500 border-green-500/20";
+        if (difficulty === "Medium")
+            return "bg-orange-500/10 text-orange-500 border-orange-500/20";
+        return "bg-red-500/10 text-red-500 border-red-500/20";
     }
-    function getTopicColor(topic: string): string {
-        const colors = {
-            basics: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-            control: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-            data: "bg-orange-500/10 text-orange-400 border-orange-500/20",
-            functions: "bg-red-500/10 text-red-400 border-red-500/20",
-            errors: "bg-red-600/10 text-red-600 border-red-600/20",
-            text: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
-            files: "bg-green-500/10 text-green-400 border-green-500/20",
-            math: "bg-pink-500/10 text-pink-400 border-pink-500/20",
-            oop: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
-            design: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+
+    function get_topic_color(topic: string): string {
+        const colors: Record<string, string> = {
+            Basics: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+            Control: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+            Data: "bg-orange-500/10 text-orange-400 border-orange-500/20",
+            Functions: "bg-red-500/10 text-red-400 border-red-500/20",
+            Errors: "bg-red-600/10 text-red-600 border-red-600/20",
+            Text: "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
+            System: "bg-green-500/10 text-green-400 border-green-500/20",
+            Math: "bg-pink-500/10 text-pink-400 border-pink-500/20",
+            OOP: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+            Design: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
         };
-        return (
-            colors[topic as keyof typeof colors] ||
-            "bg-muted text-muted-foreground"
-        );
+
+        return colors[topic] || "bg-muted text-muted-foreground";
     }
 </script>
 
@@ -119,98 +94,95 @@
     <div class="max-w-7xl mx-auto px-6 py-8 relative z-10">
         <div class="mb-8">
             <h1 class="text-3xl font-bold mb-6">Lessons</h1>
+
             <div class="flex flex-col lg:flex-row gap-4 mb-6">
                 <div class="flex-1">
                     <label
-                        for="search-input"
+                        for="searchInput"
                         class="text-sm font-medium mb-2 block">Search</label
                     >
                     <div class="relative">
                         <input
-                            id="search-input"
+                            id="searchInput"
                             type="text"
                             placeholder="Search lessons..."
                             bind:value={search_query}
                             class="w-full bg-card border border-border rounded-lg px-4 py-2 pl-10 text-sm focus:outline-none focus:ring-0 focus:border-primary"
-                            style="outline: none !important; box-shadow: none !important;"
                         />
                         <svg
                             class="w-4 h-4 absolute left-3 top-3 text-muted-foreground"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
-                            ><path
+                        >
+                            <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            /></svg
-                        >
+                            />
+                        </svg>
                     </div>
                 </div>
+
                 <div>
                     <label
-                        for="topic-select"
+                        for="topicSelect"
                         class="text-sm font-medium mb-2 block">Topic</label
                     >
                     <select
-                        id="topic-select"
+                        id="topicSelect"
                         bind:value={selected_topic}
                         class="bg-card border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-0 focus:border-primary min-w-[160px]"
-                        style="outline: none !important; box-shadow: none !important;"
                     >
                         <option value="all">All Topics</option>
-                        <option value="basics">Basics</option>
-                        <option value="control">Control</option>
-                        <option value="data">Data</option>
-                        <option value="functions">Functions</option>
-                        <option value="errors">Errors</option>
-                        <option value="text">Text</option>
-                        <option value="files">Files</option>
-                        <option value="math">Math</option>
-                        <option value="oop">OOP</option>
-                        <option value="design">Design</option>
+                        <option value="Basics">Basics</option>
+                        <option value="Control">Control</option>
+                        <option value="Data">Data</option>
+                        <option value="Functions">Functions</option>
+                        <option value="Errors">Errors</option>
+                        <option value="Text">Text</option>
+                        <option value="System">System</option>
+                        <option value="Math">Math</option>
+                        <option value="OOP">OOP</option>
+                        <option value="Design">Design</option>
                     </select>
                 </div>
 
                 <div>
                     <label
-                        for="difficulty-select"
+                        for="difficultySelect"
                         class="text-sm font-medium mb-2 block">Difficulty</label
                     >
                     <select
-                        id="difficulty-select"
-                        bind:value={selected_diff}
+                        id="difficultySelect"
+                        bind:value={selected_difficulty}
                         class="bg-card border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-0 focus:border-primary min-w-[160px]"
-                        style="outline: none !important; box-shadow: none !important;"
                     >
-                        <option value="all">All Difficulties</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
+                        <option value="All">All Difficulties</option>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
                     </select>
                 </div>
+
                 <div>
                     <label
-                        for="sort-select"
+                        for="sortSelect"
                         class="text-sm font-medium mb-2 block">Sort By</label
                     >
                     <select
-                        id="sort-select"
-                        bind:value={sort_option}
+                        id="sortSelect"
+                        bind:value={sort_by}
                         class="bg-card border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-0 focus:border-primary min-w-[180px]"
-                        style="outline: none !important; box-shadow: none !important;"
                     >
                         <option value="newest">Newest First</option>
                         <option value="oldest">Oldest First</option>
-                        <option value="success-high">Success Rate (High)</option
+                        <option value="successHigh">Success Rate (High)</option>
+                        <option value="successLow">Success Rate (Low)</option>
+                        <option value="difficultyEasy">Difficulty (Easy)</option
                         >
-                        <option value="success-low">Success Rate (Low)</option>
-                        <option value="difficulty-easy"
-                            >Difficulty (Easy)</option
-                        >
-                        <option value="difficulty-hard"
-                            >Difficulty (Hard)</option
+                        <option value="difficultyHard">Difficulty (Hard)</option
                         >
                     </select>
                 </div>
@@ -241,12 +213,9 @@
                 <tbody>
                     {#each filtered_lessons as lesson (lesson.id)}
                         <tr
-                            class={`border-b border-border transition-colors ${
-                                lesson.disabled
-                                    ? "opacity-50 cursor-not-allowed pointer-events-none select-none"
-                                    : "hover:bg-muted/30 cursor-pointer"
-                            }`}
-                            aria-disabled={lesson.disabled}
+                            class="border-b border-border transition-colors cursor-pointer {lesson.disabled
+                                ? 'opacity-35 cursor-not-allowed pointer-events-none'
+                                : 'hover:bg-muted/30'}"
                         >
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
@@ -255,14 +224,12 @@
                                             class="font-medium flex items-center gap-2"
                                         >
                                             {lesson.title}
-
-                                            {#if completed.includes(lesson.id)}
+                                            {#if user_completed.includes(lesson.id)}
                                                 <CheckIcon
-                                                    class="text-green-500"
+                                                    class="text-green-500 w-4 h-4"
                                                 />
                                             {/if}
                                         </div>
-
                                         <div
                                             class="text-sm text-muted-foreground mt-1"
                                         >
@@ -273,7 +240,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="text-xs px-3 py-1 rounded-full border {getTopicColor(
+                                    class="text-xs px-3 py-1 rounded-full border {get_topic_color(
                                         lesson.topic,
                                     )}"
                                 >
@@ -283,7 +250,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-2">
                                     <div class="text-sm font-medium">
-                                        {completed.includes(lesson.id)
+                                        {user_completed.includes(lesson.id)
                                             ? "100"
                                             : "0"}%
                                     </div>
@@ -292,7 +259,7 @@
                                     >
                                         <div
                                             class="h-full bg-primary rounded-full"
-                                            style="width: {completed.includes(
+                                            style="width: {user_completed.includes(
                                                 lesson.id,
                                             )
                                                 ? '100'
@@ -303,7 +270,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="text-xs px-3 py-1 rounded-full border {get_diff_clr(
+                                    class="text-xs px-3 py-1 rounded-full border {get_difficulty_color(
                                         lesson.difficulty,
                                     )}"
                                 >
@@ -315,9 +282,9 @@
                                     href="/lesson/{lesson.id}"
                                     data-sveltekit-preload-data="hover"
                                 >
-                                    <Button size="sm" class="cursor-pointer">
-                                        Start Lesson
-                                    </Button>
+                                    <Button size="sm" class="cursor-pointer"
+                                        >Start Lesson</Button
+                                    >
                                 </a>
                             </td>
                         </tr>
@@ -327,8 +294,8 @@
 
             {#if filtered_lessons.length === 0}
                 <div class="text-center py-12 text-muted-foreground">
-                    <p class="text-lg mb-2">no lessons found</p>
-                    <p class="text-sm">try adjusting your search or filters</p>
+                    <p class="text-lg mb-2">No lessons found</p>
+                    <p class="text-sm">Try adjusting your search or filters</p>
                 </div>
             {/if}
         </div>
@@ -343,7 +310,7 @@
             <div class="bg-card border border-border rounded-lg p-6">
                 <div class="text-sm text-muted-foreground mb-1">Completed</div>
                 <div class="text-2xl font-bold">
-                    {progress} / {lessons.length}
+                    {user_progress} / {lessons.length}
                 </div>
             </div>
             <div class="bg-card border border-border rounded-lg p-6">
@@ -351,13 +318,9 @@
                     Average Success Rate
                 </div>
                 <div class="text-2xl font-bold">
-                    {(
-                        (lessons.filter((l) =>
-                            data.user.completed.includes(l.id),
-                        ).length /
-                            lessons.length) *
-                        100
-                    ).toFixed(1)}%
+                    {((user_completed.length / lessons.length) * 100).toFixed(
+                        1,
+                    )}%
                 </div>
             </div>
         </div>

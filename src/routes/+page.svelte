@@ -85,15 +85,17 @@
                             <div
                                 class="mt-6 flex items-start gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
                             >
-                                <Button href="/lessons">Start Lessons</Button>
-
-                                <Button variant="outline" href="/challenges"
-                                    >Challenges</Button
-                                >
+                                <a href="/lessons">
+                                    <Button>Start Lessons</Button>
+                                </a>
 
                                 {#if !isLoggedIn}
-                                    <Button variant="secondary" href="/login"
+                                    <Button variant="outline" href="/login"
                                         >Login</Button
+                                    >
+                                {:else}
+                                    <Button variant="outline" href="/account"
+                                        >Account</Button
                                     >
                                 {/if}
                             </div>

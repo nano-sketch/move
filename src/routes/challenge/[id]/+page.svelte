@@ -13,6 +13,7 @@
         CheckCircle2,
     } from "lucide-svelte";
     import { enhance } from "$app/forms";
+    import { run_code } from "$lib/py/index.js";
     const challenge_id = parseInt($page.params.id || "0");
     const challenge = challenges.find((c) => c.id === challenge_id);
     let code = $state(challenge?.starter_code || "");
@@ -180,21 +181,12 @@
     }
 
     async function runCode() {
-        if (!pyodide && !pyodideLoading) {
-            output = "loading py environment";
-            await loadPyodide();
-        }
-        if (!pyodide) {
-            output = "env not ready yet.";
-            return;
-        }
-
         is_running = true;
         output = "";
         test_results = [];
 
         try {
-            await pyodide.runPythonAsync(code);
+            await run_code(code);
 
             const func_name = code.match(/def\s+(\w+)/)?.[1];
             if (!func_name) {

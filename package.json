@@ -34,6 +34,7 @@
 	"dependencies": {
 		"@monaco-editor/loader": "^1.6.1",
 		"@xyflow/svelte": "^1.4.0",
+		"bcrypt-ts": "^7.1.0",
 		"docx": "^8.5.0",
 		"lucide-svelte": "^0.546.0",
 		"mermaid": "^11.12.0",

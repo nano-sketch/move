@@ -20,7 +20,7 @@
     </style>
 </svelte:head>
 
-<main class="h-screen bg-background relative">
+<main class="min-h-screen bg-background relative">
     <Particles className="absolute inset-0" refresh={true} />
     <div
         class="max-w-3xl mx-auto px-6 py-8 relative z-10 flex items-center justify-center min-h-[calc(100vh-3.5rem)]"
@@ -29,7 +29,9 @@
             class="w-full max-w-md space-y-6 bg-card p-8 rounded-lg border border-border"
         >
             <div class="space-y-2 text-center">
-                <h1 class="text-3xl font-bold tracking-tight">Welcome back</h1>
+                <h1 class="text-3xl font-bold tracking-tight">
+                    Create an account
+                </h1>
                 <p class="text-muted-foreground">
                     Enter your username and password to continue
                 </p>
@@ -43,7 +45,7 @@
                 </div>
             {/if}
 
-            <form method="POST" action="?/login" use:enhance class="space-y-4">
+            <form method="POST" action="?/signup" class="space-y-4">
                 <div class="space-y-2">
                     <Label for="username">Username</Label>
                     <Input
@@ -89,12 +91,12 @@
             </div>
 
             <Button
-                href="/signup"
+                href="/login"
                 class="w-full"
                 disabled={loading}
                 variant={"outline"}
             >
-                {loading ? "Processing..." : "Sign Up"}
+                {loading ? "Processing..." : "Login"}
             </Button>
         </div>
     </div>

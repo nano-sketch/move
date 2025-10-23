@@ -6,6 +6,7 @@ if (!MONGODB_URI) throw new Error("MONGODB_URI is null");
 
 export interface User {
     username: string;
+    password: string /* THIS IS HASHED BTW SO DONT FREAK OUT */;
     progress: number;
     completed: number[];
     completedchallenges?: number[];
@@ -13,7 +14,14 @@ export interface User {
     createdAt?: Date;
 }
 
-/* SO the connection complies with vercel..*/
+export interface Session {
+    token: string;
+    userId: string /* This will be the mongo db object id it generates */;
+    createdAt: Date;
+    expiresAt: Date /* dont want it to be forever */;
+}
+
+// /* SO the connection complies with vercel.. WRONG THIS IS BECAUSE MONGODB DIDNT ALLOW ANY OTHER IPS TO CONNECT */
 let cached_client: MongoClient | null = null;
 let cached_promise: Promise<MongoClient> | null = null;
 

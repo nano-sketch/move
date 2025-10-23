@@ -4,39 +4,49 @@
     import { goto } from "$app/navigation";
     import { CheckCircle2, XCircle, ChevronRight } from "lucide-svelte";
     import { enhance } from "$app/forms";
+
     let { data, form }: { data: any; form: any } = $props();
     let Content = data.content;
+
+    let submitting = $state(false);
+    let completed = $state(false);
+
     let quiz_answers = $state<(number | null)[]>(
         data.metadata?.quizzes?.map(() => null) || [],
     );
+
     let show_results = $state<boolean[]>(
         data.metadata?.quizzes?.map(() => false) || [],
     );
+
     let all_correct = $derived(
         data.metadata?.quizzes?.every(
             (quiz: any, i: number) => quiz_answers[i] === quiz.correct,
         ) || false,
     );
-    let submitting = $state(false);
-    let completed = $state(false);
 
     function check_answer(quizIndex: number) {
         show_results[quizIndex] = true;
     }
+
     function select_option(quizIndex: number, optionIndex: number) {
         quiz_answers[quizIndex] = optionIndex;
         show_results[quizIndex] = false;
     }
+
     function is_correct(quizIndex: number, optionIndex: number): boolean {
         return data.metadata?.quizzes?.[quizIndex]?.correct === optionIndex;
     }
+
     function is_selected(quizIndex: number, optionIndex: number): boolean {
         return quiz_answers[quizIndex] === optionIndex;
     }
+
     function next_lesson() {
         const cur_id = data.metadata?.lesson || 1;
         goto(`/lesson/${cur_id + 1}`);
     }
+
     $effect(() => {
         if (form?.success && !form?.already_completed) completed = true;
     });
@@ -46,6 +56,8 @@
     <Particles className="absolute inset-0" refresh={true} />
 
     <div class="max-w-4xl mx-auto px-6 py-12 relative z-10">
+        <Button class="mb-8" href="/lessons" variant="outline">← Go Back</Button
+        >
         <div class="prose prose-lg">
             <Content />
         </div>

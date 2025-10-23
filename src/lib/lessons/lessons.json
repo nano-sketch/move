@@ -1,156 +1,156 @@
 [
-  {
-    "id": 1,
-    "title": "hello world & print statements",
-    "topic": "basics",
-    "topic_color": "#3B82F6",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "learn your first python program and display text."
-  },
-  {
-    "id": 2,
-    "title": "variables & data types",
-    "topic": "basics",
-    "topic_color": "#3B82F6",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "store data using variables and learn the main data types."
-  },
-  {
-    "id": 3,
-    "title": "loops",
-    "topic": "control",
-    "topic_color": "#8B5CF6",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "repeat code multiple times using loops."
-  },
-  {
-    "id": 4,
-    "title": "lists",
-    "topic": "data",
-    "topic_color": "#F59E0B",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "store multiple items in lists and learn list operations."
-  },
-  {
-    "id": 5,
-    "title": "if statements",
-    "topic": "control",
-    "topic_color": "#8B5CF6",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "make decisions using if, elif, and else statements."
-  },
-  {
-    "id": 6,
-    "title": "built-in functions",
-    "topic": "functions",
-    "topic_color": "#EF4444",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "use built in functions like input, len, sum, and max."
-  },
-  {
-    "id": 7,
-    "title": "error handling",
-    "topic": "errors",
-    "topic_color": "#DC2626",
-    "success_rate": 0.0,
-    "difficulty": "medium",
-    "difficulty_color": "#F59E0B",
-    "disabled": false,
-    "description": "handle errors gracefully with try except blocks."
-  },
-  {
-    "id": 8,
-    "title": "regex & validation",
-    "topic": "text",
-    "topic_color": "#06B6D4",
-    "success_rate": 0.0,
-    "difficulty": "medium",
-    "difficulty_color": "#F59E0B",
-    "disabled": false,
-    "description": "validate text patterns using regular expressions."
-  },
-  {
-    "id": 9,
-    "title": "file handling",
-    "topic": "files",
-    "topic_color": "#84CC16",
-    "success_rate": 0.0,
-    "difficulty": "medium",
-    "difficulty_color": "#F59E0B",
-    "disabled": false,
-    "description": "read and write files safely."
-  },
-  {
-    "id": 10,
-    "title": "python dictionaries",
-    "topic": "data",
-    "topic_color": "#F59E0B",
-    "success_rate": 0.0,
-    "difficulty": "medium",
-    "difficulty_color": "#F59E0B",
-    "disabled": false,
-    "description": "store data using key value pairs in dictionaries."
-  },
-  {
-    "id": 11,
-    "title": "operators & modulus",
-    "topic": "math",
-    "topic_color": "#EC4899",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "master mathematical operators including modulus for calculations."
-  },
-  {
-    "id": 12,
-    "title": "classes & objects",
-    "topic": "oop",
-    "topic_color": "#6366F1",
-    "success_rate": 0.0,
-    "difficulty": "medium",
-    "difficulty_color": "#F59E0B",
-    "disabled": false,
-    "description": "create reusable code with classes and object oriented programming."
-  },
-  {
-    "id": 13,
-    "title": "flowcharts",
-    "topic": "design",
-    "topic_color": "#10B981",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "learn to design flowcharts seamlessly."
-  },
-  {
-    "id": 14,
-    "title": "pseudocode",
-    "topic": "design",
-    "topic_color": "#10B981",
-    "success_rate": 0.0,
-    "difficulty": "easy",
-    "difficulty_color": "#10B981",
-    "disabled": false,
-    "description": "learn to write pseudocode for your programs"
-  }
+    {
+        "id": 1,
+        "title": "Hello World & Print Statements",
+        "topic": "Basics",
+        "topic_color": "#3B82F6",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": false,
+        "description": "Learn your first Python program and display text."
+    },
+    {
+        "id": 2,
+        "title": "Variables & Data Types",
+        "topic": "Basics",
+        "topic_color": "#3B82F6",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": false,
+        "description": "Store data using variables and learn the primitive data types."
+    },
+    {
+        "id": 3,
+        "title": "Syntax",
+        "topic": "Basics",
+        "topic_color": "#3B82F6",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Understand what syntax really is all about."
+    },
+    {
+        "id": 4,
+        "title": "Iterative Statements",
+        "topic": "Control",
+        "topic_color": "#8B5CF6",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Understand the concept of iteration."
+    },
+    {
+        "id": 5,
+        "title": "Lists & Dictionaries",
+        "topic": "Data",
+        "topic_color": "#F59E0B",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Understand how to store multiple values in a single object."
+    },
+    {
+        "id": 6,
+        "title": "Conditional Statements",
+        "topic": "Control",
+        "topic_color": "#8B5CF6",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Understand how to control the flow of logic in your programs."
+    },
+    {
+        "id": 7,
+        "title": "Built-in functions",
+        "topic": "Functions",
+        "topic_color": "#EF4444",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Learn about the useful native (built-in) functions Python offers."
+    },
+    {
+        "id": 8,
+        "title": "Error Handling",
+        "topic": "Errors",
+        "topic_color": "#DC2626",
+
+        "difficulty": "Medium",
+        "difficulty_color": "#F59E0B",
+        "disabled": true,
+        "description": "Learn how to handle errors gracefully."
+    },
+    {
+        "id": 9,
+        "title": "Regular Expressions (Regex)",
+        "topic": "Text",
+        "topic_color": "#06B6D4",
+
+        "difficulty": "Medium",
+        "difficulty_color": "#F59E0B",
+        "disabled": true,
+        "description": "Understand what regular expressions are and how to use them."
+    },
+    {
+        "id": 10,
+        "title": "File Handling & Manipulation",
+        "topic": "System",
+        "topic_color": "#84CC16",
+
+        "difficulty": "Medium",
+        "difficulty_color": "#F59E0B",
+        "disabled": true,
+        "description": "Learn how to interact with files on your system."
+    },
+    {
+        "id": 11,
+        "title": "Arithmetic Operations",
+        "topic": "Math",
+        "topic_color": "#EC4899",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Understand how to use the arithmetic operators in Python."
+    },
+    {
+        "id": 12,
+        "title": "Classes & Objects",
+        "topic": "OOP",
+        "topic_color": "#6366F1",
+
+        "difficulty": "Medium",
+        "difficulty_color": "#F59E0B",
+        "disabled": true,
+        "description": "Understand the concept behind Object Oriented Programming (OOP) with Python class and objects."
+    },
+    {
+        "id": 13,
+        "title": "Flowcharts",
+        "topic": "Design",
+        "topic_color": "#10B981",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Learn how to design, use and read flowcharts."
+    },
+    {
+        "id": 14,
+        "title": "Pseudocode",
+        "topic": "Design",
+        "topic_color": "#10B981",
+
+        "difficulty": "Easy",
+        "difficulty_color": "#10B981",
+        "disabled": true,
+        "description": "Learn to write pseudocode for your programs."
+    }
 ]
