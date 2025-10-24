@@ -22,7 +22,7 @@ import { ObjectId } from "mongodb";
 //   }
 // }
 //
-interface LeaderboardRow {
+interface UserRow {
     username: string;
     level: string;
     xp: number;
@@ -48,8 +48,7 @@ export const load = async ({ cookies }) => {
         }
 
         const users = await get_collection<User>("users");
-        const all: LeaderboardRow[] = [];
-        // const current: undefine;
+        const all: UserRow[] = [];
         const cursor = users.find(
             {},
             {
@@ -71,9 +70,24 @@ export const load = async ({ cookies }) => {
             });
         }
 
+        let current_user: UserRow | undefined = undefined;
+        const current_user_obj = await users.findOne({
+            _id: new ObjectId(ses.userId),
+        });
+
+        if (current_user_obj) {
+            current_user = {
+                username: current_user_obj.username,
+                level: `Level ${Math.floor(current_user_obj.experience / 100)}`,
+                xp: current_user_obj.experience,
+                completed: current_user_obj.completed.length,
+                rank: 0,
+            } as UserRow;
+        }
+
         return {
             leaderboard: all,
-            current_user: undefined,
+            current_user: current_user,
         };
     } catch (err) {
         cookies.delete("session_tok", { path: "/" });
