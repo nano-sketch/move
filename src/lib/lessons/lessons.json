@@ -26,7 +26,7 @@
         "topic_color": "#3B82F6",
         "difficulty": "Easy",
         "difficulty_color": "#10B981",
-        "disabled": true,
+        "disabled": false,
         "description": "Understand what syntax really is all about."
     },
     {
