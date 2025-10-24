@@ -185,6 +185,11 @@
                     }}
                     class="flex justify-items-center pb-12"
                 >
+                    <input
+                        type="hidden"
+                        name="type"
+                        value={data.metadata?.type?.toLowerCase() || "basic"}
+                    />
                     <Button
                         type="submit"
                         size="lg"

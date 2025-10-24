@@ -8,6 +8,7 @@ export interface User {
     username: string;
     password: string /* THIS IS HASHED BTW SO DONT FREAK OUT */;
     progress: number;
+    experience: number;
     completed: number[];
     completedchallenges?: number[];
     solutionshallf?: number[];

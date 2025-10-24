@@ -1,4 +1,4 @@
-import { redirect } from "@sveltejs/kit";
+import { redirect, fail } from "@sveltejs/kit";
 import { get_collection, get_user } from "$lib/db";
 import type { Session, User } from "$lib/db";
 import { ObjectId } from "mongodb";
@@ -36,6 +36,7 @@ export const load = async ({ cookies }) => {
                 username: user.username,
                 progress: user.progress,
                 completed: user.completed,
+                experience: user.experience,
                 completed_challenges: user.completedchallenges || [],
             },
         };
@@ -63,6 +64,44 @@ export const actions = {
         }
 
         cookies.delete("session_tok", { path: "/" });
+        throw redirect(303, "/login");
+    },
+
+    reset: async ({ cookies }) => {
+        const session_tok = cookies.get("session_tok");
+
+        if (session_tok) {
+            try {
+                const sessions = await get_collection<Session>("sessions");
+                const ses = await sessions.findOne({ token: session_tok });
+
+                if (!ses || ses.expiresAt <= new Date()) {
+                    if (ses) await sessions.deleteOne({ token: session_tok });
+                    cookies.delete("session_tok", { path: "/" });
+                    return fail(401, { error: "Not authenticated." });
+                }
+
+                const users = await get_collection<User>("users");
+
+                await users.updateOne(
+                    { _id: new ObjectId(ses.userId) },
+                    {
+                        $set: {
+                            progress: 0,
+                            experience: 0,
+                            completed: [],
+                            completedchallenges: [],
+                        },
+                    },
+                );
+
+                return { success: true };
+            } catch (err) {
+                console.error("db error:", err);
+                return fail(500, { error: "Failed to update progress." });
+            }
+        }
+
         throw redirect(303, "/login");
     },
 };

@@ -1,9 +1,12 @@
 import { fail } from "@sveltejs/kit";
 import { get_collection, type User, type Session } from "$lib/db";
 import { ObjectId } from "mongodb";
+import { get_experience_for_type } from "$lib/levels";
+import type { LevelCompletionType } from "$lib/levels";
 
 export const actions = {
-    complete: async ({ cookies, params }) => {
+    complete: async ({ cookies, params, request }) => {
+        const fdata = await request.formData();
         const session_tok = cookies.get("session_tok");
         if (!session_tok) return fail(401, { error: "Not authenticated." });
 
@@ -32,9 +35,20 @@ export const actions = {
             if (user.completed.includes(lesson_id))
                 return { success: true, already_completed: true };
 
+            const lesson_type: LevelCompletionType | string =
+                fdata.get("type")?.toString().trim() || "";
+            const experience_for_completion =
+                get_experience_for_type(lesson_type);
+
             await users.updateOne(
                 { _id: new ObjectId(ses.userId) },
-                { $addToSet: { completed: lesson_id }, $inc: { progress: 1 } },
+                {
+                    $addToSet: { completed: lesson_id },
+                    $inc: {
+                        progress: 1,
+                        experience: experience_for_completion,
+                    },
+                },
             );
 
             return { success: true };

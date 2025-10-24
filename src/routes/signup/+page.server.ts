@@ -67,6 +67,7 @@ export const actions = {
             const insertion_result = await users.insertOne({
                 username,
                 password: hashed,
+                experience: 0,
                 progress: 0,
                 completed: [],
                 createdAt: new Date(),

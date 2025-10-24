@@ -39,6 +39,11 @@
                     >Challenges</a
                 >
                 <a
+                    href="/leaderboard"
+                    class="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >Leaderboard</a
+                >
+                <a
                     href="/resources"
                     class="text-sm text-muted-foreground hover:text-foreground transition-colors"
                     >Resources</a

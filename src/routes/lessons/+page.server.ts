@@ -5,19 +5,15 @@ import { ObjectId } from "mongodb";
 
 export const load = async ({ cookies }) => {
     const session_tok = cookies.get("session_tok");
-    console.log(session_tok);
+
     if (!session_tok) throw redirect(303, "/login");
-    console.log("okay dude");
 
     try {
         const sessions = await get_collection<Session>("sessions");
         const ses = await sessions.findOne({ token: session_tok });
 
-        console.log(ses);
-
         /* has it expired yet */
         if (!ses || ses.expiresAt < new Date()) {
-            console.log("apparently we've expired?");
             if (ses) await sessions.deleteOne({ token: session_tok });
 
             cookies.delete("session_tok", { path: "/" });
