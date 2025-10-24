@@ -4,7 +4,6 @@
         "title": "Hello World & Print Statements",
         "topic": "Basics",
         "topic_color": "#3B82F6",
-
         "difficulty": "Easy",
         "difficulty_color": "#10B981",
         "disabled": false,
@@ -15,7 +14,6 @@
         "title": "Variables & Data Types",
         "topic": "Basics",
         "topic_color": "#3B82F6",
-
         "difficulty": "Easy",
         "difficulty_color": "#10B981",
         "disabled": false,
@@ -26,7 +24,6 @@
         "title": "Syntax",
         "topic": "Basics",
         "topic_color": "#3B82F6",
-
         "difficulty": "Easy",
         "difficulty_color": "#10B981",
         "disabled": true,

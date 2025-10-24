@@ -67,7 +67,7 @@
                             <span
                                 class="text-balance font-medium text-4xl/[1.1] tracking-tight sm:text-5xl lg:text-6xl"
                             >
-                                Learn Python the easy way and become godly.
+                                Learn Python the easy way, become godly.
                             </span>
                             <p
                                 class="mt-4 max-w-2xl text-balance text-sm sm:mt-6 sm:text-base text-muted-foreground"

@@ -70,6 +70,11 @@ export const load = async ({ cookies }) => {
             });
         }
 
+        all.sort((a, b) => b.xp - a.xp);
+        all.forEach((user, index) => {
+            user.rank = index + 1;
+        });
+
         let current_user: UserRow | undefined = undefined;
         const current_user_obj = await users.findOne({
             _id: new ObjectId(ses.userId),
