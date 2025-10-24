@@ -122,19 +122,24 @@
             description: "how to design an algorithm",
             type: "Programming guide",
             year: "2025",
-            downloadUrl: "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1",
-            previewUrl: "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1",
+            downloadUrl:
+                "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1",
+            previewUrl:
+                "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1",
             category: "Programming",
             image: "/sort/algorithm-design.png",
         },
         {
             id: 10,
             title: "Marking Scheme for Flowchart, Pseudocode And Code",
-            description: "the official marking scheme that will be used to mark your exam",
+            description:
+                "the official marking scheme that will be used to mark your exam",
             type: "Reference Guide",
             year: "2025",
-            downloadUrl: "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/ERbsn6ihteNBp_j3F-j5qHYBO9LDlHuuKmK-idok_IRuQA?e=gGIc40",
-            previewUrl: "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/ERbsn6ihteNBp_j3F-j5qHYBO9LDlHuuKmK-idok_IRuQA?e=gGIc40",
+            downloadUrl:
+                "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/ERbsn6ihteNBp_j3F-j5qHYBO9LDlHuuKmK-idok_IRuQA?e=gGIc40",
+            previewUrl:
+                "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/ERbsn6ihteNBp_j3F-j5qHYBO9LDlHuuKmK-idok_IRuQA?e=gGIc40",
             category: "Programming",
             image: "/sort/mark-scheme-for-flowchart-pseudocode-and-code.png",
         },
@@ -144,8 +149,10 @@
             description: "a small and handy data validation guide",
             type: "Reference Guide",
             year: "2025",
-            downloadUrl: "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/EaAQM0f90utBtGrBMVJUMqkB0Rp9nQes0R_UOiPz6PA6sg?e=7F85yv",
-            previewUrl: "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/EaAQM0f90utBtGrBMVJUMqkB0Rp9nQes0R_UOiPz6PA6sg?e=7F85yv",
+            downloadUrl:
+                "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/EaAQM0f90utBtGrBMVJUMqkB0Rp9nQes0R_UOiPz6PA6sg?e=7F85yv",
+            previewUrl:
+                "https://wtcollege.sharepoint.com/:b:/s/Section_CDB-WTC-2025-CLASS-0062-24-GPA/EaAQM0f90utBtGrBMVJUMqkB0Rp9nQes0R_UOiPz6PA6sg?e=7F85yv",
             category: "Programming",
             image: "/sort/data-validation.png",
         },
@@ -163,7 +170,8 @@
         {
             id: 13,
             title: "The best python guide/book",
-            description: "this free online book will help you excel in python(also covers flowcharts)",
+            description:
+                "this free online book will help you excel in python(also covers flowcharts)",
             type: "Reference Guide",
             year: "2025",
             downloadUrl: "https://automatetheboringstuff.com/",
@@ -177,12 +185,13 @@
             description: "github python snippets",
             type: "Reference Guide",
             year: "2025",
-            downloadUrl: "https://github.com/trekhleb/learn-python/tree/master/src",
-            previewUrl: "https://github.com/trekhleb/learn-python/tree/master/src",
+            downloadUrl:
+                "https://github.com/trekhleb/learn-python/tree/master/src",
+            previewUrl:
+                "https://github.com/trekhleb/learn-python/tree/master/src",
             category: "Programming",
             image: "/sort/py.png",
         },
-
     ];
 
     const categories = [
@@ -242,13 +251,159 @@
         }
     }
     onMount(async () => {
-        document.documentElement.classList.add("dark");
         await tick();
         mounted = true;
     });
 </script>
 
-<svelte:head><title>Resources - BTEC Computer Science Level 3</title><meta name="description" content="BTEC Computer Science Level 3 Year 2 resources, past papers, and study materials" /></svelte:head><div class="min-h-screen bg-background"><Particles className="absolute inset-0" refresh={true} /><main class="relative z-10 mx-auto max-w-7xl px-6 py-8"><div class="mb-8"><div class="flex items-center gap-3 mb-4"><BookOpen class="h-8 w-8 text-primary" /><h1 class="text-3xl font-bold">Unit 4 Resources</h1></div><p class="text-muted-foreground text-lg">Software Design and Development Project - BTEC Level 3 (External)</p><p class="text-sm text-muted-foreground mt-2">Python 3.4+ and C family programming languages - Exam Papers and Study Materials</p></div><div class="mb-8 space-y-4"><div class="flex-1"><label for="search" class="text-sm font-medium mb-2 block">Search</label><div class="relative"><input id="search" type="text" placeholder="Search resources..." bind:value={searchTerm} oninput={(e) => updateSearch((e.target as HTMLInputElement)?.value || "")} class="w-full bg-card border border-border rounded-lg px-4 py-2 pl-10 text-sm focus:outline-none focus:ring-0 focus:border-primary" style="outline: none !important; box-shadow: none !important;" /><svg class="w-4 h-4 absolute left-3 top-3 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div></div><div class="flex flex-wrap gap-2">{#each categories as category}<button onclick={() => (selectedCategory = category)} class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-75 ease-out {selectedCategory === category ? 'bg-primary text-primary-foreground' : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'}">{category}</button>{/each}</div></div>{#if mounted}<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{#each filteredResources as resource (resource.id)}<div class="bg-card border border-border rounded-lg p-6"><div class="flex items-start justify-between mb-4"><div class="flex items-center gap-2"><FileText class="h-5 w-5 text-primary" /><span class="text-xs px-2 py-1 rounded-full border {getTypeColor(resource.type)}">{resource.type}</span></div><div class="flex items-center gap-1 text-xs text-muted-foreground"><Calendar class="h-3 w-3" />{resource.year}</div></div><div class="mb-4 flex justify-end"><div class="w-16 h-12 rounded-md overflow-hidden bg-muted/20 border border-border/50 flex-shrink-0"><img src={resource.image} alt="{resource.title} preview" class="w-full h-full object-fill" loading="lazy" draggable="false" /></div></div><div class="mb-4"><h3 class="font-semibold text-lg mb-2">{resource.title}</h3><p class="text-sm text-muted-foreground mb-3">{resource.description}</p><span class="inline-block px-2 py-1 bg-muted text-xs rounded-full">{resource.category}</span></div><div class="flex gap-2"><Button variant="outline" size="sm" class="flex-1" onclick={() => window.open(resource.previewUrl, "_blank")}><ExternalLink class="h-4 w-4 mr-2" />Preview</Button><Button size="sm" class="flex-1" onclick={() => window.open(resource.downloadUrl, "_blank")}><Download class="h-4 w-4 mr-2" />Download</Button></div></div>{/each}</div>{:else}<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="col-span-full text-center py-8"><div class="animate-pulse">Loading resources...</div></div></div>{/if}{#if filteredResources.length === 0}<div class="text-center py-12"><FileText class="h-12 w-12 text-muted-foreground mx-auto mb-4" /><h3 class="text-lg font-semibold mb-2">No resources found</h3><p class="text-muted-foreground">Try adjusting your search terms or category filter.</p></div>{/if}
+<svelte:head
+    ><title>Resources - BTEC Computer Science Level 3</title><meta
+        name="description"
+        content="BTEC Computer Science Level 3 Year 2 resources, past papers, and study materials"
+    /></svelte:head
+>
+<div class="min-h-screen bg-background">
+    <Particles className="absolute inset-0" refresh={true} />
+    <main class="relative z-10 mx-auto max-w-7xl px-6 py-8">
+        <div class="mb-8">
+            <div class="flex items-center gap-3 mb-4">
+                <BookOpen class="h-8 w-8 text-primary" />
+                <h1 class="text-3xl font-bold">Unit 4 Resources</h1>
+            </div>
+            <p class="text-muted-foreground text-lg">
+                Software Design and Development Project - BTEC Level 3
+                (External)
+            </p>
+            <p class="text-sm text-muted-foreground mt-2">
+                Python 3.4+ and C family programming languages - Exam Papers and
+                Study Materials
+            </p>
+        </div>
+        <div class="mb-8 space-y-4">
+            <div class="flex-1">
+                <label for="search" class="text-sm font-medium mb-2 block"
+                    >Search</label
+                >
+                <div class="relative">
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Search resources..."
+                        bind:value={searchTerm}
+                        oninput={(e) =>
+                            updateSearch(
+                                (e.target as HTMLInputElement)?.value || "",
+                            )}
+                        class="w-full bg-card border border-border rounded-lg px-4 py-2 pl-10 text-sm focus:outline-none focus:ring-0 focus:border-primary"
+                        style="outline: none !important; box-shadow: none !important;"
+                    /><svg
+                        class="w-4 h-4 absolute left-3 top-3 text-muted-foreground"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        ></path></svg
+                    >
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                {#each categories as category}<button
+                        onclick={() => (selectedCategory = category)}
+                        class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-75 ease-out {selectedCategory ===
+                        category
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'}"
+                        >{category}</button
+                    >{/each}
+            </div>
+        </div>
+        {#if mounted}<div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+                {#each filteredResources as resource (resource.id)}<div
+                        class="bg-card border border-border rounded-lg p-6"
+                    >
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <FileText class="h-5 w-5 text-primary" /><span
+                                    class="text-xs px-2 py-1 rounded-full border {getTypeColor(
+                                        resource.type,
+                                    )}">{resource.type}</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center gap-1 text-xs text-muted-foreground"
+                            >
+                                <Calendar class="h-3 w-3" />{resource.year}
+                            </div>
+                        </div>
+                        <div class="mb-4 flex justify-end">
+                            <div
+                                class="w-16 h-12 rounded-md overflow-hidden bg-muted/20 border border-border/50 flex-shrink-0"
+                            >
+                                <img
+                                    src={resource.image}
+                                    alt="{resource.title} preview"
+                                    class="w-full h-full object-fill"
+                                    loading="lazy"
+                                    draggable="false"
+                                />
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="font-semibold text-lg mb-2">
+                                {resource.title}
+                            </h3>
+                            <p class="text-sm text-muted-foreground mb-3">
+                                {resource.description}
+                            </p>
+                            <span
+                                class="inline-block px-2 py-1 bg-muted text-xs rounded-full"
+                                >{resource.category}</span
+                            >
+                        </div>
+                        <div class="flex gap-2">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                class="flex-1"
+                                onclick={() =>
+                                    window.open(resource.previewUrl, "_blank")}
+                                ><ExternalLink
+                                    class="h-4 w-4 mr-2"
+                                />Preview</Button
+                            ><Button
+                                size="sm"
+                                class="flex-1"
+                                onclick={() =>
+                                    window.open(resource.downloadUrl, "_blank")}
+                                ><Download
+                                    class="h-4 w-4 mr-2"
+                                />Download</Button
+                            >
+                        </div>
+                    </div>{/each}
+            </div>{:else}<div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+                <div class="col-span-full text-center py-8">
+                    <div class="animate-pulse">Loading resources...</div>
+                </div>
+            </div>{/if}{#if filteredResources.length === 0}<div
+                class="text-center py-12"
+            >
+                <FileText
+                    class="h-12 w-12 text-muted-foreground mx-auto mb-4"
+                />
+                <h3 class="text-lg font-semibold mb-2">No resources found</h3>
+                <p class="text-muted-foreground">
+                    Try adjusting your search terms or category filter.
+                </p>
+            </div>{/if}
 
         <div
             class="mt-16 bg-gradient-to-br from-card to-muted/30 border border-border rounded-xl p-6 shadow-sm"

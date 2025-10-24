@@ -1,4 +1,3 @@
-
 <script lang="ts">
     import { onMount } from "svelte";
     import {
@@ -223,7 +222,6 @@ print(f"Rectangle area: {area}")`,
     }
 
     onMount(async () => {
-        document.documentElement.classList.add("dark");
         mounted = true;
         await loadMonaco();
     });

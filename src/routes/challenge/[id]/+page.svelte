@@ -37,7 +37,6 @@
     });
 
     onMount(async () => {
-        document.documentElement.classList.add("dark");
         await loadMonaco();
     });
     async function loadMonaco() {

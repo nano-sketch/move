@@ -69,7 +69,6 @@
         }
     }
     onMount(async () => {
-        document.documentElement.classList.add("dark");
         await tick();
         mounted = true;
     });

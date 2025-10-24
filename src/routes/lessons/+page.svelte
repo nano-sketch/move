@@ -5,10 +5,6 @@
     import lessons from "$lib/lessons/lessons.json";
     import { CheckIcon } from "lucide-svelte";
 
-    onMount(() => {
-        document.documentElement.classList.add("dark");
-    });
-
     let { data } = $props();
 
     const user_progress = data?.user?.progress ?? 0;

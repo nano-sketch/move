@@ -1,3 +1,30 @@
+import { writable } from "svelte/store";
+
+export type Themes =
+    | "default"
+    | "light"
+    | "corporate"
+    | "ghibli"
+    | "marshmallow"
+    | "material"
+    | "summer"
+    | "sunset";
+
+export const selected_theme = writable<Themes>("default");
+
+export function get_all_theme_names(): Themes[] {
+    return [
+        "default",
+        "light",
+        "corporate",
+        "ghibli",
+        "marshmallow",
+        "material",
+        "summer",
+        "sunset",
+    ];
+}
+
 export const password_requirements = new Map([
     [
         "minimum-length",

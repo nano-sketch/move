@@ -13,6 +13,7 @@ export interface User {
     completedchallenges?: number[];
     solutionshallf?: number[];
     createdAt?: Date;
+    theme?: "default" | "light";
 }
 
 export interface Session {

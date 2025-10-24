@@ -17,11 +17,7 @@
     import { onMount } from "svelte";
 
     let { data } = $props();
-    const isLoggedIn = data.isLoggedIn;
-
-    onMount(() => {
-        document.documentElement.classList.add("dark");
-    });
+    const is_logged_in = data.is_logged_in;
 
     let features_data = [
         {
@@ -89,7 +85,7 @@
                                     <Button>Start Lessons</Button>
                                 </a>
 
-                                {#if !isLoggedIn}
+                                {#if !is_logged_in}
                                     <Button variant="outline" href="/login"
                                         >Login</Button
                                     >

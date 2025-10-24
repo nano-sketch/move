@@ -3,10 +3,6 @@
     import { onMount } from "svelte";
     import { Trophy, Medal, Award, Star } from "lucide-svelte";
 
-    onMount(() => {
-        document.documentElement.classList.add("dark");
-    });
-
     let { data } = $props();
 
     const leaderboard = data?.leaderboard ?? [];
