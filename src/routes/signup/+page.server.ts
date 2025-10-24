@@ -70,6 +70,7 @@ export const actions = {
                 experience: 0,
                 progress: 0,
                 completed: [],
+                completedchallenges: [],
                 createdAt: new Date(),
             });
 
