@@ -1,4 +1,5 @@
 import { get_collection, get_database } from "$lib/db/index.js";
+import { get_session } from "$lib/server/session_helpers.js";
 import type { Session, User } from "$lib/db/index.js";
 import { validate_password } from "$lib/helpers.js";
 import { error, fail, redirect } from "@sveltejs/kit";
@@ -9,14 +10,10 @@ export const load = async ({ cookies }) => {
     const session_tok = cookies.get("session_tok");
     if (session_tok) {
         try {
-            const sesssions = await get_collection<Session>("sessions");
-            const ses = await sesssions.findOne({ token: session_tok });
+            const { session, error } = await get_session(session_tok);
 
-            /* if it is a valid session (it is not expired) redirect to lessons */
-            if (ses && ses.expiresAt > new Date())
-                throw redirect(303, "/lessons");
-
-            if (ses) await sesssions.deleteOne({ token: session_tok });
+            if (error) return fail(400, { error });
+            if (session) return redirect(303, "/lessons");
 
             cookies.delete("session_tok", { path: "/" });
         } catch (err) {

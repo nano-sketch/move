@@ -1,25 +1,18 @@
 import { get_collection, get_database } from "$lib/db/index.js";
 import type { User, Session } from "$lib/db/index.js";
+import { get_session } from "$lib/server/session_helpers.js";
 import { error, fail, redirect } from "@sveltejs/kit";
 import { compare } from "bcrypt-ts";
 import { randomBytes } from "crypto";
 
 export const load = async ({ cookies }) => {
-    // const username = cookies.get("username");
-    // if (username) throw redirect(303, "/lessons");
-    // return {};
-
     const session_tok = cookies.get("session_tok");
     if (session_tok) {
         try {
-            const sesssions = await get_collection<Session>("sessions");
-            const ses = await sesssions.findOne({ token: session_tok });
+            const { session, error } = await get_session(session_tok);
 
-            /* if it is a valid session (it is not expired) redirect to lessons */
-            if (ses && ses.expiresAt > new Date())
-                return redirect(303, "/lessons");
-
-            if (ses) await sesssions.deleteOne({ token: session_tok });
+            if (error) return fail(400, { error });
+            if (session) return redirect(303, "/lessons");
 
             cookies.delete("session_tok", { path: "/" });
         } catch (err) {
