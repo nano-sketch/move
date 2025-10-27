@@ -17,7 +17,9 @@
     import { onMount } from "svelte";
 
     let { data } = $props();
+
     const is_logged_in = data.is_logged_in;
+    const online_count = data.online_count;
 
     let features_data = [
         {
@@ -62,7 +64,19 @@
         <div class="relative min-h-screen overflow-hidden pt-24">
             <div class="relative lg:min-h-screen">
                 <div class="relative z-10 justify-center">
-                    <div class="mx-auto w-full max-w-screen-xl px-3">
+                    <div
+                        class="mx-auto w-full max-w-screen-xl px-3 flex flex-col gap-8"
+                    >
+                        <div class="flex flex-row items-center gap-2">
+                            <div
+                                class={`size-3 ${online_count === 0 ? "bg-muted" : "bg-green-600"} animate-pulse rounded-full`}
+                            ></div>
+
+                            <span
+                                >{online_count}
+                                {online_count === 1 ? "user" : "users"} online</span
+                            >
+                        </div>
                         <div class="max-w-4xl">
                             <span
                                 class="text-balance font-medium text-4xl/[1.1] tracking-tight sm:text-5xl lg:text-6xl"

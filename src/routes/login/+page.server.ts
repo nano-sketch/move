@@ -1,6 +1,7 @@
 import { get_collection, get_database } from "$lib/db/index.js";
 import type { User, Session } from "$lib/db/index.js";
 import { get_session } from "$lib/server/session_helpers.js";
+import { ratelimiter } from "$lib/server/redis.js";
 import { error, fail, redirect } from "@sveltejs/kit";
 import { compare } from "bcrypt-ts";
 import { randomBytes } from "crypto";
@@ -25,7 +26,19 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-    login: async ({ request, cookies }) => {
+    login: async ({ request, cookies, getClientAddress }) => {
+        const ip = getClientAddress();
+
+        /* ratelimit check - 5 attempts */
+        const { success, reset } = await ratelimiter.limit(`login:${ip}`);
+        if (!success) {
+            /* the reset time */
+            const rtime = new Date(reset).toLocaleTimeString();
+            return fail(429, {
+                error: `Too many login attempts, please try again after ${rtime}`,
+            });
+        }
+
         /* request the form data and check if they exist, if they dont  create a new user */
         const fdata = await request.formData();
         const username = fdata.get("username")?.toString().trim();

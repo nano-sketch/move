@@ -1,5 +1,6 @@
 import { get_collection, get_database } from "$lib/db/index.js";
 import { get_session } from "$lib/server/session_helpers.js";
+import { ratelimiter } from "$lib/server/redis";
 import type { Session, User } from "$lib/db/index.js";
 import { validate_password } from "$lib/helpers.js";
 import { error, fail, redirect } from "@sveltejs/kit";
@@ -26,7 +27,19 @@ export const load = async ({ cookies }) => {
 };
 
 export const actions = {
-    signup: async ({ request, cookies }) => {
+    signup: async ({ request, cookies, getClientAddress }) => {
+        const ip = getClientAddress();
+
+        /* ratelimit check - 5 attempts */
+        const { success, reset } = await ratelimiter.limit(`login:${ip}`);
+        if (!success) {
+            /* the reset time */
+            const rtime = new Date(reset).toLocaleTimeString();
+            return fail(429, {
+                error: `Too many sign up attempts, please try again after ${rtime}`,
+            });
+        }
+
         /* request the form data and check if they exist, if they dont  create a new user */
         const fdata = await request.formData();
         const username = fdata.get("username")?.toString().trim();

@@ -5,22 +5,9 @@ import type { PageServerLoad } from "./$types";
 import type { Session, User } from "$lib/db";
 import { selected_theme } from "$lib/helpers";
 import { ObjectId } from "mongodb";
+import { redis } from "$lib/server/redis";
 
-export const load: PageServerLoad = async ({ cookies }) => {
-    // const username = cookies.get("username");
-
-    // if (!username) {
-    //     return {
-    //         isLoggedIn: false,
-    //     };
-    // }
-
-    // const user = await get_user(username);
-
-    // return {
-    //     isLoggedIn: !!user,
-    // };
-
+export const load: PageServerLoad = async ({ cookies }: { cookies: any }) => {
     const session_tok = cookies.get("session_tok");
     if (session_tok) {
         try {
@@ -36,7 +23,18 @@ export const load: PageServerLoad = async ({ cookies }) => {
 
                 selected_theme.set(user?.theme || "default");
 
-                return { is_logged_in: true };
+                await redis.setex(
+                    `online:${ses.userId}`,
+                    60,
+                    Date.now().toString(),
+                );
+                const okeys =
+                    await redis.keys(
+                        "online:*",
+                    ); /* key all keys which are "online" */
+                const ocount = okeys.length; /* how many users are online */
+
+                return { is_logged_in: true, online_count: ocount };
             }
 
             if (ses) await sesssions.deleteOne({ token: session_tok });
