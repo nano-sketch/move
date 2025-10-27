@@ -46,5 +46,5 @@ export const load: PageServerLoad = async ({ cookies }: { cookies: any }) => {
         }
     }
 
-    return { is_logged_in: false };
+    return { is_logged_in: false, online_count: 0 };
 };

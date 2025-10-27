@@ -18,6 +18,10 @@
 
     let { data } = $props();
 
+    console.log(data);
+    console.log("online_count:", data.online_count);
+    console.log("is_logged_in:", data.is_logged_in);
+
     const is_logged_in = data.is_logged_in;
     const online_count = data.online_count;
 
@@ -69,12 +73,12 @@
                     >
                         <div class="flex flex-row items-center gap-2">
                             <div
-                                class={`size-3 ${online_count === 0 ? "bg-muted" : "bg-green-600"} animate-pulse rounded-full`}
+                                class={`size-3 ${(online_count ?? 0) === 0 ? "bg-muted" : "bg-green-600"} animate-pulse rounded-full`}
                             ></div>
 
                             <span
-                                >{online_count}
-                                {online_count === 1 ? "user" : "users"} online</span
+                                >{online_count ?? 0}
+                                {(online_count ?? 0) === 1 ? "user" : "users"} online</span
                             >
                         </div>
                         <div class="max-w-4xl">
