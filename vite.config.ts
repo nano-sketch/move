@@ -7,7 +7,23 @@ export default defineConfig({
     server: {
         hmr: {
             overlay: false,
+            // Faster HMR with reduced latency
+            clientPort: 5173,
         },
+        // Faster file watching
+        watch: {
+            usePolling: false,
+            // Ignore node_modules and other heavy directories
+            ignored: ["**/node_modules/**", "**/.git/**", "**/dist/**"],
+        },
+        // Faster reloads
+        fs: {
+            // Allow serving files from one level up to the project root
+            allow: [".."],
+        },
+        allowedHosts: [
+            "0a6d-84-66-20-122.ngrok-free.app",
+        ],
     },
     build: {
         minify: "esbuild",
@@ -22,8 +38,25 @@ export default defineConfig({
             },
         },
     },
-    //ignore this
+    // Optimize dependencies for faster dev server
     optimizeDeps: {
         include: ["lucide-svelte", "@lucide/svelte"],
+        // Exclude heavy dependencies from pre-bundling to speed up startup
+        exclude: [
+            "monaco-editor",
+            "@monaco-editor/loader",
+            "mermaid",
+            "docx",
+        ],
+        // Force esbuild for faster transforms
+        esbuildOptions: {
+            target: "esnext",
+        },
+    },
+    // Faster esbuild transforms
+    esbuild: {
+        target: "esnext",
+        // Drop console and debugger in production only
+        drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
     },
 });

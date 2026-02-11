@@ -856,3 +856,33 @@ body {
         min-width: 320px;
     }
 }
+
+/* Premium Button System */
+.premium-button {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: none !important;
+}
+
+.premium-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.premium-button:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+}
+
+.premium-button:active {
+    transform: translateY(0) scale(0.98) !important;
+}
+
+.premium-button:hover::after {
+    opacity: 0.12;
+}
