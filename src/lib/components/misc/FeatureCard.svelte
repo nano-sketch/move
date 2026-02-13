@@ -30,7 +30,7 @@
     class="pointer-events-none absolute -inset-px rounded-3xl transition-opacity duration-300"
     style="
       opacity: {opacity};
-      background: radial-gradient(300px circle at {mouseX}px {mouseY}px, var(--primary-rgb, rgba(var(--primary), 0.1)), transparent 80%);
+      background: radial-gradient(300px circle at {mouseX}px {mouseY}px, rgba(255, 255, 255, 0.1), transparent 80%);
     "
   ></div>
 
