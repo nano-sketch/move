@@ -59,4 +59,7 @@ export default defineConfig({
         // Drop console and debugger in production only
         drop: process.env.NODE_ENV === "production" ? ["console", "debugger"] : [],
     },
+    ssr: {
+        noExternal: ['svelte-motion']
+    }
 });

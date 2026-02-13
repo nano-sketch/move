@@ -1,62 +1,69 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, untrack } from "svelte";
 
-  export let className = "";
-  export let quantity = 50;
-  export let staticity = 50;
-  export let ease = 50;
-  export let size = 0.4;
-  export const refresh = true;
-  export let color = "#ffffff";
-  export let vx = 0;
-  export let vy = 0;
+  let {
+    className = "",
+    quantity = 50,
+    staticity = 50,
+    ease = 50,
+    size = 0.4,
+    color = "#ffffff",
+    vx = 0,
+    vy = 0,
+  } = $props();
 
-  let canvasRef: HTMLCanvasElement;
-  let canvasContainerRef: HTMLDivElement;
+  let canvasRef = $state<HTMLCanvasElement | null>(null);
+  let canvasContainerRef = $state<HTMLDivElement | null>(null);
   let context: CanvasRenderingContext2D | null = null;
   let circles: any[] = [];
   let mouse = { x: 0, y: 0 };
   let canvasSize = { w: 0, h: 0 };
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
+  /**
+   * utility to convert hex color codes to rgb arrays
+   */
   function hexToRgb(hex: string) {
     hex = hex.replace("#", "");
-    if (hex.length === 3)
+    if (hex.length === 3) {
       hex = hex
         .split("")
         .map((c) => c + c)
         .join("");
+    }
     const int = parseInt(hex, 16);
     return [(int >> 16) & 255, (int >> 8) & 255, int & 255];
   }
 
-  const rgb = hexToRgb(color);
+  const rgb = $derived(hexToRgb(color));
 
-  function circleParams() {
+  /**
+   * generates initial parameters for a single particle circle
+   */
+  function createCircleParams() {
     const x = Math.random() * canvasSize.w;
     const y = Math.random() * canvasSize.h;
-    const translateX = 0,
-      translateY = 0;
     const pSize = Math.random() * 2 + size;
-    const alpha = 0;
     const targetAlpha = +(Math.random() * 0.6 + 0.1).toFixed(1);
-    const dx = (Math.random() - 0.5) * 0.1;
-    const dy = (Math.random() - 0.5) * 0.1;
     const magnetism = 0.1 + Math.random() * 4;
+
     return {
       x,
       y,
-      translateX,
-      translateY,
+      translateX: 0,
+      translateY: 0,
       size: pSize,
-      alpha,
+      alpha: 0,
       targetAlpha,
-      dx,
-      dy,
+      dx: (Math.random() - 0.5) * 0.1,
+      dy: (Math.random() - 0.5) * 0.1,
       magnetism,
     };
   }
 
+  /**
+   * synchronizes canvas dimensions with its parent container
+   */
   function resizeCanvas() {
     if (!canvasContainerRef || !canvasRef || !context) return;
     circles = [];
@@ -69,13 +76,17 @@
     canvasRef.style.width = `${canvasSize.w}px`;
     canvasRef.style.height = `${canvasSize.h}px`;
     context.scale(dpr, dpr);
+
+    // initial particle burst
+    for (let i = 0; i < quantity; i++) {
+      circles.push(createCircleParams());
+    }
   }
 
-  function clearContext() {
-    if (context) context.clearRect(0, 0, canvasSize.w, canvasSize.h);
-  }
-
-  function drawCircle(c: any, update = false) {
+  /**
+   * draws a single particle on the canvas context
+   */
+  function renderCircle(c: any) {
     if (!context) return;
     const { x, y, translateX, translateY, size, alpha } = c;
     context.translate(translateX, translateY);
@@ -84,14 +95,11 @@
     context.fillStyle = `rgba(${rgb.join(",")},${alpha})`;
     context.fill();
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (!update) circles.push(c);
   }
 
-  function drawParticles() {
-    clearContext();
-    for (let i = 0; i < quantity; i++) drawCircle(circleParams());
-  }
-
+  /**
+   * simple linear mapping utility for edge fading
+   */
   function remapValue(
     v: number,
     s1: number,
@@ -103,54 +111,79 @@
     return r > 0 ? r : 0;
   }
 
-  let animationId: number,
-    lastTime = 0;
-  const targetFPS = 30,
-    frameInterval = 1000 / targetFPS;
+  let animationId: number;
+  let lastTime = 0;
+  const targetFPS = 60; // boosted for premium feel
+  const frameInterval = 1000 / targetFPS;
 
+  /**
+   * main animation loop using requestanimationframe
+   */
   function animate(t = 0) {
-    if (t - lastTime < frameInterval)
-      return (animationId = requestAnimationFrame(animate));
+    if (t - lastTime < frameInterval) {
+      animationId = requestAnimationFrame(animate);
+      return;
+    }
     lastTime = t;
-    clearContext();
+
+    if (context) {
+      context.clearRect(0, 0, canvasSize.w, canvasSize.h);
+    }
+
     circles.forEach((c, i) => {
+      // transparency mapping based on container edges
       const edge = [
         c.x + c.translateX - c.size,
         canvasSize.w - c.x - c.translateX - c.size,
         c.y + c.translateY - c.size,
         canvasSize.h - c.y - c.translateY - c.size,
       ];
+
       const closest = Math.min(...edge);
       const mapped = +remapValue(closest, 0, 20, 0, 1).toFixed(2);
-      if (mapped > 1) c.alpha = Math.min(c.alpha + 0.02, c.targetAlpha);
-      else c.alpha = c.targetAlpha * mapped;
+
+      if (mapped > 1) {
+        c.alpha = Math.min(c.alpha + 0.02, c.targetAlpha);
+      } else {
+        c.alpha = c.targetAlpha * mapped;
+      }
+
       c.x += c.dx + vx;
       c.y += c.dy + vy;
       c.translateX +=
         (mouse.x / (staticity / c.magnetism) - c.translateX) / ease;
       c.translateY +=
         (mouse.y / (staticity / c.magnetism) - c.translateY) / ease;
-      drawCircle(c, true);
+
+      renderCircle(c);
+
+      // recycling particles that move out of bounds
       if (
         c.x < -c.size ||
         c.x > canvasSize.w + c.size ||
         c.y < -c.size ||
         c.y > canvasSize.h + c.size
       ) {
-        circles.splice(i, 1);
-        drawCircle(circleParams());
+        circles[i] = createCircleParams();
       }
     });
+
     animationId = requestAnimationFrame(animate);
   }
 
-  function onMouseMove(e: MouseEvent) {
+  /**
+   * captures mouse movement relative to canvas center
+   */
+  function handleMouseMove(e: MouseEvent) {
     if (!canvasRef) return;
     const rect = canvasRef.getBoundingClientRect();
     const { w, h } = canvasSize;
     const x = e.clientX - rect.left - w / 2;
     const y = e.clientY - rect.top - h / 2;
-    if (x < w / 2 && x > -w / 2 && y < h / 2 && y > -h / 2) mouse = { x, y };
+
+    if (Math.abs(x) < w / 2 && Math.abs(y) < h / 2) {
+      mouse = { x, y };
+    }
   }
 
   onMount(() => {
@@ -159,16 +192,23 @@
       resizeCanvas();
       animate();
       window.addEventListener("resize", resizeCanvas);
-      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
     }
+
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
       if (animationId) cancelAnimationFrame(animationId);
     };
   });
 
-  $: if (canvasRef) drawParticles();
+  // reactive redraw on quantity/refresh changes
+  $effect(() => {
+    quantity;
+    untrack(() => {
+      if (canvasRef) resizeCanvas();
+    });
+  });
 </script>
 
 <div class={className} bind:this={canvasContainerRef} aria-hidden="true">

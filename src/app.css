@@ -785,26 +785,32 @@
 .number {
     color: #d8b4fe;
 }
-* {
-    scrollbar-width: thin;
-    scrollbar-color: oklch(0.4 0 0) oklch(0.22 0 0);
+/* Clean Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
 }
-*::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+
+::-webkit-scrollbar-track {
+    background: transparent;
 }
-*::-webkit-scrollbar-track {
-    background: oklch(0.22 0 0);
-    border-radius: 4px;
-}
-*::-webkit-scrollbar-thumb {
+
+::-webkit-scrollbar-thumb {
     background: oklch(0.4 0 0);
-    border-radius: 4px;
-    border: 2px solid oklch(0.22 0 0);
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
-*::-webkit-scrollbar-thumb:hover {
+
+::-webkit-scrollbar-thumb:hover {
     background: oklch(0.5 0 0);
 }
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.4 0 0) transparent;
+}
+
+
 
 /* dont even think about touching this(its for resizing logic*/
 html {
