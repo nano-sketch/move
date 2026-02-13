@@ -23,14 +23,14 @@
   onmousemove={handleMouseMove}
   onmouseleave={handleMouseLeave}
   role="presentation"
-  class="group relative h-full w-full overflow-hidden rounded-3xl bg-neutral-900/50 transition-all duration-300"
+  class="group relative h-full w-full overflow-hidden rounded-3xl bg-card border border-border/50 transition-all duration-300 hover:border-primary/30"
 >
   <!-- revealed pointer layer (native implementation) -->
   <div
     class="pointer-events-none absolute -inset-px rounded-3xl transition-opacity duration-300"
     style="
       opacity: {opacity};
-      background: radial-gradient(300px circle at {mouseX}px {mouseY}px, rgba(255, 255, 255, 0.1), transparent 80%);
+      background: radial-gradient(300px circle at {mouseX}px {mouseY}px, var(--primary-rgb, rgba(var(--primary), 0.1)), transparent 80%);
     "
   ></div>
 
@@ -40,9 +40,7 @@
   ></div>
 
   <!-- content layer -->
-  <div
-    class="relative flex h-full flex-col gap-6 rounded-3xl border border-white/10 p-8"
-  >
+  <div class="relative flex h-full flex-col gap-6 p-8">
     <div
       class="inline-flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-300"
     >
@@ -50,10 +48,10 @@
     </div>
 
     <div class="space-y-3">
-      <h3 class="text-xl font-bold tracking-tight text-foreground">
+      <h3 class="text-xl font-bold tracking-tight text-card-foreground">
         {title}
       </h3>
-      <p class="text-sm leading-relaxed text-muted-foreground/80">
+      <p class="text-sm leading-relaxed text-muted-foreground">
         {description}
       </p>
     </div>
