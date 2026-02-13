@@ -66,10 +66,7 @@
             {/if}
 
             <div
-              class="item-box mx-3 flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-all duration-500 {currentIndex ===
-              index
-                ? 'scale-110 shadow-lg shadow-primary/20'
-                : ''}"
+              class="item-box mx-3 flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-all duration-500"
             >
               {#if item.icon}
                 <item.icon class="size-4 text-primary" />
@@ -78,10 +75,7 @@
 
             <div class="flex-1 space-y-0.5 min-w-0">
               <h3
-                class="text-[1.05rem] font-bold tracking-tight text-foreground transition-colors {currentIndex ===
-                index
-                  ? 'text-primary'
-                  : ''}"
+                class="text-[1.05rem] font-bold tracking-tight text-foreground transition-colors"
               >
                 {index + 1}. {item.title}
               </h3>
