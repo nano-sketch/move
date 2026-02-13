@@ -9,6 +9,7 @@
     Instagram,
     Mail,
     Phone,
+    ChevronRight,
   } from "lucide-svelte";
 
   // internal components
@@ -24,14 +25,14 @@
   import { currentLang, translations } from "$lib/i18n";
   import { selected_theme } from "$lib/helpers";
   import whatsappImg from "$lib/assets/whatsapp.png";
-  import logoLight from "$lib/assets/logo-light.png";
-  import logoDark from "$lib/assets/logo-dark.png";
+  import logo from "$lib/assets/logo-light.png";
 
   // project assets
   import ufoImg from "../sort/ufo.png";
   import zooImg from "../sort/zousz.png";
   import hotelImg from "../sort/hotel.png";
   import bartoImg from "../sort/brgr.png";
+  import dccImg from "../sort/dcc.png";
 
   /**
    * core business features data
@@ -106,6 +107,13 @@
    */
   const portfolioProjects = $derived([
     {
+      title: translations[$currentLang.code].proj_4_title,
+      category: translations[$currentLang.code].services,
+      desc: translations[$currentLang.code].proj_4_desc,
+      image: bartoImg,
+      url: "https://brgr.sk/humenne",
+    },
+    {
       title: translations[$currentLang.code].proj_1_title,
       category: translations[$currentLang.code].services,
       desc: translations[$currentLang.code].proj_1_desc,
@@ -127,11 +135,11 @@
       url: "https://www.hotel-edelweiss.at/",
     },
     {
-      title: translations[$currentLang.code].proj_4_title,
+      title: translations[$currentLang.code].proj_5_title,
       category: translations[$currentLang.code].services,
-      desc: translations[$currentLang.code].proj_4_desc,
-      image: bartoImg,
-      url: "https://brgr.sk/humenne",
+      desc: translations[$currentLang.code].proj_5_desc,
+      image: dccImg,
+      url: "https://www.dcc-group.com/",
     },
   ]);
 </script>
@@ -370,47 +378,64 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        {#each portfolioProjects as project (project.title)}
+      <div
+        class="grid grid-cols-1 md:grid-cols-[1.14fr_1fr_1fr] md:grid-rows-2 gap-x-4 gap-y-12 lg:gap-x-6 lg:gap-y-16"
+      >
+        {#each portfolioProjects as project, i (project.title)}
           <a
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="group relative aspect-[16/10] overflow-hidden rounded-3xl border border-border bg-card transition-all duration-500 hover:border-primary/50"
+            class="group flex flex-col gap-6 {i === 0 ? 'md:row-span-2' : ''}"
           >
+            <!-- card image container area -->
             <div
-              class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity"
-            ></div>
-            <div class="absolute inset-0 flex flex-col justify-end p-8 z-20">
-              <span
-                class="text-xs font-bold tracking-widest uppercase text-primary mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
-              >
-                {project.category}
-              </span>
-              <h3 class="text-2xl font-black tracking-tighter mb-2">
-                {project.title}
-              </h3>
-              <p
-                class="text-sm text-muted-foreground opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100"
-              >
-                {project.desc}
-              </p>
-            </div>
-
-            <div
-              class="absolute top-8 right-8 z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100"
+              class="relative flex-1 {i === 0
+                ? 'aspect-[3/4.2]'
+                : 'aspect-[1.6/1]'}"
             >
-              <Button size="icon" class="rounded-full">
-                <Rocket class="size-4" />
-              </Button>
+              <!-- actual image with strict clipping -->
+              <div
+                class="absolute inset-0 overflow-hidden rounded-[2rem] bg-transparent"
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+
+                <!-- subtle color wash on hover -->
+                <div
+                  class="absolute inset-0 bg-primary/[0.04] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                ></div>
+              </div>
+
+              <!-- floating border (prevents clipping artifacts) -->
+              <div
+                class="absolute inset-0 rounded-[2rem] border border-foreground/10 group-hover:border-primary/40 transition-all duration-200 pointer-events-none"
+              ></div>
+
+              <!-- hover action button (centered on bottom edge) -->
+              <div
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 opacity-0 group-hover:opacity-100 transition-all duration-200 scale-75 group-hover:scale-100 pointer-events-none"
+              >
+                <div
+                  class="size-9 rounded-full bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/20"
+                >
+                  <ChevronRight class="size-5" />
+                </div>
+              </div>
             </div>
 
-            <img
-              src={project.image}
-              alt={project.title}
-              class="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-110"
-              loading="lazy"
-            />
+            <!-- project text info underneath -->
+            <div class="px-1 text-left">
+              <span
+                class="text-xl font-black tracking-tight text-foreground group-hover:text-primary transition-colors duration-200"
+              >
+                {new URL(project.url).hostname.replace("www.", "")}
+              </span>
+            </div>
           </a>
         {/each}
       </div>
@@ -462,36 +487,43 @@
     </div>
   </section>
 
-  <!-- site footer -->
-  <footer class="py-12 border-t border-border mt-32 bg-card/10">
-    <div
-      class="mx-auto max-w-screen-xl px-6 flex flex-col md:flex-row justify-between items-center gap-8"
-    >
-      <div class="flex flex-col items-center md:items-start gap-4">
-        <img
-          src={$selected_theme === "light" ? logoLight : logoDark}
-          alt="MOVE Logo"
-          class="h-12 w-auto object-contain scale-[1.8] origin-center md:origin-left"
-        />
-        <p class="text-xs text-muted-foreground font-medium uppercase mt-4">
-          © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
-        </p>
-      </div>
-
-      <div class="flex flex-col items-center md:items-end gap-6">
-        <!-- footer navigation -->
-        <div class="flex gap-8">
+  <footer class="py-20 border-t border-border mt-32 bg-card/10">
+    <div class="mx-auto max-w-screen-xl px-6 space-y-16">
+      <!-- top footer navigation -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex gap-10">
           {#each [{ label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
             <a
               href="#{link.id}"
-              class="text-xs font-bold tracking-widest text-muted-foreground hover:text-foreground transition-all uppercase"
+              class="text-xs font-black tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase"
             >
               {link.label}
             </a>
           {/each}
         </div>
+      </div>
 
-        <!-- social connectivity -->
+      <!-- divider -->
+      <div class="h-px w-full bg-border/20"></div>
+
+      <!-- bottom bar: logo, copyright & socials -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-12"
+      >
+        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <img
+            src={logo}
+            alt="MOVE Logo"
+            class="h-10 w-auto object-contain scale-[1.8] origin-center md:origin-left"
+          />
+          <p
+            class="text-[10px] text-muted-foreground font-black tracking-widest uppercase opacity-40 md:pt-1"
+          >
+            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+
+        <!-- socials -->
         <div class="flex items-center gap-4">
           <a
             href="https://www.instagram.com/agency.moveuk"

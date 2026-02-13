@@ -5,8 +5,7 @@
   // internal components
   import Button from "$lib/components/ui/button/button.svelte";
   import favicon from "$lib/assets/favicon.png";
-  import logoLight from "$lib/assets/logo-light.png";
-  import logoDark from "$lib/assets/logo-dark.png";
+  import logo from "$lib/assets/logo-light.png";
 
   // state and configuration
   import { currentLang, languages, translations } from "$lib/i18n";
@@ -74,7 +73,7 @@
   <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
     <a href="/" class="hover:opacity-80 transition-opacity relative z-[110]">
       <img
-        src={$selected_theme === "light" ? logoLight : logoDark}
+        src={logo}
         alt="MOVE Logo"
         class="h-12 w-auto object-contain scale-[1.8] origin-left"
       />
