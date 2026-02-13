@@ -519,7 +519,7 @@
             <img
               src={whatsappImg}
               alt="WhatsApp"
-              class="size-5 object-contain brightness-0 invert transition-all"
+              class="size-5 object-contain transition-all brightness-0 invert [.light_&]:invert-0 group-hover:!brightness-100 group-hover:!invert-0"
             />
           </a>
         </div>
