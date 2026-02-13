@@ -22,7 +22,10 @@
 
   // state and logic
   import { currentLang, translations } from "$lib/i18n";
+  import { selected_theme } from "$lib/helpers";
   import whatsappImg from "$lib/assets/whatsapp.png";
+  import logoLight from "$lib/assets/logo-light.png";
+  import logoDark from "$lib/assets/logo-dark.png";
 
   // project assets
   import ufoImg from "../sort/ufo.png";
@@ -465,8 +468,12 @@
       class="mx-auto max-w-screen-xl px-6 flex flex-col md:flex-row justify-between items-center gap-8"
     >
       <div class="flex flex-col items-center md:items-start gap-4">
-        <span class="text-2xl font-black tracking-tighter">MOVE</span>
-        <p class="text-xs text-muted-foreground font-medium uppercase">
+        <img
+          src={$selected_theme === "light" ? logoLight : logoDark}
+          alt="MOVE Logo"
+          class="h-12 w-auto object-contain scale-[1.8] origin-center md:origin-left"
+        />
+        <p class="text-xs text-muted-foreground font-medium uppercase mt-4">
           © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
         </p>
       </div>
