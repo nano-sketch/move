@@ -492,9 +492,9 @@
       <!-- top footer navigation -->
       <div class="flex flex-col md:flex-row justify-between items-center gap-8">
         <div class="flex gap-10">
-          {#each [{ label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
+          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
             <a
-              href="#{link.id}"
+              href={link.id === "" ? "/" : `/#${link.id}`}
               class="text-xs font-black tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase"
             >
               {link.label}
