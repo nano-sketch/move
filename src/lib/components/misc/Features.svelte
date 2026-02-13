@@ -49,7 +49,7 @@
           >
             {#if linePosition === "left" || linePosition === "right"}
               <div
-                class="absolute inset-y-0 h-full w-0.5 overflow-hidden rounded-lg bg-white/10 {linePosition ===
+                class="absolute inset-y-0 h-full w-0.5 overflow-hidden rounded-lg bg-foreground/10 {linePosition ===
                 'right'
                   ? 'left-auto right-0'
                   : 'left-0 right-auto'}"
@@ -57,7 +57,7 @@
                 <div
                   class="absolute left-0 top-0 w-full {currentIndex === index
                     ? 'h-full'
-                    : 'h-0'} origin-top bg-white transition-all ease-linear"
+                    : 'h-0'} origin-top bg-foreground transition-all ease-linear"
                   style="transition-duration: {currentIndex === index
                     ? `${collapseDelay}ms`
                     : '0s'};"

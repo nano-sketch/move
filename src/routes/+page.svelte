@@ -449,7 +449,7 @@
               variant="outline"
               size="lg"
               class="rounded-full px-12 h-14 text-base font-bold tracking-tight border-2 premium-button"
-              href="mailto:hello@move.com"
+              href="mailto:agencymove.official@gmail.com"
             >
               {translations[$currentLang.code].email_us}
             </Button>
@@ -496,7 +496,7 @@
             <Instagram class="size-5" />
           </a>
           <a
-            href="mailto:hello@move.com"
+            href="mailto:agencymove.official@gmail.com"
             class="p-3 rounded-full border border-border/50 bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 transition-all duration-300 group shadow-sm hover:shadow-md"
             aria-label="Email"
           >
