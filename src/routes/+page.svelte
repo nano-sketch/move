@@ -229,7 +229,7 @@
   </section>
 
   <!-- client testimonials carousel -->
-  <section class="py-24 bg-card/30 border-y border-border">
+  <section id="reviews" class="py-24 bg-card/30 border-y border-border">
     <div class="text-center mb-16 px-6">
       <h2
         class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4"

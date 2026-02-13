@@ -60,7 +60,14 @@
   });
 
   // navigation links for menu mapping
-  const navigationLinks = ["home", "services", "projects", "contact"];
+  const navigationLinks = [
+    "home",
+    "services",
+    "projects",
+    "why_us",
+    "reviews",
+    "contact",
+  ];
 </script>
 
 <svelte:head>
@@ -85,7 +92,7 @@
     >
       {#each navigationLinks as key}
         <a
-          href={key === "home" ? "/" : `/#${key}`}
+          href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
           class="text-xs font-bold tracking-widest text-muted-foreground hover:text-foreground transition-all uppercase"
         >
           {translations[$currentLang.code][key]}
@@ -219,7 +226,7 @@
       <nav class="flex flex-col items-center gap-10 w-full max-w-xs">
         {#each navigationLinks as key}
           <a
-            href={key === "home" ? "/" : `/#${key}`}
+            href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
             class="text-4xl font-black tracking-tighter text-foreground hover:text-primary transition-all duration-300 uppercase py-2"
             onclick={() => (isMobileMenuOpen = false)}
           >

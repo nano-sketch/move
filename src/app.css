@@ -831,6 +831,12 @@ body {
     transition: transform 0.2s ease-out;
 }
 
+img {
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: auto; /* ensure they still receive clicks if needed */
+}
+
 @media (max-width: 1199px) {
     body {
         overflow-x: hidden;
