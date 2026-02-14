@@ -1,7 +1,7 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
 
-  let { className = undefined, children, ...restProps } = $props();
+  let { class: className = undefined, children, ...restProps } = $props();
 </script>
 
 <label

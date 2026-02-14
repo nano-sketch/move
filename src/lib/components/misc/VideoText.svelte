@@ -15,7 +15,7 @@
     content = "",
   } = $props();
 
-  // convert children to plain string if array
+  // convert children,to plain string if array
   let dynamic_content = $derived(
     Array.isArray(content) ? content.join("") : content,
   );
@@ -61,7 +61,7 @@
       playsinline
     >
       <source {src} />
-      Your browser does not support the video tag.
+      your browser doesnt support this video tag, if you see this switch the browser..
     </video>
   </div>
 

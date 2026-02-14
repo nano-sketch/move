@@ -3,7 +3,7 @@
   import { useMotionTemplate, useMotionValue, Motion } from "svelte-motion";
 
   let {
-    className = undefined,
+    class: className = undefined,
     type = "text",
     value = $bindable(),
     ...restProps

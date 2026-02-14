@@ -2,7 +2,11 @@
   import { cn } from "$lib/utils";
   import { useMotionTemplate, useMotionValue, Motion } from "svelte-motion";
 
-  let { className = undefined, value = $bindable(), ...restProps } = $props();
+  let {
+    class: className = undefined,
+    value = $bindable(),
+    ...restProps
+  } = $props();
 
   let visible = $state(false);
 
