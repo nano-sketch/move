@@ -38,12 +38,12 @@
 </script>
 
 <div id="features" class="w-full">
-  <div class="flex flex-col gap-10">
-    <div class="w-full">
-      <div class="space-y-3">
+  <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+    <div class="w-full lg:w-[45%]">
+      <div class="space-y-6">
         {#each data as item, index}
           <button
-            class="relative flex items-center group/item cursor-pointer w-full text-left"
+            class="relative flex items-center group/item cursor-pointer w-full text-left py-1"
             onclick={() => (currentIndex = index)}
             aria-label={`View feature: ${item.title}`}
           >
@@ -66,20 +66,20 @@
             {/if}
 
             <div
-              class="item-box mx-3 flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-all duration-500"
+              class="item-box mx-2 sm:mx-4 flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-all duration-500"
             >
               {#if item.icon}
-                <item.icon class="size-4 text-primary" />
+                <item.icon class="size-5 text-primary" />
               {/if}
             </div>
 
             <div class="flex-1 space-y-0.5 min-w-0">
               <h3
-                class="text-[1.05rem] font-bold tracking-tight text-foreground transition-colors"
+                class="text-base lg:text-xl font-bold tracking-tight text-foreground transition-colors"
               >
                 {index + 1}. {item.title}
               </h3>
-              <p class="text-[0.7rem] text-muted-foreground leading-snug">
+              <p class="text-sm text-muted-foreground leading-relaxed">
                 {item.content}
               </p>
             </div>
@@ -88,44 +88,42 @@
       </div>
     </div>
 
-    <div class="w-full">
-      {#key currentIndex}
-        <div
-          class="w-full aspect-video sm:aspect-[21/9] animate-in fade-in zoom-in-95 duration-700"
-        >
-          {#if data[currentIndex]?.image}
-            <div
-              class="size-full rounded-2xl border border-border/50 bg-black/20 flex items-center justify-center overflow-hidden"
-            >
+    <div class="w-full lg:w-[55%]">
+      <div
+        class="w-full aspect-video lg:aspect-auto lg:h-[450px] p-1 rounded-xl border border-border/50 bg-card/20 relative overflow-hidden shadow-lg"
+      >
+        {#key currentIndex}
+          <div class="size-full animate-in fade-in duration-500">
+            {#if data[currentIndex]?.image}
               <img
                 src={data[currentIndex].image}
                 alt={data[currentIndex].title}
-                class="size-full object-cover select-none"
+                class="size-full rounded-lg object-cover object-left-top select-none"
                 draggable="false"
                 loading="lazy"
               />
-            </div>
-          {:else if data[currentIndex]?.video}
-            <video
-              preload="auto"
-              src={data[currentIndex].video}
-              class="size-full rounded-2xl border border-border/50 object-cover"
-              autoplay
-              loop
-              muted
-              playsinline
-            ></video>
-          {:else}
-            <div
-              class="size-full rounded-2xl border border-border/50 bg-muted/30 p-1 flex items-center justify-center"
-            >
+            {:else if data[currentIndex]?.video}
+              <video
+                preload="auto"
+                src={data[currentIndex].video}
+                class="size-full rounded-lg object-cover"
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+            {:else}
               <div
-                class="w-12 h-12 rounded-full bg-primary/10 animate-pulse"
-              ></div>
-            </div>
-          {/if}
-        </div>
-      {/key}
+                class="size-full rounded-lg bg-muted/30 flex items-center justify-center"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-primary/10 animate-pulse"
+                ></div>
+              </div>
+            {/if}
+          </div>
+        {/key}
+      </div>
     </div>
   </div>
 </div>

@@ -6,10 +6,15 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import favicon from "$lib/assets/favicon.png";
   import logo from "$lib/assets/logo-light.png";
+  import ContactPopup from "$lib/components/misc/ContactPopup.svelte";
 
   // state and configuration
   import { currentLang, languages, translations } from "$lib/i18n";
-  import { get_all_theme_names, selected_theme } from "$lib/helpers";
+  import {
+    get_all_theme_names,
+    selected_theme,
+    contact_popup_open,
+  } from "$lib/helpers";
   import "../app.css";
 
   // local component state
@@ -82,7 +87,8 @@
       <img
         src={logo}
         alt="MOVE Logo"
-        class="h-12 w-auto object-contain scale-[1.8] origin-left"
+        class="h-12 w-auto object-contain scale-[1.8] origin-left select-none"
+        draggable="false"
       />
     </a>
 
@@ -93,7 +99,7 @@
       {#each navigationLinks as key}
         <a
           href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
-          class="text-xs font-bold tracking-widest text-muted-foreground hover:text-foreground transition-all uppercase"
+          class="text-xs font-bold tracking-widest text-muted-foreground hover:text-foreground transition-all uppercase select-none"
         >
           {translations[$currentLang.code][key]}
         </a>
@@ -131,7 +137,7 @@
       <div class="relative">
         <button
           onclick={() => (isLangDropdownOpen = !isLangDropdownOpen)}
-          class="flex items-center gap-1.5 p-2 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors"
+          class="flex items-center gap-1.5 p-2 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors select-none"
           aria-label="Change documentation language"
         >
           <Languages class="w-5 h-5" />
@@ -151,7 +157,7 @@
                     $currentLang = lang;
                     isLangDropdownOpen = false;
                   }}
-                  class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-colors hover:bg-accent {$currentLang.code ===
+                  class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-colors hover:bg-accent select-none {$currentLang.code ===
                   lang.code
                     ? 'text-primary bg-primary/5'
                     : 'text-muted-foreground'}"
@@ -170,13 +176,12 @@
         {/if}
       </div>
 
-      <!-- primary call to action -->
       <div class="hidden md:block">
         <Button
           variant="outline"
           size="sm"
-          class="rounded-full px-6 font-bold text-xs tracking-widest uppercase border-2 premium-button"
-          href="/#contact"
+          class="rounded-full px-6 font-bold text-xs tracking-widest uppercase border-2 premium-button select-none"
+          onclick={() => ($contact_popup_open = true)}
         >
           {translations[$currentLang.code].get_started}
         </Button>
@@ -221,26 +226,28 @@
     class="md:hidden fixed inset-0 z-[200] bg-background animate-in fade-in duration-300 overflow-y-auto"
   >
     <div
-      class="flex flex-col items-center justify-center min-h-screen px-6 pt-20"
+      class="flex flex-col items-center justify-start min-h-screen px-6 pt-32 pb-20"
     >
-      <nav class="flex flex-col items-center gap-10 w-full max-w-xs">
+      <nav class="flex flex-col items-center gap-6 w-full max-w-xs">
         {#each navigationLinks as key}
           <a
             href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
-            class="text-4xl font-black tracking-tighter text-foreground hover:text-primary transition-all duration-300 uppercase py-2"
+            class="text-3xl font-black tracking-tighter text-foreground hover:text-primary transition-all duration-300 uppercase py-1 select-none"
             onclick={() => (isMobileMenuOpen = false)}
           >
             {translations[$currentLang.code][key]}
           </a>
         {/each}
 
-        <div class="w-12 h-px bg-primary/20 my-4"></div>
+        <div class="w-12 h-px bg-primary/20 my-2"></div>
 
         <Button
           variant="outline"
-          class="w-full rounded-full py-7 font-bold text-sm tracking-widest uppercase border-2 premium-button"
-          href="/#contact"
-          onclick={() => (isMobileMenuOpen = false)}
+          class="w-full rounded-full py-6 font-bold text-sm tracking-widest uppercase border-2 premium-button select-none"
+          onclick={() => {
+            isMobileMenuOpen = false;
+            $contact_popup_open = true;
+          }}
         >
           {translations[$currentLang.code].get_started}
         </Button>
@@ -248,5 +255,7 @@
     </div>
   </div>
 {/if}
+
+<ContactPopup bind:isOpen={$contact_popup_open} />
 
 {@render children?.()}

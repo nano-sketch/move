@@ -19,6 +19,7 @@ export type Themes =
  * defaults to 'default' theme.
  */
 export const selected_theme = writable<Themes>("default");
+export const contact_popup_open = writable<boolean>(false);
 
 /**
  * retrieves a list of all available theme identifiers.

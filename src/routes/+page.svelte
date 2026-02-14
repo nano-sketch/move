@@ -23,7 +23,7 @@
 
   // state and logic
   import { currentLang, translations } from "$lib/i18n";
-  import { selected_theme } from "$lib/helpers";
+  import { selected_theme, contact_popup_open } from "$lib/helpers";
   import whatsappImg from "$lib/assets/whatsapp.png";
   import logo from "$lib/assets/logo-light.png";
 
@@ -210,7 +210,7 @@
         <div class="flex flex-col items-center sm:items-start px-6">
           <div class="flex flex-col items-center sm:items-start">
             <span
-              class="text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-primary to-primary/50"
+              class="text-6xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-br from-primary to-primary/50 pr-2"
             >
               <Counter
                 value={translations[$currentLang.code].roi_value}
@@ -401,8 +401,9 @@
                 <img
                   src={project.image}
                   alt={project.title}
-                  class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  class="size-full object-cover transition-transform duration-300 group-hover:scale-105 select-none"
                   loading="lazy"
+                  draggable="false"
                 />
 
                 <!-- subtle color wash on hover -->
@@ -468,8 +469,7 @@
             <Button
               size="lg"
               class="rounded-full px-12 h-14 text-base font-bold tracking-tight premium-button"
-              href="https://wa.me/+421944575007"
-              target="_blank"
+              onclick={() => ($contact_popup_open = true)}
             >
               {translations[$currentLang.code].start_project}
             </Button>
@@ -487,30 +487,9 @@
     </div>
   </section>
 
-  <footer class="py-20 border-t border-border mt-32 bg-card/10">
-    <div class="mx-auto max-w-screen-xl px-6 space-y-16">
-      <!-- branding bar (now on top) -->
-      <div
-        class="flex flex-col md:flex-row justify-between items-center gap-10"
-      >
-        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-          <img
-            src={logo}
-            alt="MOVE Logo"
-            class="h-10 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-center md:origin-left"
-          />
-          <p
-            class="text-[10px] text-muted-foreground font-black tracking-[0.2em] uppercase opacity-30 md:pt-1 text-center md:text-left"
-          >
-            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
-          </p>
-        </div>
-      </div>
-
-      <!-- divider -->
-      <div class="h-px w-full bg-border/20"></div>
-
-      <!-- navigation & socials (now on bottom) -->
+  <footer class="pt-16 pb-10 border-t border-border mt-32 bg-card/10">
+    <div class="mx-auto max-w-screen-xl px-6 space-y-10">
+      <!-- nav -->
       <div
         class="flex flex-col md:flex-row justify-between items-center gap-10"
       >
@@ -520,14 +499,34 @@
           {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
             <a
               href={link.id === "" ? "/" : `/#${link.id}`}
-              class="text-[11px] md:text-xs font-black tracking-widest md:tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase whitespace-nowrap"
+              class="text-[11px] md:text-xs font-black tracking-widest md:tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase whitespace-nowrap select-none"
             >
               {link.label}
             </a>
           {/each}
         </div>
+      </div>
 
-        <div class="flex items-center gap-5 md:gap-4 justify-center">
+      <!-- divider -->
+      <div class="h-px w-full bg-border/20"></div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+          <img
+            src={logo}
+            alt="MOVE Logo"
+            class="h-10 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-center md:origin-left select-none"
+            draggable="false"
+          />
+          <p
+            class="text-[10px] text-muted-foreground font-black tracking-[0.2em] uppercase opacity-30 md:pt-1 text-center md:text-left select-none"
+          >
+            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+
+        <!-- socials at the bottom right/center -->
+        <div class="flex items-center gap-5 md:gap-4 justify-center md:-mt-1">
           <a
             href="https://www.instagram.com/agency.moveuk"
             target="_blank"
@@ -561,7 +560,8 @@
             <img
               src={whatsappImg}
               alt="WhatsApp"
-              class="size-5 object-contain transition-all brightness-0 invert [.light_&]:invert-0 group-hover:!brightness-100 group-hover:!invert-0"
+              class="size-5 object-contain transition-all brightness-0 invert [.light_&]:invert-0 group-hover:!brightness-100 group-hover:!invert-0 select-none"
+              draggable="false"
             />
           </a>
         </div>
