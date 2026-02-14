@@ -489,42 +489,45 @@
 
   <footer class="py-20 border-t border-border mt-32 bg-card/10">
     <div class="mx-auto max-w-screen-xl px-6 space-y-16">
-      <!-- top footer navigation -->
-      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="flex gap-10">
-          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
-            <a
-              href={link.id === "" ? "/" : `/#${link.id}`}
-              class="text-xs font-black tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase"
-            >
-              {link.label}
-            </a>
-          {/each}
+      <!-- branding bar (now on top) -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-10"
+      >
+        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+          <img
+            src={logo}
+            alt="MOVE Logo"
+            class="h-10 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-center md:origin-left"
+          />
+          <p
+            class="text-[10px] text-muted-foreground font-black tracking-[0.2em] uppercase opacity-30 md:pt-1 text-center md:text-left"
+          >
+            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
+          </p>
         </div>
       </div>
 
       <!-- divider -->
       <div class="h-px w-full bg-border/20"></div>
 
-      <!-- bottom bar: logo, copyright & socials -->
+      <!-- navigation & socials (now on bottom) -->
       <div
-        class="flex flex-col md:flex-row justify-between items-center gap-12"
+        class="flex flex-col md:flex-row justify-between items-center gap-10"
       >
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <img
-            src={logo}
-            alt="MOVE Logo"
-            class="h-10 w-auto object-contain scale-[1.8] origin-center md:origin-left"
-          />
-          <p
-            class="text-[10px] text-muted-foreground font-black tracking-widest uppercase opacity-40 md:pt-1"
-          >
-            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
-          </p>
+        <div
+          class="flex flex-wrap justify-center md:justify-start gap-x-6 md:gap-x-10 gap-y-6"
+        >
+          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
+            <a
+              href={link.id === "" ? "/" : `/#${link.id}`}
+              class="text-[11px] md:text-xs font-black tracking-widest md:tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase whitespace-nowrap"
+            >
+              {link.label}
+            </a>
+          {/each}
         </div>
 
-        <!-- socials -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-5 md:gap-4 justify-center">
           <a
             href="https://www.instagram.com/agency.moveuk"
             target="_blank"
