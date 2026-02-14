@@ -505,28 +505,9 @@
             </a>
           {/each}
         </div>
-      </div>
-
-      <!-- divider -->
-      <div class="h-px w-full bg-border/20"></div>
-
-      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
-          <img
-            src={logo}
-            alt="MOVE Logo"
-            class="h-10 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-center md:origin-left select-none"
-            draggable="false"
-          />
-          <p
-            class="text-[10px] text-muted-foreground font-black tracking-[0.2em] uppercase opacity-30 md:pt-1 text-center md:text-left select-none"
-          >
-            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
-          </p>
-        </div>
-
-        <!-- socials at the bottom right/center -->
-        <div class="flex items-center gap-5 md:gap-4 justify-center md:-mt-1">
+        
+        <!-- socials moved to top level -->
+        <div class="flex items-center gap-5 md:gap-4 justify-center">
           <a
             href="https://www.instagram.com/agency.moveuk"
             target="_blank"
@@ -564,6 +545,25 @@
               draggable="false"
             />
           </a>
+        </div>
+      </div>
+
+      <!-- divider -->
+      <div class="h-px w-full bg-border/20"></div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+          <img
+            src={logo}
+            alt="MOVE Logo"
+            class="h-10 w-auto object-contain scale-[1.5] md:scale-[1.8] origin-center md:origin-left select-none"
+            draggable="false"
+          />
+          <p
+            class="text-[10px] text-muted-foreground font-black tracking-[0.2em] uppercase opacity-30 md:pt-1 text-center md:text-left select-none"
+          >
+            © {new Date().getFullYear()} MOVE AGENCY. ALL RIGHTS RESERVED.
+          </p>
         </div>
       </div>
     </div>

@@ -6,10 +6,20 @@
 
 <label
   class={cn(
-    "text-sm font-medium leading-none text-black peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-white",
+    "label-field text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
     className,
   )}
   {...restProps}
 >
   {@render children()}
 </label>
+
+<style>
+  .label-field {
+    color: black;
+  }
+
+  :global(.default) .label-field {
+    color: white;
+  }
+</style>

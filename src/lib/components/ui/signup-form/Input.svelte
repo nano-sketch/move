@@ -10,6 +10,7 @@
   } = $props();
 
   let visible = $state(false);
+  let isDark = $state(false);
 
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
@@ -38,6 +39,19 @@
   )
 `,
   );
+
+  $effect(() => {
+    const checkTheme = () => {
+      isDark = document.documentElement.classList.contains("default");
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  });
 </script>
 
 <Motion
@@ -58,15 +72,12 @@
       {type}
       bind:value
       class={cn(
-        `dark:placeholder-text-neutral-600 duration-400 flex h-10 w-full rounded-md border-none bg-gray-50 px-3 py-2 text-sm text-black shadow-input transition file:border-0 
-        file:bg-transparent file:text-sm file:font-medium placeholder:text-neutral-400 
-        focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 disabled:cursor-not-allowed
-         disabled:opacity-50 group-hover/input:shadow-none
-         dark:bg-zinc-800
-         dark:text-white dark:shadow-[0px_0px_1px_1px_var(--neutral-700)] dark:focus-visible:ring-neutral-600
-         `,
+        "duration-400 flex h-10 w-full rounded-md border-none px-3 py-2 text-sm transition file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 group-hover/input:shadow-none",
         className,
       )}
+      style={isDark
+        ? "background: rgb(39 39 42); color: white; box-shadow: 0px 0px 1px 1px rgb(64 64 64);"
+        : "background: white; color: black; box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);"}
       {...restProps}
     />
   </div>
