@@ -10,6 +10,8 @@
     Mail,
     Phone,
     ChevronRight,
+    ChevronDown,
+    ArrowUpRight,
   } from "lucide-svelte";
 
   // internal components
@@ -33,6 +35,35 @@
   import hotelImg from "../sort/hotel.png";
   import bartoImg from "../sort/brgr.png";
   import dccImg from "../sort/dcc.png";
+
+  let openFaq = $state<number | null>(null);
+  const services = $derived([
+    { title: translations[$currentLang.code].svc_1_title, desc: translations[$currentLang.code].svc_1_desc },
+    { title: translations[$currentLang.code].svc_2_title, desc: translations[$currentLang.code].svc_2_desc },
+    { title: translations[$currentLang.code].svc_3_title, desc: translations[$currentLang.code].svc_3_desc },
+    { title: translations[$currentLang.code].svc_4_title, desc: translations[$currentLang.code].svc_4_desc },
+    { title: translations[$currentLang.code].svc_5_title, desc: translations[$currentLang.code].svc_5_desc },
+    { title: translations[$currentLang.code].svc_6_title, desc: translations[$currentLang.code].svc_6_desc }
+  ]);
+  let activeIndex = $state(0);
+  let animating = $state(false);
+  let moveOut = $state(-1);
+  let moveIn = $state(-1);
+  function cycleCards() {
+    if (animating) return;
+    animating = true;
+    moveOut = activeIndex;
+    moveIn = (activeIndex + 1) % services.length;
+    setTimeout(() => {
+      activeIndex = moveIn;
+      moveOut = -1;
+      moveIn = -1;
+      animating = false;
+    }, 220);
+  }
+  function toggleFaq(i: number) {
+    openFaq = openFaq === i ? null : i;
+  }
 
   /**
    * core business features data
@@ -228,6 +259,54 @@
     </div>
   </section>
 
+  <section id="services" class="py-32 border-t border-border/50">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="mb-16">
+        <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+          {translations[$currentLang.code].services_section_badge}
+        </h2>
+        <p class="text-4xl sm:text-5xl font-black tracking-tighter leading-none">
+          {translations[$currentLang.code].services_section_title}
+        </p>
+      </div>
+      <!-- svelte-ignore a11y_click_events_have_key_events -->
+      <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <div class="svc-wrap" onclick={cycleCards}>
+        {#each services as svc, i}
+          {@const pos = (i - activeIndex + services.length) % services.length}
+          <div
+            class="svc-card"
+            class:svc-left={pos === 0 && moveOut !== i}
+            class:svc-s1={pos === 1 && moveIn !== i}
+            class:svc-s2={pos === 2}
+            class:svc-s3={pos === 3}
+            class:svc-s4={pos === 4}
+            class:svc-s5={pos >= 5 && moveOut !== i}
+            class:svc-move-out={moveOut === i}
+            class:svc-move-in={moveIn === i}
+          >
+            <div class="flex items-start gap-5 h-full">
+              <span class="text-6xl font-black text-primary/50 tabular-nums leading-none select-none">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div class="flex flex-col gap-4 pt-3">
+                <span class="text-2xl font-black text-foreground">
+                  {svc.title}
+                </span>
+                <span class="text-base text-foreground/80 leading-relaxed max-w-xs">
+                  {svc.desc}
+                </span>
+              </div>
+            </div>
+            <div class="svc-arrow">
+              <ArrowUpRight class="size-5" />
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+
   <!-- client testimonials carousel -->
   <section id="reviews" class="py-24 bg-card/30 border-y border-border">
     <div class="text-center mb-16 px-6">
@@ -277,7 +356,7 @@
   </section>
 
   <!-- agency service details -->
-  <section id="services" class="py-32 overflow-hidden">
+  <section id="about" class="py-32 overflow-hidden">
     <div class="mx-auto w-full max-w-screen-xl px-6">
       <div class="flex flex-col items-start text-left gap-20">
         <div class="space-y-8 max-w-2xl">
@@ -487,6 +566,56 @@
     </div>
   </section>
 
+  <section id="faq" class="py-32">
+    <div class="mx-auto max-w-screen-xl px-6">
+      <div class="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        <div class="lg:w-[340px] shrink-0 lg:sticky lg:top-32 lg:self-start">
+          <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+            {translations[$currentLang.code].faq_badge}
+          </h2>
+          <p class="text-4xl sm:text-5xl font-black tracking-tighter leading-none mb-4">
+            {translations[$currentLang.code].faq_title}
+          </p>
+          <p class="text-base text-muted-foreground leading-relaxed">
+            {translations[$currentLang.code].faq_subtitle}
+          </p>
+        </div>
+        <div class="flex-1 flex flex-col gap-3">
+          {#each [
+            { q: translations[$currentLang.code].faq_q1, a: translations[$currentLang.code].faq_a1 },
+            { q: translations[$currentLang.code].faq_q2, a: translations[$currentLang.code].faq_a2 },
+            { q: translations[$currentLang.code].faq_q3, a: translations[$currentLang.code].faq_a3 },
+            { q: translations[$currentLang.code].faq_q4, a: translations[$currentLang.code].faq_a4 },
+            { q: translations[$currentLang.code].faq_q5, a: translations[$currentLang.code].faq_a5 },
+            { q: translations[$currentLang.code].faq_q6, a: translations[$currentLang.code].faq_a6 }
+          ] as item, i}
+            <div class="rounded-2xl border border-border/50 bg-card/30 transition-all duration-200 {openFaq === i ? 'border-border bg-card' : 'hover:border-border/80 hover:bg-card/50'}">
+              <button
+                onclick={() => toggleFaq(i)}
+                class="w-full px-6 py-5 flex items-center justify-between text-left cursor-pointer select-none group"
+              >
+                <span class="text-[15px] font-bold tracking-tight transition-colors duration-150 {openFaq === i ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}">
+                  {item.q}
+                </span>
+                <div class="shrink-0 ml-6 size-7 rounded-lg flex items-center justify-center transition-all duration-200 {openFaq === i ? 'bg-primary text-primary-foreground' : 'bg-accent/50 text-muted-foreground group-hover:bg-accent'}">
+                  <ChevronDown class="size-3.5 transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}" />
+                </div>
+              </button>
+              <div class="faq-body {openFaq === i ? 'faq-open' : ''}">
+                <div class="px-6 pb-5">
+                  <div class="h-px w-full bg-border/30 mb-4"></div>
+                  <p class="text-sm text-muted-foreground leading-relaxed">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="pt-16 pb-10 border-t border-border mt-32 bg-card/10">
     <div class="mx-auto max-w-screen-xl px-6 space-y-10">
       <!-- nav -->
@@ -496,7 +625,7 @@
         <div
           class="flex flex-wrap justify-center md:justify-start gap-x-6 md:gap-x-10 gap-y-6"
         >
-          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
+          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].about, id: "about" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].faq, id: "faq" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
             <a
               href={link.id === "" ? "/" : `/#${link.id}`}
               class="text-[11px] md:text-xs font-black tracking-widest md:tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase whitespace-nowrap select-none"
@@ -506,7 +635,7 @@
           {/each}
         </div>
         
-        <!-- socials moved to top level -->
+
         <div class="flex items-center gap-5 md:gap-4 justify-center">
           <a
             href="https://www.instagram.com/agency.moveuk"
@@ -571,8 +700,108 @@
 </main>
 
 <style>
-  /* ensuring fluid spacing on typography */
   .text-balance {
     text-wrap: balance;
+  }
+  .faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms ease;
+  }
+  .faq-body > div {
+    overflow: hidden;
+  }
+  .faq-body.faq-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .svc-wrap {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    cursor: pointer;
+  }
+  .svc-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 440px;
+    height: 220px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    padding: 2.25rem;
+    overflow: visible;
+    pointer-events: none;
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1), border-color 200ms ease;
+  }
+  .svc-arrow {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    translate: 0 -50%;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    scale: 0.7;
+    transition: opacity 200ms ease, scale 200ms ease;
+  }
+  .svc-left:hover .svc-arrow {
+    opacity: 1;
+    scale: 1;
+  }
+  .svc-left {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    z-index: 5;
+    pointer-events: auto;
+  }
+  .svc-left:hover {
+    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+  }
+  .svc-s1 {
+    transform: translateX(480px) translateY(8px) scale(.96) rotate(-1deg);
+    z-index: 4;
+  }
+  .svc-s2 {
+    transform: translateX(500px) translateY(16px) scale(.92) rotate(-2deg);
+    z-index: 3;
+  }
+  .svc-s3 {
+    transform: translateX(520px) translateY(24px) scale(.88) rotate(-3deg);
+    z-index: 2;
+  }
+  .svc-s4 {
+    transform: translateX(530px) translateY(30px) scale(.85) rotate(-3.5deg);
+    z-index: 1;
+  }
+  .svc-s5 {
+    transform: translateX(530px) translateY(30px) scale(.85) rotate(-3.5deg);
+    z-index: 0;
+  }
+  .svc-move-out {
+    transform: translateX(480px) translateY(8px) scale(.96) rotate(-1deg);
+    z-index: 6;
+  }
+  .svc-move-in {
+    transform: translateX(0) translateY(0) scale(1) rotate(0deg);
+    z-index: 7;
+  }
+  @media (max-width: 960px) {
+    .svc-card { width: 100%; max-width: 380px; }
+    .svc-s1 { transform: translateX(0) translateY(220px) scale(.96) rotate(-1deg); }
+    .svc-s2 { transform: translateX(0) translateY(228px) scale(.92) rotate(-2deg); }
+    .svc-s3 { transform: translateX(0) translateY(236px) scale(.88) rotate(-3deg); }
+    .svc-s4 { transform: translateX(0) translateY(242px) scale(.85) rotate(-3.5deg); }
+    .svc-s5 { transform: translateX(0) translateY(242px) scale(.85) rotate(-3.5deg); }
+    .svc-move-out { transform: translateX(0) translateY(220px) scale(.96) rotate(-1deg); }
+    .svc-move-in { transform: translateX(0) translateY(0) scale(1) rotate(0deg); }
+    .svc-wrap { height: 480px; }
   }
 </style>
