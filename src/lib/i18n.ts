@@ -1,8 +1,8 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
 export const languages = [
-  { code: 'en', name: 'English', flag: '🇬🇧', dir: 'ltr' },
-  { code: 'sk', name: 'Slovenčina', flag: '🇸🇰', dir: 'ltr' }
+  { code: "en", name: "English", flag: "🇬🇧", dir: "ltr" },
+  { code: "sk", name: "Slovenčina", flag: "🇸🇰", dir: "ltr" },
 ];
 
 export const currentLang = writable(languages[0]);
@@ -19,7 +19,8 @@ export const translations: any = {
     hero_badge: "Propelling Brands Forward",
     hero_title_1: "WE MOVE YOUR",
     hero_title_2: "BUSINESS",
-    hero_desc: "MOVE is a premium agency specializing in modern marketing and website development. We focus on performance that matters.",
+    hero_desc:
+      "MOVE is a premium agency specializing in modern marketing and website development. We focus on performance that matters.",
     view_projects: "View Projects",
     start_project: "Start a Project",
     email_us: "Email Us",
@@ -29,7 +30,8 @@ export const translations: any = {
     services_badge: "ABOUT",
     services_title_1: "WE REDEFINE THE",
     services_title_2: "DIGITAL STANDARDS.",
-    services_desc: "At MOVE, we don't just build websites; we create digital experiences that drive engagement and growth. Our approach combines data driven marketing with world class engineering.",
+    services_desc:
+      "At MOVE, we don't just build websites; we create digital experiences that drive engagement and growth. Our approach combines data driven marketing with world class engineering.",
     stats_1_val: 150,
     stats_1_suffix: "+",
     stats_1_label: "Projects Delivered",
@@ -37,47 +39,67 @@ export const translations: any = {
     stats_2_label: "Expert Support",
     portfolio_badge: "Portfolio",
     portfolio_title: "FEATURED WORK",
-    portfolio_desc: "A selection of our latest projects where we've helped businesses move to the next level of digital excellence.",
+    portfolio_desc:
+      "A selection of our latest projects where we've helped businesses move to the next level of digital excellence.",
     client_badge: "Client Success",
     client_title: "Trusted by Industry Leaders",
     contact_title_1: "READY TO MOVE",
     contact_title_2: "YOUR BUSINESS?",
-    contact_desc: "Let's create something extraordinary together. Contact our team to start your journey.",
+    contact_desc:
+      "Let's create something extraordinary together. Contact our team to start your journey.",
     feat_1_title: "Growth That Actually Happens",
-    feat_1_content: "Spending money on ads that get ignored is a waste of time. We build aggressive marketing systems that turn cold traffic into regular customers and finally scale your revenue.",
+    feat_1_content:
+      "Spending money on ads that get ignored is a waste of time. We build aggressive marketing systems that turn cold traffic into regular customers and finally scale your revenue.",
     feat_2_title: "Sites Built to Win",
-    feat_2_content: "Your website needs to do more than just look good because its primary job is to win. We build clean and lightning fast experiences that keep people hooked on what you offer.",
+    feat_2_content:
+      "Your website needs to do more than just look good because its primary job is to win. We build clean and lightning fast experiences that keep people hooked on what you offer.",
     feat_3_title: "Your Unfair Advantage",
-    feat_3_content: "In the digital world speed is basically a weapon. We optimize every single millisecond so you can outrank competitors and never lose a lead to slow loading.",
+    feat_3_content:
+      "In the digital world speed is basically a weapon. We optimize every single millisecond so you can outrank competitors and never lose a lead to slow loading.",
     proj_1_title: "UFO Finder",
-    proj_1_desc: "Interactive sightings tracker with real-time data visualization.",
+    proj_1_desc:
+      "Interactive sightings tracker with real-time data visualization.",
     proj_2_title: "Zoo State",
     proj_2_desc: "Modern conservation platform for global wildlife monitoring.",
     proj_3_title: "Hotel Reserve Pro",
     proj_3_desc: "Ultra-fast booking engine with seamless user experience.",
     proj_4_title: "BRGR Social",
-    proj_4_desc: "Complete visual identity and digital presence for a regional burger brand.",
+    proj_4_desc:
+      "Complete visual identity and digital presence for a regional burger brand.",
     proj_5_title: "DCC Group",
-    proj_5_desc: "Corporate strategic platform for leading energy and retail solutions.",
-    rev_1_body: "To be honest I was skeptical at first about the ROI claims but these guys actually delivered. It is rare to find an agency that does not just talk but actually moves the needle.",
-    rev_2_body: "The new site is genuinely fast. Load times are almost instant now. Conversion rates went up by about 40% in just two months. I am really impressed with the engineering here.",
-    rev_3_body: "Finally found a team that understands both code and marketing. No more messy communication between different agencies. They handled everything from start to finish.",
-    rev_4_body: "The data driven strategy they implemented actually works. It is not just random ads anymore, we finally have a system that brings in consistent leads every single morning.",
-    rev_5_body: "Spent way too long looking for a UI that does not look like a template. The attention to detail MOVE put into our project is honestly on another level. Our customers keep mentioning it.",
+    proj_5_desc:
+      "Corporate strategic platform for leading energy and retail solutions.",
+    rev_1_body:
+      "To be honest I was skeptical at first about the ROI claims but these guys actually delivered. It is rare to find an agency that does not just talk but actually moves the needle.",
+    rev_2_body:
+      "The new site is genuinely fast. Load times are almost instant now. Conversion rates went up by about 40% in just two months. I am really impressed with the engineering here.",
+    rev_3_body:
+      "Finally found a team that understands both code and marketing. No more messy communication between different agencies. They handled everything from start to finish.",
+    rev_4_body:
+      "The data driven strategy they implemented actually works. It is not just random ads anymore, we finally have a system that brings in consistent leads every single morning.",
+    rev_5_body:
+      "Spent way too long looking for a UI that does not look like a template. The attention to detail MOVE put into our project is honestly on another level. Our customers keep mentioning it.",
     grid_feat_1_title: "High Performance Webs",
-    grid_feat_1_desc: "Websites built with modern tech that actually work smoothly and feel seamless across every single device your customers use.",
+    grid_feat_1_desc:
+      "Websites built with modern tech that actually work smoothly and feel seamless across every single device your customers use.",
     grid_feat_2_title: "Insanely Fast Delivery",
-    grid_feat_2_desc: "We work in rapid cycles without cutting corners on quality because we know your time is money and we want you live as fast as possible.",
+    grid_feat_2_desc:
+      "We work in rapid cycles without cutting corners on quality because we know your time is money and we want you live as fast as possible.",
     grid_feat_3_title: "Top Tier Aesthetics",
-    grid_feat_3_desc: "Stunning designs that capture exactly what your brand is about. We focus on visual excellence so you leave a real impression on anyone who visits.",
+    grid_feat_3_desc:
+      "Stunning designs that capture exactly what your brand is about. We focus on visual excellence so you leave a real impression on anyone who visits.",
     grid_feat_4_title: "Built for You",
-    grid_feat_4_desc: "Custom strategies and development approaches made specifically for your goals instead of some lazy generic template everyone else uses.",
+    grid_feat_4_desc:
+      "Custom strategies and development approaches made specifically for your goals instead of some lazy generic template everyone else uses.",
     grid_feat_5_title: "Support That Cares",
-    grid_feat_5_desc: "Dedicated maintenance and support to keep your site secure and up to date so it keeps running smoothly long after we launch.",
+    grid_feat_5_desc:
+      "Dedicated maintenance and support to keep your site secure and up to date so it keeps running smoothly long after we launch.",
     grid_feat_6_title: "No Bullshit Process",
-    grid_feat_6_desc: "Transparent and straightforward steps from the start. We keep things simple with clear terms and no hidden fees ever.",
+    grid_feat_6_desc:
+      "Transparent and straightforward steps from the start. We keep things simple with clear terms and no hidden fees ever.",
     get_started_title: "START YOUR MOVE",
-    get_started_desc: "Tell us about your project and we'll get back to you within 24 hours.",
+    get_started_desc:
+      "Tell us about your project and we'll get back to you within 24 hours.",
     form_name: "Name",
     form_business: "Business Name",
     form_budget: "Budget Range",
@@ -87,40 +109,52 @@ export const translations: any = {
     form_submit: "SUBMIT REQUEST",
     form_sending: "SENDING...",
     form_success_title: "SENT SUCCESSFULLY",
-    form_success_desc: "We've received your request. Check your email client for the draft sent to our team.",
+    form_success_desc:
+      "We've received your request. Check your email client for the draft sent to our team.",
     placeholder_name: "John Doe",
     placeholder_business: "MOVE Agency",
     placeholder_budget: "£2,000 - £5,000",
     placeholder_phone: "+44 7123 456789",
     placeholder_email: "john@example.com",
-    placeholder_info: "Tell us about your goals, timeline, or any specific requirements...",
+    placeholder_info:
+      "Tell us about your goals, timeline, or any specific requirements...",
     faq_badge: "Frequently Asked Questions",
     faq_title: "Got Questions?",
     faq_subtitle: "Everything you need to know about working with MOVE",
     faq_q1: "How long does a typical project take?",
-    faq_a1: "Project timelines vary based on complexity. A standard website takes 4-6 weeks, while complex platforms may require 8-12 weeks. We'll provide a detailed timeline during our initial consultation.",
+    faq_a1:
+      "Project timelines vary based on complexity. A standard website takes 1-2 weeks, while complex platforms may require 2-3 weeks. We'll provide a detailed timeline during our initial consultation.",
     faq_q2: "What's your pricing structure?",
-    faq_a2: "We offer flexible pricing based on project scope and requirements. After understanding your needs, we provide a detailed proposal with transparent pricing and no hidden fees.",
+    faq_a2:
+      "We offer flexible pricing based on project scope and requirements. After understanding your needs, we provide a detailed proposal with transparent pricing and no hidden fees.",
     faq_q3: "Do you provide ongoing support?",
-    faq_a3: "Yes, we offer comprehensive maintenance and support packages to keep your digital assets running smoothly long after launch. This includes updates, security monitoring, and performance optimization.",
+    faq_a3:
+      "Yes, we offer comprehensive maintenance and support packages to keep your digital assets running smoothly long after launch. This includes updates, security monitoring, and performance optimization.",
     faq_q4: "Can you work with existing systems?",
-    faq_a4: "Absolutely. We specialize in integrating with existing systems and can work with your current tech stack. We'll assess your infrastructure and recommend the best approach for seamless integration.",
+    faq_a4:
+      "Absolutely. We specialize in integrating with existing systems and can work with your current tech stack. We'll assess your infrastructure and recommend the best approach for seamless integration.",
     faq_q5: "What makes you different from other agencies?",
-    faq_a5: "We combine technical excellence with data-driven marketing strategies. Unlike agencies that focus on just one area, we deliver holistic solutions that actually move the needle on your business metrics.",
+    faq_a5:
+      "We combine technical excellence with data-driven marketing strategies. Unlike agencies that focus on just one area, we deliver holistic solutions that actually move the needle on your business metrics.",
     faq_q6: "Do you work with international clients?",
-    faq_a6: "Yes, we work with clients globally. Our team is experienced in remote collaboration and can accommodate different time zones and cultural requirements.",
+    faq_a6:
+      "Yes, we work with clients globally. Our team is experienced in remote collaboration and can accommodate different time zones and cultural requirements.",
     faq: "FAQ",
     services: "SERVICES",
     services_section_badge: "What We Do",
     services_section_title: "OUR SERVICES",
     svc_1_title: "Web Design",
-    svc_1_desc: "Stunning interfaces that captivate users and drive explosive growth.",
+    svc_1_desc:
+      "Stunning interfaces that captivate users and drive explosive growth.",
     svc_2_title: "Web Development",
-    svc_2_desc: "Lightning fast applications built to scale and dominate your market.",
+    svc_2_desc:
+      "Lightning fast applications built to scale and dominate your market.",
     svc_3_title: "Digital Marketing",
-    svc_3_desc: "Growth focused campaigns that turn clicks into loyal customers.",
+    svc_3_desc:
+      "Growth focused campaigns that turn clicks into loyal customers.",
     svc_4_title: "Brand Identity",
-    svc_4_desc: "Unforgettable brands that command attention and inspire trust.",
+    svc_4_desc:
+      "Unforgettable brands that command attention and inspire trust.",
     svc_5_title: "SEO Optimization",
     svc_5_desc: "Rank #1 strategies that put you ahead of every competitor.",
     svc_6_title: "Maintenance",
@@ -137,7 +171,8 @@ export const translations: any = {
     hero_badge: "Posúvame značky vpred",
     hero_title_1: "POSÚVAME VÁŠ",
     hero_title_2: "BIZNIS",
-    hero_desc: "MOVE je prémiová agentúra špecializujúca sa na moderný marketing a vývoj webových stránok. Zameriavame sa na výkon, na ktorom záleží.",
+    hero_desc:
+      "MOVE je prémiová agentúra špecializujúca sa na moderný marketing a vývoj webových stránok. Zameriavame sa na výkon, na ktorom záleží.",
     view_projects: "Zobraziť projekty",
     start_project: "Začať projekt",
     email_us: "Napíšte nám",
@@ -147,7 +182,8 @@ export const translations: any = {
     services_badge: "O NÁS",
     services_title_1: "REDEFINUJEME",
     services_title_2: "DIGITÁLNE ŠTANDARDY.",
-    services_desc: "V MOVE nielen staviame webové stránky; vytvárame digitálne zážitky, ktoré zvyšujú angažovanosť a rast. Náš prístup kombinuje marketing založený na dátach so špičkovým inžinierstvom.",
+    services_desc:
+      "V MOVE nielen staviame webové stránky; vytvárame digitálne zážitky, ktoré zvyšujú angažovanosť a rast. Náš prístup kombinuje marketing založený na dátach so špičkovým inžinierstvom.",
     stats_1_val: 150,
     stats_1_suffix: "+",
     stats_1_label: "Dodané projekty",
@@ -155,47 +191,69 @@ export const translations: any = {
     stats_2_label: "Odborná podpora",
     portfolio_badge: "Portfólio",
     portfolio_title: "NAŠA PRÁCA",
-    portfolio_desc: "Výber našich najnovších projektov, kde sme pomohli firmám posunúť sa na ďalšiu úroveň digitálnej dokonalosti.",
+    portfolio_desc:
+      "Výber našich najnovších projektov, kde sme pomohli firmám posunúť sa na ďalšiu úroveň digitálnej dokonalosti.",
     client_badge: "Úspech klientov",
     client_title: "Dôverujú nám lídri v odvetví",
     contact_title_1: "PRIPRAVENÍ POSUNÚŤ",
     contact_title_2: "VÁŠ BIZNIS?",
-    contact_desc: "Vytvormo spolu niečo výnimočné. Kontaktujte náš tím a začnite svoju cestu.",
+    contact_desc:
+      "Vytvormo spolu niečo výnimočné. Kontaktujte náš tím a začnite svoju cestu.",
     feat_1_title: "Rast, ktorý reálne vidno",
-    feat_1_content: "Vyhadzovať peniaze na reklamy, ktoré nikto nerieši, nemá zmysel. Staviame agresívne marketingové systémy, ktoré menia návštevníkov na stálych zákazníkov a konečne škálujú váš zisk.",
+    feat_1_content:
+      "Vyhadzovať peniaze na reklamy, ktoré nikto nerieši, nemá zmysel. Staviame agresívne marketingové systémy, ktoré menia návštevníkov na stálych zákazníkov a konečne škálujú váš zisk.",
     feat_2_title: "Weby, ktoré vyhrávajú",
-    feat_2_content: "Váš web musí robiť viac než len dobre vyzerať, pretože jeho hlavná úloha je vyhrávať. Tvoríme čisté a bleskové zážitky, ktoré udržia ľudí presne tam, kde ich potrebujete mať.",
+    feat_2_content:
+      "Váš web musí robiť viac než len dobre vyzerať, pretože jeho hlavná úloha je vyhrávať. Tvoríme čisté a bleskové zážitky, ktoré udržia ľudí presne tam, kde ich potrebujete mať.",
     feat_3_title: "Nevyrovnaná výhoda",
-    feat_3_content: "V digitálnom svete je rýchlosť v podstate zbraň. Optimalizujeme každú jednu milisekundu, aby ste predbehli konkurenciu a nikdy neprišli o klienta kvôli pomalému načítaniu.",
+    feat_3_content:
+      "V digitálnom svete je rýchlosť v podstate zbraň. Optimalizujeme každú jednu milisekundu, aby ste predbehli konkurenciu a nikdy neprišli o klienta kvôli pomalému načítaniu.",
     proj_1_title: "UFO Finder",
-    proj_1_desc: "Interaktívny sledovač pozorovaní s vizualizáciou dát v reálnom čase.",
+    proj_1_desc:
+      "Interaktívny sledovač pozorovaní s vizualizáciou dát v reálnom čase.",
     proj_2_title: "Zoo State",
-    proj_2_desc: "Moderná platforma na ochranu a globálne monitorovanie voľne žijúcich živočíchov.",
+    proj_2_desc:
+      "Moderná platforma na ochranu a globálne monitorovanie voľne žijúcich živočíchov.",
     proj_3_title: "Hotel Reserve Pro",
-    proj_3_desc: "Ultra-rýchly rezervačný systém s bezproblémovým užívateľským zážitkom.",
+    proj_3_desc:
+      "Ultra-rýchly rezervačný systém s bezproblémovým užívateľským zážitkom.",
     proj_4_title: "BRGR Social",
-    proj_4_desc: "Kompletná vizuálna identita a digitálna prezentácia pre regionálnu sieť burgerov.",
+    proj_4_desc:
+      "Kompletná vizuálna identita a digitálna prezentácia pre regionálnu sieť burgerov.",
     proj_5_title: "DCC Group",
-    proj_5_desc: "Korporátna strategická platforma pre energetické a maloobchodné riešenia.",
-    rev_1_body: "Budem úprimný, najprv som bol skeptický ohľadom toho ROI, ale títo chalani to fakt dali. Je vzácne nájsť agentúru, ktorá len nekecá, ale reálne doručuje výsledky.",
-    rev_2_body: "Ten nový web je fakt rýchly. Načítanie je skoro okamžité. Konverzie nám vyskočili o 40 percent za necelé dva mesiace. Klobúk dole pred tým, ako to nakódili.",
-    rev_3_body: "Konečne tím, ktorý rozumie kódu aj marketingu naraz. Žiadna komplikovaná komunikácia medzi viacerými firmami. Vybavili všetko od začiatku až po koniec.",
-    rev_4_body: "Tá stratégia postavená na dátach fakt funguje. Už to nie sú len náhodné reklamy, konečne máme systém, ktorý nám každé ráno stabilne prináša nových klientov.",
-    rev_5_body: "Dlho som hľadal dizajn, ktorý nevyzerá ako cez kopirák. Tá pozornosť k detailom, ktorú MOVE vložil do nášho projektu, je úprimne iný level. Klienti si to hneď všimli.",
+    proj_5_desc:
+      "Korporátna strategická platforma pre energetické a maloobchodné riešenia.",
+    rev_1_body:
+      "Budem úprimný, najprv som bol skeptický ohľadom toho ROI, ale títo chalani to fakt dali. Je vzácne nájsť agentúru, ktorá len nekecá, ale reálne doručuje výsledky.",
+    rev_2_body:
+      "Ten nový web je fakt rýchly. Načítanie je skoro okamžité. Konverzie nám vyskočili o 40 percent za necelé dva mesiace. Klobúk dole pred tým, ako to nakódili.",
+    rev_3_body:
+      "Konečne tím, ktorý rozumie kódu aj marketingu naraz. Žiadna komplikovaná komunikácia medzi viacerými firmami. Vybavili všetko od začiatku až po koniec.",
+    rev_4_body:
+      "Tá stratégia postavená na dátach fakt funguje. Už to nie sú len náhodné reklamy, konečne máme systém, ktorý nám každé ráno stabilne prináša nových klientov.",
+    rev_5_body:
+      "Dlho som hľadal dizajn, ktorý nevyzerá ako cez kopirák. Tá pozornosť k detailom, ktorú MOVE vložil do nášho projektu, je úprimne iný level. Klienti si to hneď všimli.",
     grid_feat_1_title: "Výkonné webstránky",
-    grid_feat_1_desc: "Weby postavené na moderných technológiách, ktoré reálne fungujú hladko a pôsobia prirodzene na každom jednom zariadení, ktoré vaši klienti používajú.",
+    grid_feat_1_desc:
+      "Weby postavené na moderných technológiách, ktoré reálne fungujú hladko a pôsobia prirodzene na každom jednom zariadení, ktoré vaši klienti používajú.",
     grid_feat_2_title: "Bleskové dodanie",
-    grid_feat_2_desc: "Makáme v rýchlych cykloch bez toho, aby sme znižovali kvalitu, pretože vieme, že váš čas sú peniaze a chceme vás mať online čo najskôr.",
+    grid_feat_2_desc:
+      "Makáme v rýchlych cykloch bez toho, aby sme znižovali kvalitu, pretože vieme, že váš čas sú peniaze a chceme vás mať online čo najskôr.",
     grid_feat_3_title: "Špičkový dizajn",
-    grid_feat_3_desc: "Dizajny, ktoré presne zachytia, o čom je vaša značka. Zameriavame sa na vizuálnu kvalitu, aby ste zanechali skutočný dojem na každom, kto vás navštívi.",
+    grid_feat_3_desc:
+      "Dizajny, ktoré presne zachytia, o čom je vaša značka. Zameriavame sa na vizuálnu kvalitu, aby ste zanechali skutočný dojem na každom, kto vás navštívi.",
     grid_feat_4_title: "Riešenia priamo pre vás",
-    grid_feat_4_desc: "Vlastné stratégie a prístup navrhnutý priamo pre vaše ciele namiesto nejakých lenivých šablón, ktoré používa každý druhý.",
+    grid_feat_4_desc:
+      "Vlastné stratégie a prístup navrhnutý priamo pre vaše ciele namiesto nejakých lenivých šablón, ktoré používa každý druhý.",
     grid_feat_5_title: "Podpora, ktorá má zmysel",
-    grid_feat_5_desc: "Poctivá údržba a podpora, aby bol váš web bezpečný a aktuálny, takže bude fungovať hladko ešte dlho po tom, ako ho spustíme.",
+    grid_feat_5_desc:
+      "Poctivá údržba a podpora, aby bol váš web bezpečný a aktuálny, takže bude fungovať hladko ešte dlho po tom, ako ho spustíme.",
     grid_feat_6_title: "Fér dohoda bez kecov",
-    grid_feat_6_desc: "Transparentné a jasné kroky hneď od začiatku. Držíme to jednoduché s jasnými podmienkami a bez akýchkoľvek skrytých poplatkov.",
+    grid_feat_6_desc:
+      "Transparentné a jasné kroky hneď od začiatku. Držíme to jednoduché s jasnými podmienkami a bez akýchkoľvek skrytých poplatkov.",
     get_started_title: "NAŠTARTUJTE SVOJ POHYB",
-    get_started_desc: "Povedzte nám o svojom projekte a my sa vám ozveme do 24 hodín.",
+    get_started_desc:
+      "Povedzte nám o svojom projekte a my sa vám ozveme do 24 hodín.",
     form_name: "Meno",
     form_business: "Názov Firmy",
     form_budget: "Rozpočet",
@@ -205,43 +263,57 @@ export const translations: any = {
     form_submit: "ODOSLAŤ ŽIADOSŤ",
     form_sending: "ODOSIELA SA...",
     form_success_title: "ÚSPEŠNE ODOSLANÉ",
-    form_success_desc: "Dostali sme vašu žiadosť. Skontrolujte svojho e-mailového klienta pre koncept odoslaný nášmu tímu.",
+    form_success_desc:
+      "Dostali sme vašu žiadosť. Skontrolujte svojho e-mailového klienta pre koncept odoslaný nášmu tímu.",
     placeholder_name: "Jozef Mrkva",
     placeholder_business: "MOVE Agentúra",
     placeholder_budget: "2,000€ - 5,000€",
     placeholder_phone: "+421 912 345 678",
     placeholder_email: "jozef@priklad.sk",
-    placeholder_info: "Povedzte nám o svojich cieľoch, časovom rámci alebo konkrétnych požiadavkách...",
+    placeholder_info:
+      "Povedzte nám o svojich cieľoch, časovom rámci alebo konkrétnych požiadavkách...",
     faq_badge: "Často Kladené Otázky",
     faq_title: "Máte Otázky?",
     faq_subtitle: "Všetko, čo potrebujete vedieť o spolupráci s MOVE",
     faq_q1: "Ako dlho trvá typický projekt?",
-    faq_a1: "Časové rámce projektu závisia od zložitosti. Štandardná webstránka trvá 4-6 týždňov, zatiaľ čo komplexné platformy môžu vyžadovať 8-12 týždňov. Počas úvodnej konzultácie poskytneme podrobný harmonogram.",
+    faq_a1:
+      "Časové rámce projektu závisia od zložitosti. Štandardná webstránka trvá 1-2 týždňov, zatiaľ čo komplexné platformy môžu vyžadovať 2-3 týždňov. Počas úvodnej konzultácie poskytneme podrobný harmonogram.",
     faq_q2: "Aká je vaša cenová štruktúra?",
-    faq_a2: "Ponúkame flexibilné ceny na základe rozsahu a požiadaviek projektu. Po pochopení vašich potrieb poskytneme podrobnú ponuku s transparentnými cenami a bez skrytých poplatkov.",
+    faq_a2:
+      "Ponúkame flexibilné ceny na základe rozsahu a požiadaviek projektu. Po pochopení vašich potrieb poskytneme podrobnú ponuku s transparentnými cenami a bez skrytých poplatkov.",
     faq_q3: "Poskytujete trvalú podporu?",
-    faq_a3: "Áno, ponúkame komplexné balíky údržby a podpory, aby vaše digitálne aktíva fungovali hladko dlho po spustení. To zahŕňa aktualizácie, bezpečnostný monitoring a optimalizáciu výkonu.",
+    faq_a3:
+      "Áno, ponúkame komplexné balíky údržby a podpory, aby vaše digitálne aktíva fungovali hladko dlho po spustení. To zahŕňa aktualizácie, bezpečnostný monitoring a optimalizáciu výkonu.",
     faq_q4: "Môžete pracovať s existujúcimi systémami?",
-    faq_a4: "Absolútne. Špecializujeme sa na integráciu s existujúcimi systémami a môžeme pracovať s vašou súčasnou technológiou. Posúdime vašu infraštruktúru a odporučíme najlepší prístup pre bezproblémovú integráciu.",
+    faq_a4:
+      "Absolútne. Špecializujeme sa na integráciu s existujúcimi systémami a môžeme pracovať s vašou súčasnou technológiou. Posúdime vašu infraštruktúru a odporučíme najlepší prístup pre bezproblémovú integráciu.",
     faq_q5: "Čo vás odlišuje od iných agentúr?",
-    faq_a5: "Kombinujeme technickú excelentnosť s marketingovými stratégiami založenými na dátach. Na rozdiel od agentúr, ktoré sa zameriavajú len na jednu oblasť, dodávame holistické riešenia, ktoré skutočne posúvajú vaše obchodné metriky.",
+    faq_a5:
+      "Kombinujeme technickú excelentnosť s marketingovými stratégiami založenými na dátach. Na rozdiel od agentúr, ktoré sa zameriavajú len na jednu oblasť, dodávame holistické riešenia, ktoré skutočne posúvajú vaše obchodné metriky.",
     faq_q6: "Pracujete s medzinárodnými klientmi?",
-    faq_a6: "Áno, pracujeme s klientmi globálne. Náš tím má skúsenosti s diaľkovou spoluprácou a môže prispôsobiť rôzne časové pásma a kultúrne požiadavky.",
+    faq_a6:
+      "Áno, pracujeme s klientmi globálne. Náš tím má skúsenosti s diaľkovou spoluprácou a môže prispôsobiť rôzne časové pásma a kultúrne požiadavky.",
     faq: "FAQ",
     services: "SLUŽBY",
     services_section_badge: "Čo Robíme",
     services_section_title: "NAŠE SLUŽBY",
     svc_1_title: "Webový Dizajn",
-    svc_1_desc: "Ohromujúce rozhrania, ktoré fascinujú používateľov a zabezpečia rast.",
+    svc_1_desc:
+      "Ohromujúce rozhrania, ktoré fascinujú používateľov a zabezpečia rast.",
     svc_2_title: "Vývoj Webov",
-    svc_2_desc: "Bleskovo rýchle aplikácie postavené na škálovateľnosť a dominovanie trhu.",
+    svc_2_desc:
+      "Bleskovo rýchle aplikácie postavené na škálovateľnosť a dominovanie trhu.",
     svc_3_title: "Digitálny Marketing",
-    svc_3_desc: "Kampane zamerané na rast, ktoré menia kliky na verných zákazníkov.",
+    svc_3_desc:
+      "Kampane zamerané na rast, ktoré menia kliky na verných zákazníkov.",
     svc_4_title: "Identita Značky",
-    svc_4_desc: "Nezabudnuteľné značky, ktoré priťahujú pozornosť a budujú dôveru.",
+    svc_4_desc:
+      "Nezabudnuteľné značky, ktoré priťahujú pozornosť a budujú dôveru.",
     svc_5_title: "SEO Optimalizácia",
-    svc_5_desc: "Stratégie na #1 pozíciu, ktoré vás posunú pred každého konkurenta.",
+    svc_5_desc:
+      "Stratégie na #1 pozíciu, ktoré vás posunú pred každého konkurenta.",
     svc_6_title: "Údržba",
-    svc_6_desc: "Nepriestrežná podpora, ktorá udržiava váš biznis v chode 24/7.",
-  }
+    svc_6_desc:
+      "Nepriestrežná podpora, ktorá udržiava váš biznis v chode 24/7.",
+  },
 };
