@@ -794,7 +794,7 @@
     z-index: 7;
   }
   @media (max-width: 960px) {
-    .svc-card { width: 100%; max-width: 380px; }
+    .svc-card { width: 100%; max-width: 340px; padding: 1.5rem; }
     .svc-left { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); left: 50%; }
     .svc-s1 { transform: translateX(-50%) translateY(260px) scale(.96) rotate(-1deg); left: 50%; }
     .svc-s2 { transform: translateX(-50%) translateY(268px) scale(.92) rotate(-2deg); left: 50%; }
