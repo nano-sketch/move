@@ -67,13 +67,13 @@
   // navigation links for menu mapping
   const navigationLinks = [
     "home",
-    "about",
     "services",
-    "projects",
-    "why_us",
     "reviews",
-    "faq",
+    "about",
+    "why_us",
+    "projects",
     "contact",
+    "faq",
   ];
 </script>
 

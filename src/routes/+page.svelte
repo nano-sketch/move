@@ -285,15 +285,15 @@
             class:svc-move-out={moveOut === i}
             class:svc-move-in={moveIn === i}
           >
-            <div class="flex items-start gap-5 h-full">
-              <span class="text-6xl font-black text-primary/50 tabular-nums leading-none select-none">
+            <div class="flex items-start gap-3 sm:gap-5 sm:h-full w-full">
+              <span class="text-5xl sm:text-6xl font-black text-primary/50 tabular-nums leading-none select-none">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div class="flex flex-col gap-4 pt-3">
-                <span class="text-2xl font-black text-foreground">
+              <div class="flex flex-col gap-1 sm:gap-4 pt-1 sm:pt-3">
+                <span class="text-xl sm:text-2xl font-black text-foreground">
                   {svc.title}
                 </span>
-                <span class="text-base text-foreground/80 leading-relaxed max-w-xs">
+                <span class="text-sm sm:text-base text-foreground/80 leading-relaxed max-w-[200px] sm:max-w-xs">
                   {svc.desc}
                 </span>
               </div>
@@ -625,7 +625,7 @@
         <div
           class="flex flex-wrap justify-center md:justify-start gap-x-6 md:gap-x-10 gap-y-6"
         >
-          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].about, id: "about" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].faq, id: "faq" }, { label: translations[$currentLang.code].contact, id: "contact" }] as link}
+          {#each [{ label: translations[$currentLang.code].home, id: "" }, { label: translations[$currentLang.code].services, id: "services" }, { label: translations[$currentLang.code].reviews, id: "reviews" }, { label: translations[$currentLang.code].about, id: "about" }, { label: translations[$currentLang.code].why_us, id: "why-us" }, { label: translations[$currentLang.code].projects, id: "projects" }, { label: translations[$currentLang.code].contact, id: "contact" }, { label: translations[$currentLang.code].faq, id: "faq" }] as link}
             <a
               href={link.id === "" ? "/" : `/#${link.id}`}
               class="text-[11px] md:text-xs font-black tracking-widest md:tracking-[0.2em] text-muted-foreground hover:text-primary transition-all uppercase whitespace-nowrap select-none"
@@ -794,15 +794,15 @@
     z-index: 7;
   }
   @media (max-width: 960px) {
-    .svc-card { width: 100%; max-width: 340px; padding: 1.5rem; }
+    .svc-card { width: 100%; max-width: 340px; height: 180px; padding: 1.25rem; display: flex; align-items: center; }
     .svc-left { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); left: 50%; }
-    .svc-s1 { transform: translateX(-50%) translateY(260px) scale(.96) rotate(-1deg); left: 50%; }
-    .svc-s2 { transform: translateX(-50%) translateY(268px) scale(.92) rotate(-2deg); left: 50%; }
-    .svc-s3 { transform: translateX(-50%) translateY(276px) scale(.88) rotate(-3deg); left: 50%; }
-    .svc-s4 { transform: translateX(-50%) translateY(282px) scale(.85) rotate(-3.5deg); left: 50%; }
-    .svc-s5 { transform: translateX(-50%) translateY(282px) scale(.85) rotate(-3.5deg); left: 50%; }
-    .svc-move-out { transform: translateX(-50%) translateY(260px) scale(.96) rotate(-1deg); left: 50%; }
+    .svc-s1 { transform: translateX(-50%) translateY(220px) scale(.96) rotate(-1deg); left: 50%; }
+    .svc-s2 { transform: translateX(-50%) translateY(228px) scale(.92) rotate(-2deg); left: 50%; }
+    .svc-s3 { transform: translateX(-50%) translateY(236px) scale(.88) rotate(-3deg); left: 50%; }
+    .svc-s4 { transform: translateX(-50%) translateY(242px) scale(.85) rotate(-3.5deg); left: 50%; }
+    .svc-s5 { transform: translateX(-50%) translateY(242px) scale(.85) rotate(-3.5deg); left: 50%; }
+    .svc-move-out { transform: translateX(-50%) translateY(220px) scale(.96) rotate(-1deg); left: 50%; }
     .svc-move-in { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); left: 50%; }
-    .svc-wrap { height: 520px; }
+    .svc-wrap { height: 460px; }
   }
 </style>
