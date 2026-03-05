@@ -78,7 +78,7 @@
     onclick={() => (isOpen = false)}
   >
     <div
-      class="relative w-full max-w-lg my-auto rounded-3xl border border-border/50 bg-card p-4 shadow-2xl md:p-10"
+      class="framer-card relative w-full max-w-lg my-auto p-4 md:p-10"
       transition:scale={{ duration: 300, start: 0.95 }}
       onclick={(e) => e.stopPropagation()}
     >
@@ -173,7 +173,7 @@
           <button
             type="submit"
             disabled={isSubmitting}
-            class="group/btn relative block h-11 w-full rounded-2xl bg-primary font-black text-primary-foreground shadow-lg transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-xs md:h-12"
+            class="premium-button mt-4 block w-full uppercase"
           >
             {isSubmitting ? t.form_sending : t.form_submit}
             {@html isSubmitting ? "" : "&rarr;"}

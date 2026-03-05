@@ -15,13 +15,17 @@
   } from "lucide-svelte";
 
   // internal components
+  import Separator from "$lib/components/misc/Separator.svelte";
   import Features from "$lib/components/misc/Features.svelte";
-  import Particles from "$lib/components/misc/Particles.svelte";
   import Marquee from "$lib/components/misc/Marquee.svelte";
   import FeaturesGrid from "$lib/components/misc/FeaturesGrid.svelte";
   import Counter from "$lib/components/misc/Counter.svelte";
   import VideoText from "$lib/components/misc/VideoText.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
+  import ThreeCube from "$lib/components/misc/ThreeCube.svelte";
+  import { LineShadowText } from "$lib/components/magic-ui/line-shadow-text";
+  import { MorphingText } from "$lib/components/magic-ui/morphing-text";
+  import { PulsatingButton } from "$lib/components/magic-ui/pulsating-button";
 
   // state and logic
   import { currentLang, translations } from "$lib/i18n";
@@ -38,12 +42,30 @@
 
   let openFaq = $state<number | null>(null);
   const services = $derived([
-    { title: translations[$currentLang.code].svc_1_title, desc: translations[$currentLang.code].svc_1_desc },
-    { title: translations[$currentLang.code].svc_2_title, desc: translations[$currentLang.code].svc_2_desc },
-    { title: translations[$currentLang.code].svc_3_title, desc: translations[$currentLang.code].svc_3_desc },
-    { title: translations[$currentLang.code].svc_4_title, desc: translations[$currentLang.code].svc_4_desc },
-    { title: translations[$currentLang.code].svc_5_title, desc: translations[$currentLang.code].svc_5_desc },
-    { title: translations[$currentLang.code].svc_6_title, desc: translations[$currentLang.code].svc_6_desc }
+    {
+      title: translations[$currentLang.code].svc_1_title,
+      desc: translations[$currentLang.code].svc_1_desc,
+    },
+    {
+      title: translations[$currentLang.code].svc_2_title,
+      desc: translations[$currentLang.code].svc_2_desc,
+    },
+    {
+      title: translations[$currentLang.code].svc_3_title,
+      desc: translations[$currentLang.code].svc_3_desc,
+    },
+    {
+      title: translations[$currentLang.code].svc_4_title,
+      desc: translations[$currentLang.code].svc_4_desc,
+    },
+    {
+      title: translations[$currentLang.code].svc_5_title,
+      desc: translations[$currentLang.code].svc_5_desc,
+    },
+    {
+      title: translations[$currentLang.code].svc_6_title,
+      desc: translations[$currentLang.code].svc_6_desc,
+    },
   ]);
   let activeIndex = $state(0);
   let animating = $state(false);
@@ -183,13 +205,11 @@
   />
 </svelte:head>
 
-<main class="select-none bg-background text-foreground scroll-smooth">
+<main class="select-none bg-transparent text-foreground scroll-smooth">
   <!-- hero landing section -->
   <section
     class="relative min-h-screen flex flex-col items-center justify-center pt-24 overflow-hidden"
   >
-    <Particles className="absolute inset-0 z-0" color="#888888" />
-
     <div
       class="relative z-10 w-full max-w-screen-xl px-6 text-center flex flex-col items-center gap-8"
     >
@@ -229,13 +249,11 @@
       <div
         class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-10 animate-in fade-in slide-in-from-bottom-16 duration-700 delay-200"
       >
-        <Button
-          size="lg"
-          class="rounded-full px-10 h-14 text-base font-bold tracking-tight premium-button"
-          href="#projects"
-        >
-          {translations[$currentLang.code].view_projects}
-        </Button>
+        <a href="#projects">
+          <PulsatingButton pulseColor="rgba(0, 85, 255, 0.5)">
+            {translations[$currentLang.code].view_projects}
+          </PulsatingButton>
+        </a>
 
         <!-- secondary roi stats -->
         <div class="flex flex-col items-center sm:items-start px-6">
@@ -259,13 +277,18 @@
     </div>
   </section>
 
-  <section id="services" class="py-32 border-t border-border/50">
+  <Separator gradient={true} />
+  <section id="services" class="py-32">
     <div class="mx-auto max-w-screen-xl px-6">
       <div class="mb-16">
-        <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+        <h2
+          class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4"
+        >
           {translations[$currentLang.code].services_section_badge}
         </h2>
-        <p class="text-4xl sm:text-5xl font-black tracking-tighter leading-none">
+        <p
+          class="text-4xl sm:text-5xl font-black tracking-tighter leading-none"
+        >
           {translations[$currentLang.code].services_section_title}
         </p>
       </div>
@@ -286,14 +309,18 @@
             class:svc-move-in={moveIn === i}
           >
             <div class="flex items-start gap-3 sm:gap-5 sm:h-full w-full">
-              <span class="text-5xl sm:text-6xl font-black text-primary/50 tabular-nums leading-none select-none">
+              <span
+                class="text-5xl sm:text-6xl font-black text-primary/50 tabular-nums leading-none select-none"
+              >
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div class="flex flex-col gap-1 sm:gap-4 pt-1 sm:pt-3">
                 <span class="text-xl sm:text-2xl font-black text-foreground">
                   {svc.title}
                 </span>
-                <span class="text-sm sm:text-base text-foreground/80 leading-relaxed max-w-[200px] sm:max-w-xs">
+                <span
+                  class="text-sm sm:text-base text-foreground/80 leading-relaxed max-w-[200px] sm:max-w-xs"
+                >
                   {svc.desc}
                 </span>
               </div>
@@ -307,8 +334,9 @@
     </div>
   </section>
 
+  <Separator gradient={true} />
   <!-- client testimonials carousel -->
-  <section id="reviews" class="py-24 bg-card/30 border-y border-border">
+  <section id="reviews" class="py-24 bg-transparent">
     <div class="text-center mb-16 px-6">
       <h2
         class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4"
@@ -323,7 +351,7 @@
     <Marquee pauseOnHover class="[--duration:30s] [--gap:2rem]">
       {#each clientReviews as review (review.username)}
         <div
-          class="relative w-80 cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-6 hover:bg-accent transition-colors group"
+          class="framer-card framer-card-hover group relative w-80 cursor-pointer overflow-hidden p-8 flex flex-col text-left gap-4"
         >
           <div class="flex flex-row items-center gap-3 mb-4">
             <div
@@ -355,6 +383,7 @@
     </Marquee>
   </section>
 
+  <Separator gradient={true} />
   <!-- agency service details -->
   <section id="about" class="py-32 overflow-hidden">
     <div class="mx-auto w-full max-w-screen-xl px-6">
@@ -370,9 +399,15 @@
           </div>
           <h2 class="text-4xl sm:text-6xl font-black tracking-tighter">
             {translations[$currentLang.code].services_title_1} <br />
-            <span class="text-primary italic"
-              >{translations[$currentLang.code].services_title_2}</span
-            >
+            <span class="text-primary italic">
+              <MorphingText
+                texts={[
+                  translations[$currentLang.code].services_title_2,
+                  'INNOVATION.',
+                  'EXCELLENCE.',
+                ]}
+              />
+            </span>
           </h2>
           <p class="text-lg text-muted-foreground leading-relaxed">
             {translations[$currentLang.code].services_desc}
@@ -410,9 +445,7 @@
 
         <!-- specialized feature showcase -->
         <div class="relative group w-full">
-          <div
-            class="relative border border-border/50 rounded-3xl p-6 sm:p-10 bg-card/30 backdrop-blur-sm"
-          >
+          <div class="framer-card relative p-6 sm:p-10">
             <Features
               data={businessFeatures}
               linePosition="left"
@@ -424,17 +457,14 @@
     </div>
   </section>
 
+  <Separator gradient={true} />
   <!-- comprehensive features grid -->
   <FeaturesGrid />
 
+  <Separator gradient={true} />
   <!-- portfolio showcase -->
-  <section
-    id="projects"
-    class="relative py-24 bg-card/5 overflow-hidden border-t border-border/50"
-  >
-    <div class="absolute inset-0 z-0 opacity-50">
-      <Particles className="size-full" color="#888888" quantity={80} />
-    </div>
+  <section id="projects" class="relative py-24 bg-card/5 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-50"></div>
 
     <div class="relative z-10 mx-auto max-w-screen-xl px-6">
       <div
@@ -522,11 +552,12 @@
     </div>
   </section>
 
+  <Separator gradient={true} />
   <!-- high conversion contact cta -->
   <section id="contact" class="py-32">
     <div class="mx-auto max-w-4xl px-6 text-center">
       <div
-        class="bg-gradient-to-br from-card to-card/50 border border-border p-12 sm:p-20 rounded-[3rem] relative overflow-hidden"
+        class="framer-card p-12 sm:p-[60px] relative overflow-hidden flex flex-col items-center"
       >
         <div
           class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-96 bg-primary/10 blur-3xl rounded-full"
@@ -546,16 +577,14 @@
           </p>
           <div class="flex flex-wrap justify-center gap-4 pt-4">
             <Button
-              size="lg"
-              class="rounded-full px-12 h-14 text-base font-bold tracking-tight premium-button"
+              class="premium-button"
               onclick={() => ($contact_popup_open = true)}
             >
               {translations[$currentLang.code].start_project}
             </Button>
             <Button
-              variant="outline"
-              size="lg"
-              class="rounded-full px-12 h-14 text-base font-bold tracking-tight border-2 premium-button"
+              class="premium-button"
+              style="background-color: rgba(255, 255, 255, 0.1) !important; color: white !important; box-shadow: none !important;"
               href="mailto:agencymove.official@gmail.com"
             >
               {translations[$currentLang.code].email_us}
@@ -566,39 +595,60 @@
     </div>
   </section>
 
+  <Separator gradient={true} />
   <section id="faq" class="py-32">
     <div class="mx-auto max-w-screen-xl px-6">
       <div class="flex flex-col lg:flex-row gap-16 lg:gap-24">
         <div class="lg:w-[340px] shrink-0 lg:sticky lg:top-32 lg:self-start">
-          <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4">
+          <h2
+            class="text-xs font-bold tracking-[0.3em] uppercase text-primary mb-4"
+          >
             {translations[$currentLang.code].faq_badge}
           </h2>
-          <p class="text-4xl sm:text-5xl font-black tracking-tighter leading-none mb-4">
-            {translations[$currentLang.code].faq_title}
+          <p
+            class="text-4xl sm:text-5xl font-black tracking-tighter leading-none mb-4"
+          >
+            Got <LineShadowText
+              content="Questions?"
+              class="italic"
+              shadowColor={$selected_theme === "light" ? "black" : "white"}
+            />
           </p>
           <p class="text-base text-muted-foreground leading-relaxed">
             {translations[$currentLang.code].faq_subtitle}
           </p>
         </div>
         <div class="flex-1 flex flex-col gap-3">
-          {#each [
-            { q: translations[$currentLang.code].faq_q1, a: translations[$currentLang.code].faq_a1 },
-            { q: translations[$currentLang.code].faq_q2, a: translations[$currentLang.code].faq_a2 },
-            { q: translations[$currentLang.code].faq_q3, a: translations[$currentLang.code].faq_a3 },
-            { q: translations[$currentLang.code].faq_q4, a: translations[$currentLang.code].faq_a4 },
-            { q: translations[$currentLang.code].faq_q5, a: translations[$currentLang.code].faq_a5 },
-            { q: translations[$currentLang.code].faq_q6, a: translations[$currentLang.code].faq_a6 }
-          ] as item, i}
-            <div class="rounded-2xl border border-border/50 bg-card/30 transition-all duration-200 {openFaq === i ? 'border-border bg-card' : 'hover:border-border/80 hover:bg-card/50'}">
+          {#each [{ q: translations[$currentLang.code].faq_q1, a: translations[$currentLang.code].faq_a1 }, { q: translations[$currentLang.code].faq_q2, a: translations[$currentLang.code].faq_a2 }, { q: translations[$currentLang.code].faq_q3, a: translations[$currentLang.code].faq_a3 }, { q: translations[$currentLang.code].faq_q4, a: translations[$currentLang.code].faq_a4 }, { q: translations[$currentLang.code].faq_q5, a: translations[$currentLang.code].faq_a5 }, { q: translations[$currentLang.code].faq_q6, a: translations[$currentLang.code].faq_a6 }] as item, i}
+            <div
+              class="framer-card transition-all duration-300 {openFaq === i
+                ? '!bg-white/10 !border-white/20'
+                : 'framer-card-hover'}"
+            >
               <button
                 onclick={() => toggleFaq(i)}
                 class="w-full px-6 py-5 flex items-center justify-between text-left cursor-pointer select-none group"
               >
-                <span class="text-[15px] font-bold tracking-tight transition-colors duration-150 {openFaq === i ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground'}">
+                <span
+                  class="text-[15px] font-bold tracking-tight transition-colors duration-150 {openFaq ===
+                  i
+                    ? 'text-foreground'
+                    : 'text-muted-foreground group-hover:text-foreground'}"
+                >
                   {item.q}
                 </span>
-                <div class="shrink-0 ml-6 size-7 rounded-lg flex items-center justify-center transition-all duration-200 {openFaq === i ? 'bg-primary text-primary-foreground' : 'bg-accent/50 text-muted-foreground group-hover:bg-accent'}">
-                  <ChevronDown class="size-3.5 transition-transform duration-200 {openFaq === i ? 'rotate-180' : ''}" />
+                <div
+                  class="shrink-0 ml-6 size-7 rounded-lg flex items-center justify-center transition-all duration-200 {openFaq ===
+                  i
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-accent/50 text-muted-foreground group-hover:bg-accent'}"
+                >
+                  <ChevronDown
+                    class="size-3.5 transition-transform duration-200 {openFaq ===
+                    i
+                      ? 'rotate-180'
+                      : ''}"
+                  />
                 </div>
               </button>
               <div class="faq-body {openFaq === i ? 'faq-open' : ''}">
@@ -616,7 +666,8 @@
     </div>
   </section>
 
-  <footer class="pt-16 pb-10 border-t border-border mt-32 bg-card/10">
+  <Separator gradient={true} />
+  <footer class="pt-16 pb-10 mt-32 bg-transparent">
     <div class="mx-auto max-w-screen-xl px-6 space-y-10">
       <!-- nav -->
       <div
@@ -634,28 +685,27 @@
             </a>
           {/each}
         </div>
-        
 
         <div class="flex items-center gap-5 md:gap-4 justify-center">
           <a
             href="https://www.instagram.com/agency.moveuk"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-3 rounded-full border border-border/50 bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 transition-all duration-300 group shadow-sm hover:shadow-md"
+            class="text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Instagram"
           >
             <Instagram class="size-5" />
           </a>
           <a
             href="mailto:agencymove.official@gmail.com"
-            class="p-3 rounded-full border border-border/50 bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 transition-all duration-300 group shadow-sm hover:shadow-md"
+            class="text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Email"
           >
             <Mail class="size-5" />
           </a>
           <a
             href="tel:+421944575007"
-            class="p-3 rounded-full border border-border/50 bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 transition-all duration-300 group shadow-sm hover:shadow-md"
+            class="text-muted-foreground hover:text-primary transition-colors duration-300"
             aria-label="Phone"
           >
             <Phone class="size-5" />
@@ -664,13 +714,13 @@
             href="https://wa.me/+421944575007"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-3 rounded-full border border-border/50 bg-background hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 transition-all duration-300 group shadow-sm hover:shadow-md flex items-center justify-center"
+            class="text-muted-foreground hover:text-primary transition-colors duration-300 flex items-center justify-center"
             aria-label="WhatsApp"
           >
             <img
               src={whatsappImg}
               alt="WhatsApp"
-              class="size-5 object-contain transition-all brightness-0 invert [.light_&]:invert-0 group-hover:!brightness-100 group-hover:!invert-0 select-none"
+              class="size-5 object-contain transition-colors brightness-0 invert [.light_&]:invert-0 hover:brightness-100 hover:invert-0 select-none"
               draggable="false"
             />
           </a>
@@ -697,6 +747,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- 3D Cube Section -->
+  <!-- <section class="relative w-full h-96 bg-black overflow-hidden">
+    <ThreeCube />
+  </section> -->
 </main>
 
 <style>
@@ -707,7 +762,9 @@
     display: grid;
     grid-template-rows: 0fr;
     opacity: 0;
-    transition: grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 150ms ease;
+    transition:
+      grid-template-rows 280ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 150ms ease;
   }
   .faq-body > div {
     overflow: hidden;
@@ -728,13 +785,18 @@
     left: 0;
     width: 440px;
     height: 220px;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    background-color: var(--background);
+    border-radius: 12px;
+    border: none;
+    background-color: #111318;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
     padding: 2.25rem;
     overflow: visible;
     pointer-events: none;
-    transition: transform 220ms cubic-bezier(.2,.9,.2,1), border-color 200ms ease;
+    transition:
+      transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+      background-color 200ms ease;
   }
   .svc-arrow {
     position: absolute;
@@ -751,7 +813,10 @@
     color: white;
     opacity: 0;
     scale: 0.7;
-    transition: opacity 200ms ease, scale 200ms ease;
+    transition:
+      opacity 200ms ease,
+      scale 200ms ease;
+    box-shadow: none;
   }
   .svc-left:hover .svc-arrow {
     opacity: 1;
@@ -763,30 +828,30 @@
     pointer-events: auto;
   }
   .svc-left:hover {
-    border-color: color-mix(in srgb, var(--primary) 40%, var(--border));
+    background-color: #14191f;
   }
   .svc-s1 {
-    transform: translateX(480px) translateY(8px) scale(.96) rotate(-1deg);
+    transform: translateX(480px) translateY(8px) scale(0.96) rotate(-1deg);
     z-index: 4;
   }
   .svc-s2 {
-    transform: translateX(500px) translateY(16px) scale(.92) rotate(-2deg);
+    transform: translateX(500px) translateY(16px) scale(0.92) rotate(-2deg);
     z-index: 3;
   }
   .svc-s3 {
-    transform: translateX(520px) translateY(24px) scale(.88) rotate(-3deg);
+    transform: translateX(520px) translateY(24px) scale(0.88) rotate(-3deg);
     z-index: 2;
   }
   .svc-s4 {
-    transform: translateX(530px) translateY(30px) scale(.85) rotate(-3.5deg);
+    transform: translateX(530px) translateY(30px) scale(0.85) rotate(-3.5deg);
     z-index: 1;
   }
   .svc-s5 {
-    transform: translateX(530px) translateY(30px) scale(.85) rotate(-3.5deg);
+    transform: translateX(530px) translateY(30px) scale(0.85) rotate(-3.5deg);
     z-index: 0;
   }
   .svc-move-out {
-    transform: translateX(480px) translateY(8px) scale(.96) rotate(-1deg);
+    transform: translateX(480px) translateY(8px) scale(0.96) rotate(-1deg);
     z-index: 6;
   }
   .svc-move-in {
@@ -794,15 +859,48 @@
     z-index: 7;
   }
   @media (max-width: 960px) {
-    .svc-card { width: 100%; max-width: 340px; height: 180px; padding: 1.25rem; display: flex; align-items: center; }
-    .svc-left { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); left: 50%; }
-    .svc-s1 { transform: translateX(-50%) translateY(220px) scale(.96) rotate(-1deg); left: 50%; }
-    .svc-s2 { transform: translateX(-50%) translateY(228px) scale(.92) rotate(-2deg); left: 50%; }
-    .svc-s3 { transform: translateX(-50%) translateY(236px) scale(.88) rotate(-3deg); left: 50%; }
-    .svc-s4 { transform: translateX(-50%) translateY(242px) scale(.85) rotate(-3.5deg); left: 50%; }
-    .svc-s5 { transform: translateX(-50%) translateY(242px) scale(.85) rotate(-3.5deg); left: 50%; }
-    .svc-move-out { transform: translateX(-50%) translateY(220px) scale(.96) rotate(-1deg); left: 50%; }
-    .svc-move-in { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); left: 50%; }
-    .svc-wrap { height: 460px; }
+    .svc-card {
+      width: 100%;
+      max-width: 340px;
+      height: 180px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+    }
+    .svc-left {
+      transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+      left: 50%;
+    }
+    .svc-s1 {
+      transform: translateX(-50%) translateY(220px) scale(0.96) rotate(-1deg);
+      left: 50%;
+    }
+    .svc-s2 {
+      transform: translateX(-50%) translateY(228px) scale(0.92) rotate(-2deg);
+      left: 50%;
+    }
+    .svc-s3 {
+      transform: translateX(-50%) translateY(236px) scale(0.88) rotate(-3deg);
+      left: 50%;
+    }
+    .svc-s4 {
+      transform: translateX(-50%) translateY(242px) scale(0.85) rotate(-3.5deg);
+      left: 50%;
+    }
+    .svc-s5 {
+      transform: translateX(-50%) translateY(242px) scale(0.85) rotate(-3.5deg);
+      left: 50%;
+    }
+    .svc-move-out {
+      transform: translateX(-50%) translateY(220px) scale(0.96) rotate(-1deg);
+      left: 50%;
+    }
+    .svc-move-in {
+      transform: translateX(-50%) translateY(0) scale(1) rotate(0deg);
+      left: 50%;
+    }
+    .svc-wrap {
+      height: 460px;
+    }
   }
 </style>

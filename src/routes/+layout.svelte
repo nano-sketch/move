@@ -1,12 +1,16 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { fade, scale } from "svelte/transition";
   import { Sun, Moon, Languages } from "lucide-svelte";
 
   // internal components
   import Button from "$lib/components/ui/button/button.svelte";
+  import ButtonBackgroundShine from "$lib/components/ui/button-background-shine/ButtonBackgroundShine.svelte";
   import favicon from "$lib/assets/favicon.png";
   import logo from "$lib/assets/logo-light.png";
   import ContactPopup from "$lib/components/misc/ContactPopup.svelte";
+  import FramerBackground from "$lib/components/misc/FramerBackground.svelte";
+  import Separator from "$lib/components/misc/Separator.svelte";
 
   // state and configuration
   import { currentLang, languages, translations } from "$lib/i18n";
@@ -82,75 +86,59 @@
 </svelte:head>
 
 <header
-  class="fixed top-0 left-0 right-0 z-[201] border-b border-border bg-background/80 backdrop-blur"
+  class="fixed top-0 left-0 right-0 z-[201] h-[91px] px-6 lg:px-[50px] flex items-center backdrop-blur-md bg-black/30"
 >
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-    <a href="/" class="hover:opacity-80 transition-opacity relative z-[110]">
-      <img
-        src={logo}
-        alt="MOVE Logo"
-        class="h-12 w-auto object-contain scale-[1.8] origin-left select-none"
-        draggable="false"
-      />
-    </a>
-
-    <!-- desktop navigation: centered for balance -->
-    <nav
-      class="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 items-center gap-8"
-    >
-      {#each navigationLinks as key}
-        <a
-          href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
-          class="text-xs font-bold tracking-widest text-muted-foreground hover:text-foreground transition-all uppercase select-none"
-        >
-          {translations[$currentLang.code][key]}
-        </a>
-      {/each}
-    </nav>
-
-    <div class="flex items-center gap-2 md:gap-4 relative z-[110]">
-      <!-- theme toggle mechanism -->
-      <button
-        onclick={toggleThemeSystem}
-        class="p-2 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors group relative overflow-hidden"
-        aria-label="Toggle visual theme"
+  <div class="w-full flex items-center justify-between">
+    <!-- LEFT SIDE: Logo & Nav -->
+    <div class="flex items-center gap-6 lg:gap-[40px]">
+      <a
+        href="/"
+        class="hover:opacity-80 transition-opacity flex items-center h-full"
       >
-        <div class="relative w-5 h-5">
-          <div
-            class="absolute inset-0 transform transition-transform duration-500 {$selected_theme ===
-            'light'
-              ? 'rotate-0 scale-100 opacity-100'
-              : 'rotate-90 scale-0 opacity-0'}"
-          >
-            <Moon class="w-5 h-5 text-foreground" />
-          </div>
-          <div
-            class="absolute inset-0 transform transition-transform duration-500 {$selected_theme !==
-            'light'
-              ? 'rotate-0 scale-100 opacity-100'
-              : '-90 scale-0 opacity-0'}"
-          >
-            <Sun class="w-5 h-5 text-foreground" />
-          </div>
-        </div>
-      </button>
+        <img
+          src={logo}
+          alt="MOVE Logo"
+          class="h-10 lg:h-12 w-auto object-contain scale-[1.8] origin-left select-none"
+          draggable="false"
+        />
+      </a>
 
+      <!-- vertical separator -->
+      <div class="hidden lg:block w-px h-[24px] bg-white/10"></div>
+
+      <!-- desktop navigation -->
+      <nav class="hidden lg:flex items-center gap-[25px]">
+        {#each navigationLinks as key}
+          <a
+            href={key === "home" ? "/" : `/#${key.replace("_", "-")}`}
+            class="text-[16px] text-white hover:text-white/80 transition-all select-none font-medium capitalize"
+          >
+            <span class="lowercase block first-letter:uppercase">
+              {translations[$currentLang.code][key]}
+            </span>
+          </a>
+        {/each}
+      </nav>
+    </div>
+
+    <!-- RIGHT SIDE: Tools & CTA -->
+    <div class="flex items-center gap-2 md:gap-4 relative z-[110]">
       <!-- localized language selection -->
       <div class="relative">
         <button
           onclick={() => (isLangDropdownOpen = !isLangDropdownOpen)}
-          class="flex items-center gap-1.5 p-2 rounded-full hover:bg-accent hover:text-accent-foreground transition-colors select-none"
-          aria-label="Change documentation language"
+          class="flex items-center gap-1.5 py-2 px-3 rounded-xl text-white/80 hover:text-white hover:bg-white/5 transition-colors select-none"
+          aria-label="Change language"
         >
-          <Languages class="w-5 h-5" />
-          <span class="text-[10px] font-bold uppercase"
+          <Languages class="w-4 h-4" />
+          <span class="text-[13px] font-bold uppercase"
             >{$currentLang.code}</span
           >
         </button>
 
         {#if isLangDropdownOpen}
           <div
-            class="absolute right-0 mt-2 w-40 bg-card border border-border rounded-2xl shadow-2xl p-2 z-[210] animate-in fade-in slide-in-from-top-2 duration-200"
+            class="absolute right-0 mt-2 w-40 bg-black/40 border border-white/10 rounded-2xl p-2 z-[210] animate-in fade-in slide-in-from-top-2 duration-200 backdrop-blur-sm"
           >
             <div class="space-y-1">
               {#each languages as lang}
@@ -159,9 +147,9 @@
                     $currentLang = lang;
                     isLangDropdownOpen = false;
                   }}
-                  class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-colors hover:bg-accent select-none {$currentLang.code ===
+                  class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-colors hover:bg-white/5 select-none {$currentLang.code ===
                   lang.code
-                    ? 'text-primary bg-primary/5'
+                    ? 'text-primary bg-white/10'
                     : 'text-muted-foreground'}"
                 >
                   <span class="flex items-center gap-2">
@@ -179,20 +167,16 @@
       </div>
 
       <div class="hidden md:block">
-        <Button
-          variant="outline"
-          size="sm"
-          class="rounded-full px-6 font-bold text-xs tracking-widest uppercase border-2 premium-button select-none"
+        <ButtonBackgroundShine
+          text={translations[$currentLang.code].get_started}
           onclick={() => ($contact_popup_open = true)}
-        >
-          {translations[$currentLang.code].get_started}
-        </Button>
+        />
       </div>
 
       <!-- mobile menu trigger -->
       <button
         aria-label={isMobileMenuOpen ? "Close main menu" : "Open main menu"}
-        class="md:hidden p-2 rounded-md hover:bg-accent transition relative z-[70]"
+        class="md:hidden p-2 rounded-md hover:bg-white/10 transition-colors duration-300 relative z-[70]"
         onclick={() => (isMobileMenuOpen = !isMobileMenuOpen)}
       >
         <svg
@@ -220,15 +204,21 @@
       </button>
     </div>
   </div>
+
+  <div class="absolute bottom-0 left-0 w-full translate-y-full">
+    <Separator gradient={true} />
+  </div>
 </header>
 
 <!-- mobile navigation overlay -->
 {#if isMobileMenuOpen}
   <div
-    class="md:hidden fixed inset-0 z-[200] bg-background animate-in fade-in duration-300 overflow-y-auto"
+    class="md:hidden fixed inset-0 z-[200] bg-black/95 backdrop-blur-sm"
+    transition:fade={{ duration: 300 }}
   >
     <div
       class="flex flex-col items-center justify-start min-h-screen px-6 pt-32 pb-20"
+      transition:scale={{ duration: 400, start: 1.05, opacity: 0 }}
     >
       <nav class="flex flex-col items-center gap-6 w-full max-w-xs">
         {#each navigationLinks as key}
@@ -259,5 +249,7 @@
 {/if}
 
 <ContactPopup bind:isOpen={$contact_popup_open} />
+
+<FramerBackground />
 
 {@render children?.()}

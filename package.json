@@ -36,7 +36,10 @@
 		"@xyflow/svelte": "^1.4.0",
 		"lucide-svelte": "^0.546.0",
 		"mermaid": "^11.12.0",
+		"mode-watcher": "^1.1.0",
 		"monaco-editor": "^0.52.2",
-		"svelte-motion": "^0.12.2"
+		"motion-sv": "^0.1.10",
+		"svelte-motion": "^0.12.2",
+		"three": "^0.183.2"
 	}
 }

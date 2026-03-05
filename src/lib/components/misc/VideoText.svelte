@@ -1,45 +1,58 @@
 <script lang="ts">
-  let {
-    src,
-    className = "",
-    autoPlay = true,
-    muted = true,
-    loop = true,
-    preload = "auto" as "auto" | "metadata" | "none",
-    fontSize = 12,
-    fontWeight = "900",
-    textAnchor = "middle",
-    dominantBaseline = "middle",
-    fontFamily = "inherit",
-    as = "div",
-    content = "",
-  } = $props();
+  import { onMount, onDestroy } from "svelte";
 
-  // convert children,to plain string if array
-  let dynamic_content = $derived(
-    Array.isArray(content) ? content.join("") : content,
-  );
+  export let src: string;
+  export let className = "";
+  export let autoPlay = true;
+  export let muted = true;
+  export let loop = true;
+  export let preload: "auto" | "metadata" | "none" = "auto";
+  export let fontSize: string | number = 12;
+  export let fontWeight: string | number = "bold";
+  export let textAnchor = "middle";
+  export let dominantBaseline = "middle";
+  export let fontFamily = "DM Sans, sans-serif";
+  export let as: string = "div"; // dynamic tag
+  export let content: string | string[] = ""; // used to build the mask
 
-  let responsiveFontSize = $derived(
-    typeof fontSize === "number" ? `${fontSize}vw` : fontSize,
-  );
+  let svgMask = "";
+  let dataUrlMask = "";
 
-  let svgMask =
-    $derived(`<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
+  // Convert children to plain string if array
+  $: dynamic_content = Array.isArray(content) ? content.join("") : content;
+
+  function updateSvgMask() {
+    const responsiveFontSize =
+      typeof fontSize === "number" ? `${fontSize}vw` : fontSize;
+    svgMask = `<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'>
       <text x='50%' y='50%' font-size='${responsiveFontSize}' font-weight='${fontWeight}'
         text-anchor='${textAnchor}' dominant-baseline='${dominantBaseline}' font-family='${fontFamily}'>
         ${dynamic_content}
       </text>
-    </svg>`);
+    </svg>`;
+    dataUrlMask = `url("data:image/svg+xml,${encodeURIComponent(svgMask)}")`;
+  }
 
-  let dataUrlMask = $derived(
-    `url("data:image/svg+xml,${encodeURIComponent(svgMask)}")`,
-  );
+  onMount(() => {
+    updateSvgMask();
+  });
+
+  $: if (
+    content ||
+    fontSize ||
+    fontWeight ||
+    textAnchor ||
+    dominantBaseline ||
+    fontFamily
+  ) {
+    updateSvgMask();
+  }
 </script>
 
+<svelte:window on:resize={updateSvgMask} />
 <svelte:element this={as} class={`relative w-full h-full ${className}`}>
   <div
-    class="absolute inset-0 flex items-center justify-center overflow-hidden z-10"
+    class="absolute inset-0 flex items-center justify-center"
     style="
       mask-image: {dataUrlMask};
       -webkit-mask-image: {dataUrlMask};
@@ -51,9 +64,8 @@
       -webkit-mask-position: center;
     "
   >
-    <div class="absolute inset-0 size-full bg-foreground z-0"></div>
     <video
-      class="w-full h-full object-cover relative z-10"
+      class="w-full h-full object-cover"
       autoplay={autoPlay}
       {muted}
       {loop}
@@ -61,8 +73,11 @@
       playsinline
     >
       <source {src} />
-      your browser doesnt support this video tag, if you see this switch the browser..
+      Your browser does not support the video tag.
     </video>
+    <!-- if you want to add YouTube Video prefer using Iframe  -->
+     <!-- Iframe Docs : https://www.w3schools.com/html/html_youtube.asp -->
+    <!-- <iframe {src} title="svelte" class="w-full h-full"> </iframe> -->
   </div>
 
   <span class="sr-only">{dynamic_content}</span>

@@ -23,7 +23,7 @@
   onmousemove={handleMouseMove}
   onmouseleave={handleMouseLeave}
   role="presentation"
-  class="group relative h-full w-full overflow-hidden rounded-3xl bg-card border border-border/50 transition-all duration-300 hover:border-primary/30"
+  class="framer-card framer-card-hover group relative h-full w-full overflow-hidden transition-all duration-300"
 >
   <!-- revealed pointer layer (native implementation) -->
   <div
